@@ -148,7 +148,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "add_feed_form";
             this.Text = "add_feed_form";
-            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).EndInit();
+            //((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
