@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Gruppprojekt
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -20,8 +20,9 @@ namespace Gruppprojekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            URL_feed_controller U_c = new URL_feed_controller();
-            listBox1.Items.Add(U_c.Get_RSS());
+            add_feed_form feedform = new add_feed_form();
+            feedform.Show();
+
         }
     }
 }

@@ -100,6 +100,7 @@
             this.button1.TabIndex = 6;
             this.button1.Text = "OK";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -110,6 +111,7 @@
             this.button2.TabIndex = 7;
             this.button2.Text = "Cancel";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // add_feed_form
             // 
@@ -126,7 +128,7 @@
             this.Controls.Add(this.textBox1);
             this.Name = "add_feed_form";
             this.Text = "add_feed_form";
-            ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).EndInit();
+          //  ((System.ComponentModel.ISupportInitialize)(this.performanceCounter1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

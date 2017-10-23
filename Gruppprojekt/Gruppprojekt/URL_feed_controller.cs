@@ -8,14 +8,14 @@ namespace Gruppprojekt
 {
     class URL_feed_controller
     {
-        public string Get_RSS()
+        public string Get_RSS(String url)
         {
             string Output = "";
             var xml = "";
             using (var client = new System.Net.WebClient())
             {
                 client.Encoding = Encoding.UTF8;
-                xml = client.DownloadString("http://www.aftonbladet.se/rss.xml");
+                xml = client.DownloadString(url);
             }
 
             var dom = new System.Xml.XmlDocument();
@@ -25,7 +25,7 @@ namespace Gruppprojekt
             {
                 var title = item.SelectSingleNode("title");
                 Output += title.InnerText;
-                playurl, titel, kategori, intervall
+                //playurl, titel, kategori, intervall
             }
 
             return Output;
