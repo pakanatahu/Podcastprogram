@@ -16,5 +16,17 @@ namespace Gruppprojekt
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            URL_feed_controller feedController = new URL_feed_controller();
+            feedController.Get_RSS("http://www.aftonbladet.se/rss.xml");
+          //  listBox1.Items.Add(U_c.Get_RSS());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

@@ -8,16 +8,14 @@ namespace Gruppprojekt
 {
     class URL_feed_controller
     {
-        List<Podcast> Podcast_list = new List<Podcast>();
-
-        public string Get_RSS()
+        public string Get_RSS(String url)
         {
             string Output = "";
             var xml = "";
             using (var client = new System.Net.WebClient())
             {
                 client.Encoding = Encoding.UTF8;
-                xml = client.DownloadString("http://www.aftonbladet.se/rss.xml");
+                xml = client.DownloadString(url);
             }
 
             var dom = new System.Xml.XmlDocument();
@@ -25,19 +23,9 @@ namespace Gruppprojekt
 
             foreach (System.Xml.XmlNode item in dom.DocumentElement.SelectNodes("channel/item"))
             {
-                string playurl = item.SelectSingleNode("link").InnerText;
-                string title = item.SelectSingleNode("title").InnerText;
-                string category = item.SelectSingleNode("category").InnerText;
-                int update_intervall = 1;
-                int listen_count = 0;
-                Podcast P_C = new Podcast(playurl, title, category, update_intervall, listen_count);
-                Podcast_list.Add(P_C);
-
-            }
-
-            foreach (Podcast pc in Podcast_list)
-            {
-                Output += pc.Title;
+                var title = item.SelectSingleNode("title");
+                Output += title.InnerText;
+                //playurl, titel, kategori, intervall
             }
 
             return Output;
