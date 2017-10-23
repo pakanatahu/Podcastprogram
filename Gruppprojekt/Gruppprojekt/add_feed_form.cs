@@ -20,7 +20,7 @@ namespace Gruppprojekt
         private void button1_Click(object sender, EventArgs e)
         {
             URL_feed_controller feedController = new URL_feed_controller();
-            feedController.Get_RSS("http://www.aftonbladet.se/rss.xml");
+            feedController.Create_Podcast(textBox3.Text, "http://www.aftonbladet.se/rss.xml", "kategori", 1);
           //  listBox1.Items.Add(U_c.Get_RSS());
         }
 

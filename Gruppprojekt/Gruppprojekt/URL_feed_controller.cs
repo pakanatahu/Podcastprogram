@@ -8,9 +8,10 @@ namespace Gruppprojekt
 {
     class URL_feed_controller
     {
-        public string Get_RSS(String url)
+        List<Podcast> Podcast_list = new List<Podcast>();
+
+        public void Create_Podcast(String name, String url, string category, int update_intervall)
         {
-            string Output = "";
             var xml = "";
             using (var client = new System.Net.WebClient())
             {
@@ -23,12 +24,13 @@ namespace Gruppprojekt
 
             foreach (System.Xml.XmlNode item in dom.DocumentElement.SelectNodes("channel/item"))
             {
-                var title = item.SelectSingleNode("title");
-                Output += title.InnerText;
-                //playurl, titel, kategori, intervall
-            }
+                string playurl = item.SelectSingleNode("link").InnerText;
+                string title = item.SelectSingleNode("title").InnerText;
 
-            return Output;
+                Podcast p_c = new Podcast(name, playurl, title, category, update_intervall, 0);
+                Podcast_list.Add(p_c);
+
+            }
         }
     }
 }
