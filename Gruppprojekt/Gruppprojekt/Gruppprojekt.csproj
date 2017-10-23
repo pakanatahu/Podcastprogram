@@ -69,6 +69,7 @@
     <Compile Include="manage_url.Designer.cs">
       <DependentUpon>manage_url.cs</DependentUpon>
     </Compile>
+    <Compile Include="Podcast.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="URL_feed_controller.cs" />

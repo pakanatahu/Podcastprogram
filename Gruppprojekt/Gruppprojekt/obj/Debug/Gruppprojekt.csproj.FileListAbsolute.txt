@@ -1,7 +1,3 @@
-C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe.config
-C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe
-C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.pdb
-C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csprojResolveAssemblyReference.cache
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.add_feed_form.resources
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Form1.resources
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.form_manage_categories.resources
@@ -9,5 +5,8 @@ C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Properties.Resources.resources
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.GenerateResource.Cache
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.CoreCompileInputs.cache
+C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe.config
+C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe
+C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.pdb
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.exe
 C:\Users\Henkie\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.pdb
