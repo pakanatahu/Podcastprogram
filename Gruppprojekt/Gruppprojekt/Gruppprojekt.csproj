@@ -71,6 +71,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="URL_feed_controller.cs" />
     <EmbeddedResource Include="add_feed_form.resx">
       <DependentUpon>add_feed_form.cs</DependentUpon>
     </EmbeddedResource>

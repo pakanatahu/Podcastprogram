@@ -15,6 +15,13 @@ namespace Gruppprojekt
         public Form1()
         {
             InitializeComponent();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            URL_feed_controller U_c = new URL_feed_controller();
+            listBox1.Items.Add(U_c.Get_RSS());
         }
     }
 }
