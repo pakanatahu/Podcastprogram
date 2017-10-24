@@ -52,6 +52,7 @@
       <DependentUpon>add_feed_form.cs</DependentUpon>
     </Compile>
     <Compile Include="Categories.cs" />
+    <Compile Include="form_handler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -12,6 +12,7 @@ namespace Gruppprojekt
 {
     public partial class add_feed_form : Form
     {
+        private form_handler f_h = new form_handler();
         public add_feed_form()
         {
             InitializeComponent();
@@ -22,10 +23,7 @@ namespace Gruppprojekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            URL_feed_controller feedController = new URL_feed_controller();
-            feedController.Create_Podcast(tbNamn.Text, tbURL.Text,
-                cbCategory.SelectedItem.ToString(), 1);
-          //  listBox1.Items.Add(U_c.Get_RSS());
+            f_h.Create_podcast(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
         }
 
         private void button2_Click(object sender, EventArgs e)

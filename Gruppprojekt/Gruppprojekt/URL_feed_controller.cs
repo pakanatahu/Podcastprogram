@@ -8,9 +8,8 @@ namespace Gruppprojekt
 {
     class URL_feed_controller
     {
-        podcast_handler p_h = new podcast_handler();
 
-        public void Create_Podcast(String name, String url, string category, int update_intervall)
+        public void Create_Podcast(podcast_handler p_h, String name, String url, string category, int update_intervall)
         {
             var xml = "";
             using (var client = new System.Net.WebClient())

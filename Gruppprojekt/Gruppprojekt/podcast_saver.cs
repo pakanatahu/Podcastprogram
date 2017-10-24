@@ -20,7 +20,6 @@ namespace Gruppprojekt
 
         public void serialize_podcast()
         {
-            
 
             using (var stream = new StreamWriter("podcast.xml"))
             {
