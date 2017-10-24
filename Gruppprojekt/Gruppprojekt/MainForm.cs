@@ -17,6 +17,7 @@ namespace Gruppprojekt
         {
 
             InitializeComponent();
+            f_handler = new form_handler();
             Categories categ = new Categories();
             List<String> categoryList = categ.getList();
             categ.fillCategoryCB(categoryList, cbCategory);

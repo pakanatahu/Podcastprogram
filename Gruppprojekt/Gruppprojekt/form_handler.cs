@@ -14,11 +14,13 @@ namespace Gruppprojekt
 
         public form_handler()
         {
-
+            p_h = new podcast_handler();
+            u_f_c = new URL_feed_controller();
         }
         public void fill_list_box(ListBox listbox)
         {
-            foreach (Podcast pc in p_h.get_podcast_list())
+            List<Podcast> temp2 = p_h.get_podcast_list();
+            foreach (Podcast pc in temp2)
             {
                 listbox.Items.Add(pc.Title);
             }
@@ -26,7 +28,12 @@ namespace Gruppprojekt
 
         public void Create_podcast(string name, string url, string category, int update_intervall)
         {
-            u_f_c.Create_Podcast(p_h, name, url, category, update_intervall);
+            List<Podcast> temper = new List<Podcast>();
+            temper = u_f_c.Create_Podcast(name, url, category, update_intervall);
+            foreach (Podcast pc in temper)
+            {
+                p_h.add_podcast(pc);
+            }
         }
     }
 }

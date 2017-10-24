@@ -12,7 +12,7 @@ namespace Gruppprojekt
 
         public podcast_handler()
         {
-
+            podcast_list = new List<Podcast>();
         }
 
         public List<Podcast> get_podcast_list()

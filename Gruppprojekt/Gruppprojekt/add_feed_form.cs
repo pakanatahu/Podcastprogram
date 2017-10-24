@@ -15,6 +15,7 @@ namespace Gruppprojekt
         private form_handler f_h = new form_handler();
         public add_feed_form()
         {
+            f_h = new form_handler();
             InitializeComponent();
             Categories categ = new Categories();
             List<String> categoryList = categ.getList();
@@ -23,7 +24,7 @@ namespace Gruppprojekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            f_h.Create_podcast(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
+            f_h.Create_podcast(tbNamn.Text, tbURL.Text,cbCategory.SelectedItem.ToString(), 1);
         }
 
         private void button2_Click(object sender, EventArgs e)
