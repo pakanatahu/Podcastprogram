@@ -26,7 +26,7 @@ namespace Gruppprojekt
             }
         }
 
-        public void Create_podcast(string name, string url, string category, int update_intervall)
+        public void SendInput(string name, string url, string category, int update_intervall)
         {
             List<Podcast> temper = new List<Podcast>();
             temper = u_f_c.Create_Podcast(name, url, category, update_intervall);

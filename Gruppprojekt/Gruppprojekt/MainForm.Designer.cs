@@ -36,7 +36,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.tbNamn = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
@@ -128,17 +127,6 @@
             this.button5.Text = "Visa mer";
             this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button5.UseVisualStyleBackColor = true;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(326, 69);
-            this.button6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(50, 37);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "RefreshaSkiten";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label4
             // 
@@ -240,7 +228,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 333);
+            this.ClientSize = new System.Drawing.Size(682, 273);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -252,7 +240,6 @@
             this.Controls.Add(this.cbCategory2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbURL);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -278,7 +265,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox tbNamn;
         private System.Windows.Forms.Button button8;

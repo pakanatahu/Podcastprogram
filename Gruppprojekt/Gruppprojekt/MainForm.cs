@@ -36,12 +36,13 @@ namespace Gruppprojekt
 
         private void button6_Click(object sender, EventArgs e)
         {
-            f_handler.fill_list_box(listBox1);
+            
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            f_handler.Create_podcast(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
+            f_handler.SendInput(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
+            f_handler.fill_list_box(listBox1);
         }
 
         private void button3_Click(object sender, EventArgs e)
