@@ -8,5 +8,8 @@ namespace Gruppprojekt
 {
     class Validator
     {
+
+
+
     }
 }

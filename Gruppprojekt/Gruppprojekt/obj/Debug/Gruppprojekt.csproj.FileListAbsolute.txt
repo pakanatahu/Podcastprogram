@@ -14,7 +14,6 @@ C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\G
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.exe
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.pdb
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csprojResolveAssemblyReference.cache
-C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.add_feed_form.resources
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.form_manage_categories.resources
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.manage_url.resources
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Properties.Resources.resources
@@ -22,4 +21,3 @@ C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\G
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.pdb
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.MainForm.resources
-C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.CoreCompileInputs.cache

@@ -21,14 +21,12 @@ namespace Gruppprojekt
             Categories categ = new Categories();
             List<String> categoryList = categ.getList();
             categ.fillCategoryCB(categoryList, cbCategory);
+            categ.fillCategoryCB(categoryList, cbCategory2);
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            add_feed_form feedform = new add_feed_form();
-            feedform.Show();
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -39,6 +37,18 @@ namespace Gruppprojekt
         private void button6_Click(object sender, EventArgs e)
         {
             f_handler.fill_list_box(listBox1);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            f_handler.Create_podcast(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            form_manage_categories manageCat = new form_manage_categories();
+            manageCat.Show();
+
         }
     }
 }
