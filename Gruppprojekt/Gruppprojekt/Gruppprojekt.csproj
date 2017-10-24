@@ -51,6 +51,7 @@
     <Compile Include="add_feed_form.Designer.cs">
       <DependentUpon>add_feed_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="Categories.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,8 @@
       <DependentUpon>manage_url.cs</DependentUpon>
     </Compile>
     <Compile Include="Podcast.cs" />
+    <Compile Include="podcast_handler.cs" />
+    <Compile Include="podcast_saver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="URL_feed_controller.cs" />
@@ -106,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Validator.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

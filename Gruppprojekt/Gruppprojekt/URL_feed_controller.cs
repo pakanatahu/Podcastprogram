@@ -8,7 +8,7 @@ namespace Gruppprojekt
 {
     class URL_feed_controller
     {
-        List<Podcast> Podcast_list = new List<Podcast>();
+        podcast_handler p_h = new podcast_handler();
 
         public void Create_Podcast(String name, String url, string category, int update_intervall)
         {
@@ -28,7 +28,7 @@ namespace Gruppprojekt
                 string title = item.SelectSingleNode("title").InnerText;
 
                 Podcast p_c = new Podcast(name, playurl, title, category, update_intervall, 0);
-                Podcast_list.Add(p_c);
+                p_h.add_podcast(p_c);
 
             }
         }

@@ -14,9 +14,13 @@ namespace Gruppprojekt
     {
         public MainForm()
         {
-            InitializeComponent();
 
+            InitializeComponent();
+            Categories categ = new Categories();
+            List<String> categoryList = categ.getList();
+            categ.fillCategoryCB(categoryList, cbCategory);
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
