@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="audio_handler.cs" />
     <Compile Include="Categories.cs" />
     <Compile Include="form_handler.cs" />
     <Compile Include="MainForm.cs">
@@ -64,6 +65,12 @@
     <Compile Include="podcast_saver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShowMorePodcastInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowMorePodcastInfo.Designer.cs">
+      <DependentUpon>ShowMorePodcastInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="URL_feed_controller.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -80,6 +87,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ShowMorePodcastInfo.resx">
+      <DependentUpon>ShowMorePodcastInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
