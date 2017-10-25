@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="audio_handler.cs" />
     <Compile Include="Categories.cs" />
+    <Compile Include="CategoryHandler.cs" />
     <Compile Include="form_handler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

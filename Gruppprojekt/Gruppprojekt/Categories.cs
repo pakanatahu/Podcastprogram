@@ -22,6 +22,11 @@ namespace Gruppprojekt
             return categoryList;
         }
 
+        public void removeCategory(String name)
+        {
+            categoryList.Remove(name);
+        }
+
         public void addNewCategory(String name)
         {
             categoryList.Add(name);

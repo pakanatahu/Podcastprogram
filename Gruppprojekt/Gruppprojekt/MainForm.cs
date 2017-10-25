@@ -12,13 +12,15 @@ namespace Gruppprojekt
 {
     public partial class MainForm : Form
     {
+        Categories categ = new Categories();
+
+
         form_handler FormHandler = new form_handler();
         public MainForm()
         {
 
             InitializeComponent();
             FormHandler = new form_handler();
-            Categories categ = new Categories();
             List<String> categoryList = categ.getList();
             categ.fillCategoryCB(categoryList, cbCategory);
             categ.fillCategoryCB(categoryList, cbCategory2);
@@ -64,11 +66,6 @@ namespace Gruppprojekt
             ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
             PodcastInfoWindow.Show();
             
-        }
-
-        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

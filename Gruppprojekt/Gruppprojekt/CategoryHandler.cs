@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class audio_handler
+    public static class CategoryHandler
     {
+
     }
 }
