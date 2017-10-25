@@ -65,5 +65,10 @@ namespace Gruppprojekt
             PodcastInfoWindow.Show();
             
         }
+
+        private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

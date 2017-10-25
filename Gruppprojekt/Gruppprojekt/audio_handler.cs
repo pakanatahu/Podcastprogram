@@ -8,5 +8,12 @@ namespace Gruppprojekt
 {
     class audio_handler
     {
+
+        public audio_handler(Podcast SelectedPodcast) {
+        
+        
+
+        }   
+
     }
 }
