@@ -26,8 +26,11 @@ namespace Gruppprojekt
 
         private void button1_Click(object sender, EventArgs e)
         {
-            changeName(tbNewName.Text, cbCategory.SelectedItem.ToString());
+            var newName = tbNewName.Text;
+            var oldName = cbCategory.SelectedItem.ToString();
+            changeName(newName, oldName);
             updateComboBoxes();
+            MessageBox.Show(oldName + " har döpts om till " + newName);
 
         }
 
@@ -61,7 +64,19 @@ namespace Gruppprojekt
 
         private void button2_Click(object sender, EventArgs e)
         {
+            var nyKategori = tbAddCategory.Text;
+            categ.addNewCategory(nyKategori);
+            updateComboBoxes();
+            MessageBox.Show(nyKategori + " har lagts till som ny kategori");
+            tbAddCategory.Clear();
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var valdKategori = cbCategory2.SelectedItem.ToString();
+            categ.removeCategory(valdKategori);
+            MessageBox.Show(valdKategori + " har tagits bort som kategori");
+            updateComboBoxes();   
         }
     }
 }
