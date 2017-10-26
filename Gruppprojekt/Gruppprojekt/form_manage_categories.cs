@@ -27,10 +27,7 @@ namespace Gruppprojekt
         private void button1_Click(object sender, EventArgs e)
         {
             changeName(tbNewName.Text, cbCategory.SelectedItem.ToString());
-            cbCategory.Items.Clear();
-            cbCategory2.Items.Clear();
-            categ.fillCategoryCB(categ.getList(), cbCategory);
-            categ.fillCategoryCB(categ.getList(), cbCategory2);
+            updateComboBoxes();
 
         }
 
@@ -52,12 +49,18 @@ namespace Gruppprojekt
 
         }
 
-        private void updateComboBoxes( List<String> categories, ComboBox cb)
+        private void updateComboBoxes()
         {
 
-            cb.Items.Clear();
+            cbCategory.Items.Clear();
+            cbCategory2.Items.Clear();
             categ.fillCategoryCB(categ.getList(), cbCategory);
             categ.fillCategoryCB(categ.getList(), cbCategory2);
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
 
         }
     }
