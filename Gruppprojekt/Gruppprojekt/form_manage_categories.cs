@@ -13,19 +13,21 @@ namespace Gruppprojekt
     public partial class form_manage_categories : Form
     {
         Categories categ = new Categories();
+        List<ComboBox> boxlist = new List<ComboBox>();
 
         public form_manage_categories()
         {
             InitializeComponent();
+
             List<String> categoryList = categ.getList();
-            updateComboBox(cbCategory, categoryList);
-            categ.fillCategoryCB(categoryList, cbCategory2);
+            categ.fillCategoryCB(categ.getList(), cbCategory);
+            categ.fillCategoryCB(categ.getList(), cbCategory2);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             changeName(tbNewName.Text, cbCategory.SelectedItem.ToString());
-            updateComboBox();
+            
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -46,10 +48,13 @@ namespace Gruppprojekt
 
         }
 
-        private void updateComboBox(ComboBox cb, List<String> li)
+        private void updateComboBoxes( List<String> categories, ComboBox cb)
         {
+
             cb.Items.Clear();
-            categ.fillCategoryCB(li, cb);
+            categ.fillCategoryCB(categ.getList(), cbCategory);
+            categ.fillCategoryCB(categ.getList(), cbCategory2);
+
         }
     }
 }
