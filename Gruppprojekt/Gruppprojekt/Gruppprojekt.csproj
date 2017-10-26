@@ -61,7 +61,6 @@
       <DependentUpon>form_manage_categories.cs</DependentUpon>
     </Compile>
     <Compile Include="MP3_Downloader.cs" />
-    <Compile Include="MP3_Player.cs" />
     <Compile Include="Podcast.cs" />
     <Compile Include="Podcast_Handler.cs" />
     <Compile Include="podcast_saver.cs" />
