@@ -12,6 +12,7 @@ namespace Gruppprojekt
 {
     public partial class form_manage_categories : Form
     {
+        Validator validator;
         Categories categ = new Categories();
         List<ComboBox> boxlist = new List<ComboBox>();
 
@@ -28,9 +29,18 @@ namespace Gruppprojekt
         {
             var newName = tbNewName.Text;
             var oldName = cbCategory.SelectedItem.ToString();
-            changeName(newName, oldName);
-            updateComboBoxes();
-            MessageBox.Show(oldName + " har döpts om till " + newName);
+            try
+                {
+                validator.validateName(newName);
+                changeName(newName, oldName);
+                updateComboBoxes();
+                MessageBox.Show(oldName + " har döpts om till " + newName);
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
 
         }
 

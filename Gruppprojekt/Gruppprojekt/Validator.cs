@@ -11,7 +11,7 @@ namespace Gruppprojekt
         public void validateName(string input)
         {
             if (String.IsNullOrWhiteSpace(input))
-                throw new ArgumentException("Name must have a value");
+                throw new NullReferenceException("Name must have a value");
             if (input.Length > 30)
                 throw new ArgumentException("Name cannot be longer than 30 characters");
             if (input.Any(c => char.IsDigit(c)))
