@@ -47,8 +47,10 @@
             this.tbURL = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.pbMain = new System.Windows.Forms.ProgressBar();
-            this.btDownload = new System.Windows.Forms.Button();
+            this.lbDownload = new System.Windows.Forms.Label();
+            this.btPlayPause = new System.Windows.Forms.Button();
+            this.btQuitMusicPlayback = new System.Windows.Forms.Button();
+            this.lbNowPlaying = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -114,7 +116,7 @@
             // btPlay
             // 
             this.btPlay.AccessibleName = "bt_play";
-            this.btPlay.Location = new System.Drawing.Point(23, 316);
+            this.btPlay.Location = new System.Drawing.Point(3, 157);
             this.btPlay.Name = "btPlay";
             this.btPlay.Size = new System.Drawing.Size(75, 23);
             this.btPlay.TabIndex = 6;
@@ -229,29 +231,53 @@
             this.label7.TabIndex = 21;
             this.label7.Text = "Podcasts";
             // 
-            // pbMain
+            // lbDownload
             // 
-            this.pbMain.Location = new System.Drawing.Point(26, 287);
-            this.pbMain.Name = "pbMain";
-            this.pbMain.Size = new System.Drawing.Size(100, 23);
-            this.pbMain.TabIndex = 22;
+            this.lbDownload.AutoSize = true;
+            this.lbDownload.Location = new System.Drawing.Point(133, 297);
+            this.lbDownload.Name = "lbDownload";
+            this.lbDownload.Size = new System.Drawing.Size(0, 13);
+            this.lbDownload.TabIndex = 24;
             // 
-            // btDownload
+            // btPlayPause
             // 
-            this.btDownload.Location = new System.Drawing.Point(130, 316);
-            this.btDownload.Name = "btDownload";
-            this.btDownload.Size = new System.Drawing.Size(75, 23);
-            this.btDownload.TabIndex = 23;
-            this.btDownload.Text = "Ladda ner";
-            this.btDownload.UseVisualStyleBackColor = true;
+            this.btPlayPause.Location = new System.Drawing.Point(3, 186);
+            this.btPlayPause.Name = "btPlayPause";
+            this.btPlayPause.Size = new System.Drawing.Size(75, 23);
+            this.btPlayPause.TabIndex = 25;
+            this.btPlayPause.Text = "Play/Pause";
+            this.btPlayPause.UseVisualStyleBackColor = true;
+            this.btPlayPause.Visible = false;
+            this.btPlayPause.Click += new System.EventHandler(this.btPlayPause_Click);
+            // 
+            // btQuitMusicPlayback
+            // 
+            this.btQuitMusicPlayback.Location = new System.Drawing.Point(84, 186);
+            this.btQuitMusicPlayback.Name = "btQuitMusicPlayback";
+            this.btQuitMusicPlayback.Size = new System.Drawing.Size(75, 23);
+            this.btQuitMusicPlayback.TabIndex = 26;
+            this.btQuitMusicPlayback.Text = "Avbryt";
+            this.btQuitMusicPlayback.UseVisualStyleBackColor = true;
+            this.btQuitMusicPlayback.Visible = false;
+            this.btQuitMusicPlayback.Click += new System.EventHandler(this.btQuitMusicPlayback_Click);
+            // 
+            // lbNowPlaying
+            // 
+            this.lbNowPlaying.AutoSize = true;
+            this.lbNowPlaying.Location = new System.Drawing.Point(246, 297);
+            this.lbNowPlaying.Name = "lbNowPlaying";
+            this.lbNowPlaying.Size = new System.Drawing.Size(0, 13);
+            this.lbNowPlaying.TabIndex = 27;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 390);
-            this.Controls.Add(this.btDownload);
-            this.Controls.Add(this.pbMain);
+            this.Controls.Add(this.lbNowPlaying);
+            this.Controls.Add(this.btQuitMusicPlayback);
+            this.Controls.Add(this.btPlayPause);
+            this.Controls.Add(this.lbDownload);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
@@ -299,8 +325,10 @@
         private System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ProgressBar pbMain;
-        private System.Windows.Forms.Button btDownload;
+        private System.Windows.Forms.Label lbDownload;
+        private System.Windows.Forms.Button btPlayPause;
+        private System.Windows.Forms.Button btQuitMusicPlayback;
+        private System.Windows.Forms.Label lbNowPlaying;
     }
 }
 

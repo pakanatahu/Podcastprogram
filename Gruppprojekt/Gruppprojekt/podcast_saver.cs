@@ -11,7 +11,7 @@ namespace Gruppprojekt
     class podcast_saver
     {
         XmlSerializer serial = new XmlSerializer(typeof(Podcast));
-        podcast_handler p_h = new podcast_handler();
+        Podcast_Handler p_h = new Podcast_Handler();
 
         public podcast_saver()
         {
@@ -23,7 +23,7 @@ namespace Gruppprojekt
 
             using (var stream = new StreamWriter("podcast.xml"))
             {
-                serial.Serialize(stream, p_h.get_podcast_list());
+                serial.Serialize(stream, p_h.GetPodcastList());
             }
         }
     }

@@ -45,9 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="audio_handler.cs" />
     <Compile Include="Categories.cs" />
-    <Compile Include="form_handler.cs" />
+    <Compile Include="Directory_Handler.cs" />
+    <Compile Include="Form_Handler.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,8 +60,10 @@
     <Compile Include="form_manage_categories.Designer.cs">
       <DependentUpon>form_manage_categories.cs</DependentUpon>
     </Compile>
+    <Compile Include="MP3_Downloader.cs" />
+    <Compile Include="MP3_Player.cs" />
     <Compile Include="Podcast.cs" />
-    <Compile Include="podcast_handler.cs" />
+    <Compile Include="Podcast_Handler.cs" />
     <Compile Include="podcast_saver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,7 +73,7 @@
     <Compile Include="ShowMorePodcastInfo.Designer.cs">
       <DependentUpon>ShowMorePodcastInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="URL_feed_controller.cs" />
+    <Compile Include="URL_Feed_Controller.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -105,6 +107,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Validator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

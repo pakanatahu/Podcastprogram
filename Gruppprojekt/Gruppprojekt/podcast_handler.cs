@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class podcast_handler
+    class Podcast_Handler
     {
-        private List<Podcast> podcast_list = new List<Podcast>();
+        private List<Podcast> PodcastList = new List<Podcast>();
 
-        public podcast_handler()
+        public Podcast_Handler()
         {
-            podcast_list = new List<Podcast>();
+            PodcastList = new List<Podcast>();
         }
 
-        public List<Podcast> get_podcast_list()
+        public List<Podcast> GetPodcastList()
         {
-            return podcast_list;
+            return PodcastList;
         }
 
-        public void add_podcast(Podcast podcast)
+        public void AddPodcast(Podcast SelectedPodcast)
         {
-            podcast_list.Add(podcast);
+            PodcastList.Add(SelectedPodcast);
         }
+
     }
 }

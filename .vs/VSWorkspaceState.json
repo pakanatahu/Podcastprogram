@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Gruppprojekt",
-    "\\Gruppprojekt\\Gruppprojekt"
+    "\\Gruppprojekt\\Gruppprojekt",
+    "\\Gruppprojekt\\Gruppprojekt\\obj",
+    "\\Gruppprojekt\\Gruppprojekt\\obj\\Release"
   ],
-  "SelectedNode": "\\Gruppprojekt\\Gruppprojekt\\form_manage_categories.Designer.cs",
-  "PreviewInSolutionExplorer": false
+  "SelectedNode": "\\Gruppprojekt\\Gruppprojekt\\MainForm.cs",
+  "PreviewInSolutionExplorer": true
 }

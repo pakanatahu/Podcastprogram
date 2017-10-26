@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,12 +13,12 @@ namespace Gruppprojekt
 {
     public partial class MainForm : Form
     {
-        form_handler FormHandler = new form_handler();
+        Form_Handler FormHandler = new Form_Handler();
+
         public MainForm()
         {
-
             InitializeComponent();
-            FormHandler = new form_handler();
+            FormHandler = new Form_Handler();
             Categories categ = new Categories();
             List<String> categoryList = categ.getList();
             categ.fillCategoryCB(categoryList, cbCategory);
@@ -42,7 +43,7 @@ namespace Gruppprojekt
         private void button8_Click(object sender, EventArgs e)
         {
             FormHandler.SendInput(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
-            FormHandler.fill_list_box(listBox1);
+            FormHandler.FillListBox(listBox1);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -52,10 +53,21 @@ namespace Gruppprojekt
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private async void button4_Click(object sender, EventArgs e)
         {
-            FormHandler.PlayAudio(listBox1.SelectedItem as Podcast);
+            Podcast SelectedPodcast = listBox1.SelectedItem as Podcast;
 
+            Task<String> DownloadMP3Task = FormHandler.DownloadAudioHandler(SelectedPodcast);
+            lbNowPlaying.Text = "Laddar ner...";
+
+            await DownloadMP3Task;
+
+            lbNowPlaying.Text = DownloadMP3Task.Result;
+
+            btQuitMusicPlayback.Visible = true;
+            btPlayPause.Visible = true;
+            btPlay.Visible = false;
+            lbNowPlaying.Text = "Spelar upp...";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -68,7 +80,23 @@ namespace Gruppprojekt
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            listBox1.Items.Clear();
+            FormHandler.set_selected_category(cbCategory.SelectedItem.ToString());
+            FormHandler.FillListBox(listBox1);
+        }
 
+        private void btPlayPause_Click(object sender, EventArgs e)
+        {
+            FormHandler.StartPauseAudio();
+        }
+
+        private void btQuitMusicPlayback_Click(object sender, EventArgs e)
+        {
+            FormHandler.QuitMusicPlayer();
+            btQuitMusicPlayback.Visible = false;
+            btPlayPause.Visible = false;
+            btPlay.Visible = true;
+            lbNowPlaying.Text = "";
         }
     }
 }

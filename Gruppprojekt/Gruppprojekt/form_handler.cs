@@ -5,37 +5,53 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WMPLib;
 
 namespace Gruppprojekt
 {
-    class form_handler
+    class Form_Handler
     {
-        private podcast_handler p_h = new podcast_handler();
-        private URL_feed_controller u_f_c = new URL_feed_controller();
+        private Podcast_Handler PodcastHandler = new Podcast_Handler();
+        private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
+        private Directory_Handler DirectoryHandler = new Directory_Handler();
+        private MP3_Downloader MP3Downloader = new MP3_Downloader();
+        private WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
+        private Boolean Playing;
+        public string selected_category = "";
 
-        public form_handler()
+        public Form_Handler()
         {
-            p_h = new podcast_handler();
-            u_f_c = new URL_feed_controller();
+            CreateDirectories();
+
         }
-        public void fill_list_box(ListBox listbox)
+        public void FillListBox(ListBox listbox)
         {
-            List<Podcast> temp2 = p_h.get_podcast_list();
+            List<Podcast> temp2 = PodcastHandler.GetPodcastList();
+
             foreach (Podcast pc in temp2)
             {
-                listbox.Items.Add(pc);
+                if (pc.Category == selected_category)
+                {
+                    listbox.Items.Add(pc);
+                }
+
             }
         }
 
-        public void SendInput(string name, string url, string category, int update_intervall)
+        public void set_selected_category(string selected_categ)
+        {
+            selected_category = selected_categ;
+        }
+
+        public void SendInput(String Name, String URL, String Category, int UpdateInterval)
         {
 
             //TODO fixa uppdaterings frekvens.
             List<Podcast> temper = new List<Podcast>();
-            temper = u_f_c.Create_Podcast(name, url, category, update_intervall);
+            temper = URLFeedController.CreatePodcast(Name, URL, Category, UpdateInterval);
             foreach (Podcast pc in temper)
             {
-                p_h.add_podcast(pc);
+                PodcastHandler.AddPodcast(pc);
             }
         }
 
@@ -48,16 +64,49 @@ namespace Gruppprojekt
             return PodcastInfoList;
         }
 
-        public void PlayAudio(Podcast SelectedPodcast)
+        public async Task<string> DownloadAudioHandler(Podcast SelectedPodcast)
         {
-            //TODO - fixa nerladdning.
+            String Titel = SelectedPodcast.Title;
+            String PlayURL = SelectedPodcast.Playurl;
 
-            using (WebClient wc = new WebClient())
+            Task<String> DownloadMP3Task = MP3Downloader.DownloadMP3FileAsync(Titel, PlayURL);
+
+            await DownloadMP3Task;
+
+            StartAudio(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\DownloadedPodcasts\\" + SelectedPodcast.Title + ".mp3");
+
+            return DownloadMP3Task.Result;
+        }
+
+        public void StartAudio(String MP3URL)
+        {
+            WindowsPlayer.URL = MP3URL;
+            WindowsPlayer.controls.play();
+            Playing = true;
+        }
+
+        public void StartPauseAudio()
+        {
+            if (Playing)
             {
-                wc.DownloadFileAsync(new System.Uri(SelectedPodcast.Playurl),
-                "C:\\" + SelectedPodcast.Title + ".mp3");
-            }   
+                WindowsPlayer.controls.pause();
+            }
+            else
+            {
+                WindowsPlayer.controls.play();
+            }
 
+            Playing = !Playing;
+        }
+
+        public void QuitMusicPlayer()
+        {
+            WindowsPlayer.controls.stop();
+        }
+
+        public void CreateDirectories()
+        {
+            DirectoryHandler.CreateMP3DownloadDirectory();
         }
 
     }

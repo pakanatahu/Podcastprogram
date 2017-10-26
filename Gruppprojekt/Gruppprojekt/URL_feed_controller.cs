@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class URL_feed_controller
+    class URL_Feed_Controller
     {
 
-        public List<Podcast> Create_Podcast(String name, String url, String category, int update_intervall)
+        public List<Podcast> CreatePodcast(String name, String url, String category, int update_intervall)
+
         {
             List<Podcast> temp_list = new List<Podcast>();
             var xml = "";
