@@ -8,7 +8,32 @@ namespace Gruppprojekt
 {
     class Validator
     {
+        public void validateName(string input)
+        {
+            if (String.IsNullOrWhiteSpace(input))
+                throw new NullReferenceException("Name must have a value");
+            if (input.Length > 30)
+                throw new ArgumentException("Name cannot be longer than 30 characters");
+            if (input.Any(c => char.IsDigit(c)))
+            {
+                throw new ArgumentException("Name cannot contain numbers");
+            }
 
+        }
+
+        public static void validateUrl(string url_input)
+        {
+            bool isUri = Uri.IsWellFormedUriString(url_input, UriKind.RelativeOrAbsolute);
+
+            if (!isUri)
+            {
+                throw new Exception("URL not valid");
+            }
+            if (!url_input.EndsWith("xml"))
+            {
+                throw new Exception("The url does not contain an xml link");
+            }
+        }
 
 
     }

@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\Gruppprojekt",
-    "\\Gruppprojekt\\Gruppprojekt",
-    "\\Gruppprojekt\\Gruppprojekt\\obj",
-    "\\Gruppprojekt\\Gruppprojekt\\obj\\Release"
+    "\\Gruppprojekt\\Gruppprojekt"
   ],
-  "SelectedNode": "\\Gruppprojekt\\Gruppprojekt\\MainForm.cs",
-  "PreviewInSolutionExplorer": true
+  "SelectedNode": "\\Gruppprojekt\\Gruppprojekt\\podcast_handler.cs",
+  "PreviewInSolutionExplorer": false
 }
