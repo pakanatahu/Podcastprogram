@@ -8,10 +8,22 @@ namespace Gruppprojekt
 {
     class Validator
     {
+        public bool hasValue(String input)
+        {
+            if (String.IsNullOrWhiteSpace(input))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         public void validateName(string input)
         {
             if (String.IsNullOrWhiteSpace(input))
-                throw new NullReferenceException("Name must have a value");
+                throw new ArgumentException("Name must have a value");
             if (input.Length > 30)
                 throw new ArgumentException("Name cannot be longer than 30 characters");
             if (input.Any(c => char.IsDigit(c)))
@@ -35,6 +47,15 @@ namespace Gruppprojekt
             }
         }
 
-
+        public void validateCategoryName(String name, List<String> categoryList)
+        {
+            for (int i = 0; i < categoryList.Count; i++)
+            {
+                 if (name == categoryList[i])
+                {
+                    throw new Exception(name + " already exists as a category");
+                }
+            }
+        }
     }
 }

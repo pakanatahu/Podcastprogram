@@ -29,17 +29,28 @@ namespace Gruppprojekt
         {
             var newName = tbNewName.Text;
             var oldName = cbCategory.SelectedItem.ToString();
-            try
-                {
-                validator.validateName(newName);
-                changeName(newName, oldName);
-                updateComboBoxes();
-                MessageBox.Show(oldName + " har döpts om till " + newName);
-            }
-            catch(ArgumentException ex)
+
+            if (!String.IsNullOrWhiteSpace(newName))
             {
-                MessageBox.Show(ex.ToString());
+                try
+                {
+                    validator.validateCategoryName(newName, categ.getList());
+                    changeName(newName, oldName);
+                    updateComboBoxes();
+                    MessageBox.Show(oldName + " har döpts om till " + newName);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.ToString());
+                }
             }
+            else
+            {
+                MessageBox.Show("Kategorin måste ha ett namn");
+            }
+            
+
+
 
 
         }
