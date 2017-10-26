@@ -27,7 +27,11 @@ namespace Gruppprojekt
         private void button1_Click(object sender, EventArgs e)
         {
             changeName(tbNewName.Text, cbCategory.SelectedItem.ToString());
-            
+            cbCategory.Items.Clear();
+            cbCategory2.Items.Clear();
+            categ.fillCategoryCB(categ.getList(), cbCategory);
+            categ.fillCategoryCB(categ.getList(), cbCategory2);
+
         }
 
         private void label2_Click(object sender, EventArgs e)
