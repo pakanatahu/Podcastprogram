@@ -51,6 +51,7 @@
             this.btPlayPause = new System.Windows.Forms.Button();
             this.btQuitMusicPlayback = new System.Windows.Forms.Button();
             this.lbNowPlaying = new System.Windows.Forms.Label();
+            this.button4 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -269,11 +270,22 @@
             this.lbNowPlaying.Size = new System.Drawing.Size(0, 13);
             this.lbNowPlaying.TabIndex = 27;
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(462, 297);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.TabIndex = 28;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 390);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.lbNowPlaying);
             this.Controls.Add(this.btQuitMusicPlayback);
             this.Controls.Add(this.btPlayPause);
@@ -329,6 +341,7 @@
         private System.Windows.Forms.Button btPlayPause;
         private System.Windows.Forms.Button btQuitMusicPlayback;
         private System.Windows.Forms.Label lbNowPlaying;
+        private System.Windows.Forms.Button button4;
     }
 }
 

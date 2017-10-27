@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -11,21 +12,27 @@ namespace Gruppprojekt
 {
     class Form_Handler
     {
+
+        private WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
+
         private Podcast_Handler PodcastHandler = new Podcast_Handler();
         private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
-        private WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
+        private XML_Handler XMLHandler = new XML_Handler();
+
         private Boolean Playing;
         public string selected_category = "";
 
         public Form_Handler()
         {
+
             CreateDirectories();
 
         }
         public void FillListBox(ListBox listbox)
         {
+
             List<Podcast> temp2 = PodcastHandler.GetPodcastList();
 
             foreach (Podcast pc in temp2)
@@ -40,6 +47,7 @@ namespace Gruppprojekt
 
         public void set_selected_category(string selected_categ)
         {
+
             selected_category = selected_categ;
         }
 
@@ -57,15 +65,17 @@ namespace Gruppprojekt
 
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
         {
+
             List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Name,
                 SelectedPodcast.Title, SelectedPodcast.Playurl, SelectedPodcast.Listen_Count.ToString(),
-                SelectedPodcast.Update_Intervall.ToString() });
+                SelectedPodcast.Update_Interval.ToString() });
 
             return PodcastInfoList;
         }
 
         public async Task<string> DownloadAudioHandler(Podcast SelectedPodcast)
         {
+
             String Titel = SelectedPodcast.Title;
             String PlayURL = SelectedPodcast.Playurl;
 
@@ -73,13 +83,15 @@ namespace Gruppprojekt
 
             await DownloadMP3Task;
 
-            StartAudio(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\DownloadedPodcasts\\" + SelectedPodcast.Title + ".mp3");
+            StartAudio(DirectoryHandler.GetPlayableMP3File(SelectedPodcast));
+            SelectedPodcast.Listen_Count++;
 
             return DownloadMP3Task.Result;
         }
 
         public void StartAudio(String MP3URL)
         {
+
             WindowsPlayer.URL = MP3URL;
             WindowsPlayer.controls.play();
             Playing = true;
@@ -87,6 +99,7 @@ namespace Gruppprojekt
 
         public void StartPauseAudio()
         {
+
             if (Playing)
             {
                 WindowsPlayer.controls.pause();
@@ -101,13 +114,30 @@ namespace Gruppprojekt
 
         public void QuitMusicPlayer()
         {
+
             WindowsPlayer.controls.stop();
         }
 
         public void CreateDirectories()
         {
+            DirectoryHandler.CreateProgramRootDirectory();
             DirectoryHandler.CreateMP3DownloadDirectory();
+            DirectoryHandler.CreateXMLSaveDirectory();
         }
 
+        public void HandleXMLSaving()
+        {
+
+            List<Podcast> PodcastsToBeSaved = PodcastHandler.GetPodcastList();
+            XMLHandler.CreateXMLDocument(DirectoryHandler.GetSavedXMLFile(), "PodcastSaveFile", PodcastsToBeSaved);
+        }
+
+        public void LoadXMLSaving()
+        {
+
+            List<Podcast> PodcastsToBeLoaded = PodcastHandler.GetPodcastList();
+            XMLHandler.LoadXMLDocument(DirectoryHandler.GetSavedXMLFile(), "PodcastSaveFile", PodcastsToBeLoaded);
+        }
     }
+
 }

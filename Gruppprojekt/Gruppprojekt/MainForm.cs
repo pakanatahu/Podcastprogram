@@ -42,8 +42,10 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+
             FormHandler.SendInput(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
             FormHandler.FillListBox(listBox1);
+            FormHandler.HandleXMLSaving();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -97,6 +99,11 @@ namespace Gruppprojekt
             btPlayPause.Visible = false;
             btPlay.Visible = true;
             lbNowPlaying.Text = "";
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            FormHandler.LoadXMLSaving();
         }
     }
 }
