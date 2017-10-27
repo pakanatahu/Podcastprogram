@@ -8,7 +8,6 @@ C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\G
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.pdb
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.MainForm.resources
-C:\Users\David\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.CoreCompileInputs.cache
 C:\Users\David\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.ShowMorePodcastInfo.resources
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.MainForm.resources
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.form_manage_categories.resources
@@ -24,3 +23,5 @@ C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.ResolveComReference.cache
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.exe
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.pdb
+C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Interop.WMPLib.dll
+C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.ResolveComReference.cache
