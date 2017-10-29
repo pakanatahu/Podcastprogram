@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Categories.cs" />
+    <Compile Include="DataEntities.cs" />
     <Compile Include="Directory_Handler.cs" />
     <Compile Include="Form_Handler.cs" />
     <Compile Include="MainForm.cs">
@@ -62,7 +63,7 @@
     </Compile>
     <Compile Include="MP3_Downloader.cs" />
     <Compile Include="Podcast.cs" />
-    <Compile Include="Podcast_Handler.cs" />
+    <Compile Include="Feed.cs" />
     <Compile Include="podcast_saver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

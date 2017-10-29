@@ -13,9 +13,9 @@ namespace Gruppprojekt
     class Form_Handler
     {
 
-        private WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
+        internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
 
-        private Podcast_Handler PodcastHandler = new Podcast_Handler();
+        private Feed PodcastFeed = new Feed();
         private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
@@ -33,7 +33,7 @@ namespace Gruppprojekt
         public void FillListBox(ListBox listbox)
         {
 
-            List<Podcast> temp2 = PodcastHandler.GetPodcastList();
+            List<Podcast> temp2 = PodcastFeed.GetPodcastList();
 
             foreach (Podcast pc in temp2)
             {
@@ -59,7 +59,7 @@ namespace Gruppprojekt
             temper = URLFeedController.CreatePodcast(Name, URL, Category, UpdateInterval);
             foreach (Podcast pc in temper)
             {
-                PodcastHandler.AddPodcast(pc);
+                PodcastFeed.AddPodcast(pc);
             }
         }
 
@@ -89,7 +89,29 @@ namespace Gruppprojekt
             return DownloadMP3Task.Result;
         }
 
-        public void StartAudio(String MP3URL)
+        public void CreateDirectories()
+        {
+            DirectoryHandler.CreateProgramRootDirectory();
+            DirectoryHandler.CreateMP3DownloadDirectory();
+            DirectoryHandler.CreateXMLSaveDirectory();
+        }
+
+        public void HandleXMLSaving()
+        {
+
+            List<Podcast> PodcastsToBeSaved = PodcastFeed.GetPodcastList();
+            XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+        }
+
+        public void LoadXMLSaving()
+        {
+
+            List<Podcast> PodcastsToBeLoaded = PodcastFeed.GetPodcastList();
+            XMLHandler.Deserialize(PodcastsToBeLoaded, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+
+        }
+
+        internal void StartAudio(String MP3URL)
         {
 
             WindowsPlayer.URL = MP3URL;
@@ -118,26 +140,8 @@ namespace Gruppprojekt
             WindowsPlayer.controls.stop();
         }
 
-        public void CreateDirectories()
-        {
-            DirectoryHandler.CreateProgramRootDirectory();
-            DirectoryHandler.CreateMP3DownloadDirectory();
-            DirectoryHandler.CreateXMLSaveDirectory();
-        }
 
-        public void HandleXMLSaving()
-        {
-
-            List<Podcast> PodcastsToBeSaved = PodcastHandler.GetPodcastList();
-            XMLHandler.CreateXMLDocument(DirectoryHandler.GetSavedXMLFile(), "PodcastSaveFile", PodcastsToBeSaved);
-        }
-
-        public void LoadXMLSaving()
-        {
-
-            List<Podcast> PodcastsToBeLoaded = PodcastHandler.GetPodcastList();
-            XMLHandler.LoadXMLDocument(DirectoryHandler.GetSavedXMLFile(), "PodcastSaveFile", PodcastsToBeLoaded);
-        }
+        //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.
     }
 
 }

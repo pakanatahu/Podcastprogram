@@ -28,8 +28,8 @@ namespace Gruppprojekt
                 string playurl = item.SelectSingleNode("link").InnerText;
                 string title = item.SelectSingleNode("title").InnerText;
                 string pubDate = item.SelectSingleNode("pubDate").InnerText;
-                string summary = item.SelectSingleNode("//[local-name() = 'summary']").InnerText;
-                string duration = item.SelectSingleNode("//[local-name() = 'duration']").InnerText;
+                //string summary = item.SelectSingleNode("//[local-name() = 'summary']").InnerText;
+                //string duration = item.SelectSingleNode("//[local-name() = 'duration']").InnerText;
 
                 Podcast p_c = new Podcast(name, playurl, title, category, update_intervall, 0);
                 temp_list.Add(p_c);

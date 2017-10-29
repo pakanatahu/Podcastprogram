@@ -7,25 +7,24 @@ using System.Xml.Serialization;
 
 namespace Gruppprojekt
 {
-    [XmlRoot(Namespace = "Gruppprojekt", ElementName = "podcastlist", DataType = "string", IsNullable = true)]
     public class Podcast
     {
-        [XmlElement("Name")]
+        [XmlElement(ElementName = "Name")]
         public string Name { get; set; }
 
-        [XmlElement("Playurl")]
+        [XmlElement(ElementName = "Playurl")]
         public string Playurl { get; set; }
 
-        [XmlElement("Title")]
+        [XmlElement(ElementName = "Title")]
         public string Title { get; set; }
 
-        [XmlElement("Category")]
+        [XmlElement(ElementName = "Category")]
         public string Category { get; set; }
 
-        [XmlElement("Update_Interval")]
+        [XmlElement(ElementName = "Update_Interval")]
         public int Update_Interval { get; set; }
 
-        [XmlElement("Listen_Count")]
+        [XmlElement(ElementName = "Listen_Count")]
         public int Listen_Count { get; set; }
 
         public Podcast(string New_Name, string New_Playurl, string New_Title, string New_Category, int New_Update_Interval, int New_Listen_Count )

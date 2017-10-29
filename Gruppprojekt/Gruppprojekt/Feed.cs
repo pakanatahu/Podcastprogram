@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class Podcast_Handler
+    class Feed
     {
-        private List<Podcast> PodcastList = new List<Podcast>();
+        //TODO - Skapa en listbox/cbbox som ska hålla alla podcasternas namn, för att sedan gå vidare till avsnitten.
 
-        public Podcast_Handler()
+        private List<Podcast> PodcastList = new List<Podcast>();
+        public String Category { get; set; }
+        public String URL { get; set; }
+        public int UpdateInterval { get; set; }
+        public Feed()
         {
             PodcastList = new List<Podcast>();
         }

@@ -11,7 +11,7 @@ namespace Gruppprojekt
     class podcast_saver
     {
         XmlSerializer serial = new XmlSerializer(typeof(Podcast));
-        Podcast_Handler p_h = new Podcast_Handler();
+        Feed p_h = new Feed();
 
         public podcast_saver()
         {

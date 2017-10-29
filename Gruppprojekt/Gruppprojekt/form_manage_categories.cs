@@ -12,7 +12,7 @@ namespace Gruppprojekt
 {
     public partial class form_manage_categories : Form
     {
-        Validator validator;
+        Validator validator = new Validator();
         Categories categ = new Categories();
         List<ComboBox> boxlist = new List<ComboBox>();
 
@@ -27,6 +27,7 @@ namespace Gruppprojekt
 
         private void button1_Click(object sender, EventArgs e)
         {
+
             var newName = tbNewName.Text;
             var oldName = cbCategory.SelectedItem.ToString();
 
@@ -48,11 +49,6 @@ namespace Gruppprojekt
             {
                 MessageBox.Show("Kategorin måste ha ett namn");
             }
-            
-
-
-
-
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -62,14 +58,15 @@ namespace Gruppprojekt
 
         private void btnBack_Click(object sender, EventArgs e)
         {
+
             Close();
         }
 
         private void changeName(String newName, String oldName)
         {
+
             categ.removeCategory(oldName);
             categ.addNewCategory(newName);
-
 
         }
 

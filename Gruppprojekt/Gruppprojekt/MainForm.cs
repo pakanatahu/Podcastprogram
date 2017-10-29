@@ -104,6 +104,7 @@ namespace Gruppprojekt
         private void button4_Click_1(object sender, EventArgs e)
         {
             FormHandler.LoadXMLSaving();
+            FormHandler.FillListBox(listBox1);
         }
     }
 }

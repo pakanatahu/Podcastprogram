@@ -12,27 +12,27 @@ namespace Gruppprojekt
 {
     class XML_Handler
     {
-
-        public void CreateXMLDocument(String DirectoryToBeSaved, String FileName, List<Podcast> PodcastsToBeSaved)
+        public void SerializeObject(List<Podcast> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
-            XmlRootAttribute XMLRoot = new XmlRootAttribute();
-            XMLRoot.ElementName = "podcastlist";
-            XMLRoot.Namespace = "Gruppprojekt";
-            XMLRoot.IsNullable = true;
-            XmlSerializer Serializer = new XmlSerializer(PodcastsToBeSaved.GetType(), XMLRoot);
-            StreamWriter Writer = new StreamWriter(@DirectoryToBeSaved + FileName + ".xml");
-            Serializer.Serialize(Writer.BaseStream, PodcastsToBeSaved);
-
+            var Serializer = new XmlSerializer(typeof(List<Podcast>));
+            using (var Stream = File.OpenWrite(PodcastListToBeSerializedURL))
+            {
+                Serializer.Serialize(Stream, PodcastListToBeSerialized);
+            }
         }
 
-        public void LoadXMLDocument(String DirectoryToBeSaved, String FileName, List<Podcast> PodcastsToBeDeserialized)
+        public void Deserialize(List<Podcast> PodcastListToBeDeserialized, string fileName)
         {
-            XmlSerializer xmlser = new XmlSerializer(typeof(List<Podcast>));
-            StreamReader srdr = new StreamReader(@DirectoryToBeSaved + FileName + ".xml");
-            PodcastsToBeDeserialized = (List<Podcast>)xmlser.Deserialize(srdr);
-            srdr.Close();
-
+            var serializer = new XmlSerializer(typeof(List<Podcast>));
+            using (var stream = File.OpenRead(fileName))
+            {
+                var other = (List<Podcast>)(serializer.Deserialize(stream));
+                PodcastListToBeDeserialized.Clear();
+                PodcastListToBeDeserialized.AddRange(other);
+            }
+            
         }
+
 
         }
     
