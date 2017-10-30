@@ -25,3 +25,14 @@ C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Interop.WMPLib.dll
 C:\Users\David\Source\Repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.ResolveComReference.cache
 C:\Users\Henkie\source\repos\Podcastprogram\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe.config
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Interop.WMPLib.dll
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.ResolveComReference.cache
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.exe
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.pdb
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.MainForm.resources
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.form_manage_categories.resources
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Properties.Resources.resources
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.ShowMorePodcastInfo.resources
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.GenerateResource.Cache

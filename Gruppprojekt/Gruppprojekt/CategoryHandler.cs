@@ -13,7 +13,7 @@ namespace Gruppprojekt
 
         public CategoryHandler()
         {
-            
+
         }
 
         public List<Category> getList()
@@ -23,7 +23,7 @@ namespace Gruppprojekt
 
         public void removeCategory(String name)
         {
-            for( int i = 0; i < categoryList.Count; i++)
+            for (int i = 0; i < categoryList.Count; i++)
             {
                 if (categoryList[i].ToString() == name)
                 {
@@ -39,14 +39,14 @@ namespace Gruppprojekt
 
         public void changeName(String newName, String oldName)
         {
-            for(int i = 0; i < categoryList.Count; i++)
+            for (int i = 0; i < categoryList.Count; i++)
             {
                 Console.Write(categoryList[i]);
                 if (categoryList[i].Name == oldName)
                 {
                     categoryList[i].Name = newName;
                     break;
-                } 
+                }
             }
 
         }
