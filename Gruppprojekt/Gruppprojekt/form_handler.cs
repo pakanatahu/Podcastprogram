@@ -15,8 +15,8 @@ namespace Gruppprojekt
 
         internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
 
-        private Feed PodcastFeed = new Feed();
-        private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
+        private Feed_Controller FeedController = new Feed_Controller();
+        private Entities_Creator EntitiesCreator = new Entities_Creator();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
         private XML_Handler XMLHandler = new XML_Handler();
@@ -30,17 +30,29 @@ namespace Gruppprojekt
             CreateDirectories();
 
         }
-        public void FillListBox(ListBox listbox)
+        public void FillListBoxFeeds(ListBox listbox)
+        {
+            //TODO Sortera på titelnummret, göra om filllist till en istället för två.
+            List<Feed> FeedToFillBox = FeedController.ReturnDataFromList();
+
+            foreach (Feed feed in FeedToFillBox)
+            {
+                if (feed.Category == selected_category)
+                {
+                    listbox.Items.Add(feed);
+                }
+
+            }
+        }
+
+        public void FillListBoxPodcasts(ListBox listbox, Feed SelectedFeed)
         {
 
-            List<Podcast> temp2 = PodcastFeed.GetPodcastList();
+            List<Podcast> PodcastToFillBox = SelectedFeed.ReturnDataFromList();
 
-            foreach (Podcast pc in temp2)
+            foreach (Podcast podcast in PodcastToFillBox)
             {
-                if (pc.Category == selected_category)
-                {
-                    listbox.Items.Add(pc);
-                }
+                listbox.Items.Add(podcast);
 
             }
         }
@@ -55,20 +67,17 @@ namespace Gruppprojekt
         {
 
             //TODO fixa uppdaterings frekvens.
-            List<Podcast> temper = new List<Podcast>();
-            temper = URLFeedController.CreatePodcast(Name, URL, Category, UpdateInterval);
-            foreach (Podcast pc in temper)
-            {
-                PodcastFeed.AddPodcast(pc);
-            }
+            Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
+
+            FeedController.AddDataToList(NewFeed);
+
         }
 
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
         {
 
-            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Name,
-                SelectedPodcast.Title, SelectedPodcast.Playurl, SelectedPodcast.Listen_Count.ToString(),
-                SelectedPodcast.Update_Interval.ToString() });
+            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Summary,
+                SelectedPodcast.Title, SelectedPodcast.PlayURL, SelectedPodcast.ListenCount.ToString() });
 
             return PodcastInfoList;
         }
@@ -76,15 +85,15 @@ namespace Gruppprojekt
         public async Task<string> DownloadAudioHandler(Podcast SelectedPodcast)
         {
 
-            String Titel = SelectedPodcast.Title;
-            String PlayURL = SelectedPodcast.Playurl;
+            String Title = SelectedPodcast.Title;
+            String PlayURL = SelectedPodcast.PlayURL;
 
-            Task<String> DownloadMP3Task = MP3Downloader.DownloadMP3FileAsync(Titel, PlayURL);
+            Task<String> DownloadMP3Task = MP3Downloader.DownloadMP3FileAsync(Title, PlayURL);
 
             await DownloadMP3Task;
 
             StartAudio(DirectoryHandler.GetPlayableMP3File(SelectedPodcast));
-            SelectedPodcast.Listen_Count++;
+            SelectedPodcast.ListenCount++;
 
             return DownloadMP3Task.Result;
         }
@@ -99,19 +108,30 @@ namespace Gruppprojekt
         public void HandleXMLSaving()
         {
 
-            List<Podcast> PodcastsToBeSaved = PodcastFeed.GetPodcastList();
+            List<Feed> PodcastsToBeSaved = FeedController.ReturnDataFromList();
             XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
         }
 
         public void LoadXMLSaving()
         {
 
-            List<Podcast> PodcastsToBeLoaded = PodcastFeed.GetPodcastList();
+            List<Feed> PodcastsToBeLoaded = FeedController.ReturnDataFromList();
             XMLHandler.Deserialize(PodcastsToBeLoaded, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
-
         }
 
-        internal void StartAudio(String MP3URL)
+        public void StartPauseAudio()
+        {
+
+            CheckIfPlayingOrPaused();
+        }
+
+        public void QuitMusicPlayer()
+        {
+
+            WindowsPlayer.controls.stop();
+        }
+
+        private void StartAudio(String MP3URL)
         {
 
             WindowsPlayer.URL = MP3URL;
@@ -119,7 +139,7 @@ namespace Gruppprojekt
             Playing = true;
         }
 
-        public void StartPauseAudio()
+        private void CheckIfPlayingOrPaused()
         {
 
             if (Playing)
@@ -134,11 +154,7 @@ namespace Gruppprojekt
             Playing = !Playing;
         }
 
-        public void QuitMusicPlayer()
-        {
 
-            WindowsPlayer.controls.stop();
-        }
 
 
         //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.

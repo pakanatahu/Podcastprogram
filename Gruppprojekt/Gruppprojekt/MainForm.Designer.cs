@@ -31,7 +31,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.cbCategory = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.ListBoxPodcasts = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.btPlay = new System.Windows.Forms.Button();
@@ -52,12 +52,14 @@
             this.btQuitMusicPlayback = new System.Windows.Forms.Button();
             this.lbNowPlaying = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
+            this.LabelFeeds = new System.Windows.Forms.Label();
+            this.ListBoxFeeds = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
             // 
             this.button1.AccessibleName = "bt_add";
-            this.button1.Location = new System.Drawing.Point(246, 157);
+            this.button1.Location = new System.Drawing.Point(255, 314);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -84,19 +86,19 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Kategori";
             // 
-            // listBox1
+            // ListBoxPodcasts
             // 
-            this.listBox1.AccessibleDescription = "lb_main_content";
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(23, 69);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(298, 82);
-            this.listBox1.TabIndex = 3;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.ListBoxPodcasts.AccessibleDescription = "";
+            this.ListBoxPodcasts.FormattingEnabled = true;
+            this.ListBoxPodcasts.Location = new System.Drawing.Point(26, 222);
+            this.ListBoxPodcasts.Name = "ListBoxPodcasts";
+            this.ListBoxPodcasts.Size = new System.Drawing.Size(298, 82);
+            this.ListBoxPodcasts.TabIndex = 3;
+            this.ListBoxPodcasts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(165, 157);
+            this.button2.Location = new System.Drawing.Point(174, 314);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
@@ -117,7 +119,7 @@
             // btPlay
             // 
             this.btPlay.AccessibleName = "bt_play";
-            this.btPlay.Location = new System.Drawing.Point(3, 157);
+            this.btPlay.Location = new System.Drawing.Point(12, 314);
             this.btPlay.Name = "btPlay";
             this.btPlay.Size = new System.Drawing.Size(75, 23);
             this.btPlay.TabIndex = 6;
@@ -127,7 +129,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(84, 157);
+            this.button5.Location = new System.Drawing.Point(93, 314);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(56, 23);
             this.button5.TabIndex = 7;
@@ -226,7 +228,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 49);
+            this.label7.Location = new System.Drawing.Point(32, 206);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(51, 13);
             this.label7.TabIndex = 21;
@@ -242,7 +244,7 @@
             // 
             // btPlayPause
             // 
-            this.btPlayPause.Location = new System.Drawing.Point(3, 186);
+            this.btPlayPause.Location = new System.Drawing.Point(12, 343);
             this.btPlayPause.Name = "btPlayPause";
             this.btPlayPause.Size = new System.Drawing.Size(75, 23);
             this.btPlayPause.TabIndex = 25;
@@ -253,7 +255,7 @@
             // 
             // btQuitMusicPlayback
             // 
-            this.btQuitMusicPlayback.Location = new System.Drawing.Point(84, 186);
+            this.btQuitMusicPlayback.Location = new System.Drawing.Point(93, 343);
             this.btQuitMusicPlayback.Name = "btQuitMusicPlayback";
             this.btQuitMusicPlayback.Size = new System.Drawing.Size(75, 23);
             this.btQuitMusicPlayback.TabIndex = 26;
@@ -265,7 +267,7 @@
             // lbNowPlaying
             // 
             this.lbNowPlaying.AutoSize = true;
-            this.lbNowPlaying.Location = new System.Drawing.Point(246, 297);
+            this.lbNowPlaying.Location = new System.Drawing.Point(174, 348);
             this.lbNowPlaying.Name = "lbNowPlaying";
             this.lbNowPlaying.Size = new System.Drawing.Size(0, 13);
             this.lbNowPlaying.TabIndex = 27;
@@ -280,11 +282,31 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
+            // LabelFeeds
+            // 
+            this.LabelFeeds.AutoSize = true;
+            this.LabelFeeds.Location = new System.Drawing.Point(32, 49);
+            this.LabelFeeds.Name = "LabelFeeds";
+            this.LabelFeeds.Size = new System.Drawing.Size(36, 13);
+            this.LabelFeeds.TabIndex = 29;
+            this.LabelFeeds.Text = "Feeds";
+            // 
+            // ListBoxFeeds
+            // 
+            this.ListBoxFeeds.FormattingEnabled = true;
+            this.ListBoxFeeds.Location = new System.Drawing.Point(26, 69);
+            this.ListBoxFeeds.Name = "ListBoxFeeds";
+            this.ListBoxFeeds.Size = new System.Drawing.Size(295, 95);
+            this.ListBoxFeeds.TabIndex = 30;
+            this.ListBoxFeeds.SelectedIndexChanged += new System.EventHandler(this.ListBoxFeeds_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 390);
+            this.Controls.Add(this.ListBoxFeeds);
+            this.Controls.Add(this.LabelFeeds);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.lbNowPlaying);
             this.Controls.Add(this.btQuitMusicPlayback);
@@ -305,7 +327,7 @@
             this.Controls.Add(this.btPlay);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.ListBoxPodcasts);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbCategory);
             this.Controls.Add(this.button1);
@@ -321,7 +343,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbCategory;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox ListBoxPodcasts;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btPlay;
@@ -342,6 +364,8 @@
         private System.Windows.Forms.Button btQuitMusicPlayback;
         private System.Windows.Forms.Label lbNowPlaying;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label LabelFeeds;
+        private System.Windows.Forms.ListBox ListBoxFeeds;
     }
 }
 
