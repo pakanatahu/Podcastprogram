@@ -76,8 +76,8 @@ namespace Gruppprojekt
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
         {
 
-            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Summary,
-                SelectedPodcast.Title, SelectedPodcast.PlayURL, SelectedPodcast.ListenCount.ToString() });
+            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Title,
+                SelectedPodcast.PublishingDate, SelectedPodcast.Duration, SelectedPodcast.Summary, SelectedPodcast.ListenCount.ToString() });
 
             return PodcastInfoList;
         }

@@ -14,6 +14,7 @@ namespace Gruppprojekt
     {
         public void SerializeObject(List<Feed> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
+
             var Serializer = new XmlSerializer(typeof(List<Feed>));
             using (var Stream = File.OpenWrite(PodcastListToBeSerializedURL))
             {

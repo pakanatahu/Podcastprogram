@@ -24,25 +24,26 @@ namespace Gruppprojekt
 
         public Feed()
         {
-            PodcastList = new List<Podcast>();
 
+            PodcastList = new List<Podcast>();
         }
 
         public override void AddDataToList(Podcast SelectedPodcast)
         {
+
             PodcastList.Add(SelectedPodcast);
         }
 
         public override void RemoveDataFromList(Podcast SelectedPodcast)
         {
+
             PodcastList.Remove(SelectedPodcast);
         }
 
-
         public override List<Podcast> ReturnDataFromList()
         {
-            return PodcastList;
 
+            return PodcastList;
         }
 
     }

@@ -11,8 +11,8 @@ namespace Gruppprojekt
     {
 
         public Feed CreateEntities(String FeedName, String FeedURL, String FeedCategory, int FeedUpdateInterval)
-
         {
+
             Boolean FeedCreated = false;
 
             Feed NewFeed = new Feed();
@@ -32,8 +32,8 @@ namespace Gruppprojekt
 
                 string Title = Item.SelectSingleNode("title").InnerText;
                 string PlayURL = Item.SelectSingleNode("link").InnerText;
-                //string Summary = Item.SelectSingleNode("//[local-name() = 'summary']").InnerText;
-                //string Duration = Item.SelectSingleNode("//[local-name() = 'duration']").InnerText;
+                string Summary = Item.SelectSingleNode("//*[local-name() = 'summary']").InnerText;
+                string Duration = Item.SelectSingleNode("//*[local-name() = 'duration']").InnerText;
                 string PublishingDate = Item.SelectSingleNode("pubDate").InnerText;
                 int ListenCount = 0;
 
@@ -71,6 +71,7 @@ namespace Gruppprojekt
 
         internal System.Xml.XmlDocument RSSFeedDownloader(string FeedURL)
         {
+
             var XMLString = "";
 
             using (var client = new System.Net.WebClient())

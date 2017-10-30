@@ -43,8 +43,13 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+            string Name = tbNamn.Text;
+            string URL = tbURL.Text;
+            string Category = cbCategory.SelectedItem.ToString();
+            int UpdateInterval = 1;
 
-            FormHandler.SendInput(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
+            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+            ListBoxFeeds.Items.Clear();
             FormHandler.FillListBoxFeeds(ListBoxFeeds);
             FormHandler.HandleXMLSaving();
         }
@@ -110,6 +115,7 @@ namespace Gruppprojekt
 
         private void ListBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListBoxPodcasts.Items.Clear();
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
