@@ -15,25 +15,48 @@ namespace Gruppprojekt
         public void SerializeObject(List<Feed> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
 
-            var Serializer = new XmlSerializer(typeof(List<Feed>));
-            using (var Stream = File.OpenWrite(PodcastListToBeSerializedURL))
+            //TODO när man tar bort kategori ska ett default värde komma.
+            File.Delete(PodcastListToBeSerializedURL);
+
+            XmlTextWriter XMLWriter = new XmlTextWriter(PodcastListToBeSerializedURL, null);
+
+            foreach (Feed feed in PodcastListToBeSerialized)
             {
-                Serializer.Serialize(Stream, PodcastListToBeSerialized);
+
+                XMLWriter.Formatting = Formatting.Indented;
+
+                XMLWriter.WriteStartElement("feed");
+
+                XMLWriter.WriteAttributeString("name", feed.Name);
+                XMLWriter.WriteAttributeString("category", feed.Category);
+                XMLWriter.WriteAttributeString("updateinterval", feed.UpdateInterval.ToString());
+                XMLWriter.WriteAttributeString("url", feed.URL);
+
+                foreach (Podcast podcast in feed.ReturnDataFromList())
+                {
+
+                    XMLWriter.WriteStartElement("podcast");
+                    XMLWriter.WriteElementString("title", podcast.Title);
+                    XMLWriter.WriteElementString("playurl", podcast.PlayURL);
+                    XMLWriter.WriteElementString("summary", podcast.Summary);
+                    XMLWriter.WriteElementString("publishingdate", podcast.PublishingDate);
+                    XMLWriter.WriteElementString("listencount", podcast.ListenCount.ToString());
+                    XMLWriter.WriteElementString("duration", podcast.Duration);
+                    XMLWriter.WriteWhitespace("\n");
+
+                    XMLWriter.WriteEndElement();
+                }
+
+
             }
+
+            XMLWriter.WriteFullEndElement();
+
+            XMLWriter.Close();
         }
 
-        public void Deserialize(List<Feed> PodcastListToBeDeserialized, string fileName)
-        {
-            var serializer = new XmlSerializer(typeof(List<Feed>));
-            using (var stream = File.OpenRead(fileName))
-            {
-                var other = (List<Feed>)(serializer.Deserialize(stream));
-                PodcastListToBeDeserialized.Clear();
-                PodcastListToBeDeserialized.AddRange(other);
-            }
-            
-        }
-
+        //public List<String> LoadFeedDataFromXML() { 
+        //}
 
         }
     

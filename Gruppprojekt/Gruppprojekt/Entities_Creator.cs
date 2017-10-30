@@ -18,7 +18,6 @@ namespace Gruppprojekt
             Feed NewFeed = new Feed();
 
             var XMLDocument = new System.Xml.XmlDocument();
-            XNamespace NameSpace = "http://www.itunes.com/dtds/podcast-1.0.dtd";
             XMLDocument = RSSFeedDownloader(FeedURL);
 
             foreach (System.Xml.XmlNode Item in XMLDocument.DocumentElement.SelectNodes("channel/item"))

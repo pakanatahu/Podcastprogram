@@ -159,9 +159,8 @@ namespace Gruppprojekt
 
         public void LoadXMLSaving()
         {
-
-            List<Feed> PodcastsToBeLoaded = FeedController.ReturnDataFromList();
-            XMLHandler.Deserialize(PodcastsToBeLoaded, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+            
+            //EntitiesCreator.CreateEntities(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
         }
 
         public void StartPauseAudio()

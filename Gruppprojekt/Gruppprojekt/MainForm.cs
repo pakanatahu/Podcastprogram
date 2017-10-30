@@ -20,25 +20,12 @@ namespace Gruppprojekt
         {
             InitializeComponent();
             AddDefaultCategories adc = new AddDefaultCategories();
-            clearAndSetSelectedIndexCategory();
-            ListBoxPodcasts.DisplayMember = "Title";
-        }
-        public void updateForm()
-        {
-            clearAndSetSelectedIndexCategory();
-        }
-
-        private void clearAndSetSelectedIndexCategory()
-        {
             FormHandler.fillCategoryComobox(cbCategory);
             FormHandler.fillCategoryComobox(cbCategory2);
-            FormHandler.setSelectedCategoryInCombobox(cbCategory, 0);
-            FormHandler.setSelectedCategoryInCombobox(cbCategory2, 0);
-        }
-
-        private void Form1_Activated(object sender, System.EventArgs e)
-        {
-            clearAndSetSelectedIndexCategory();
+            cbCategory.SelectedIndex = 0;
+            cbCategory2.SelectedIndex = 0;
+            ListBoxPodcasts.DisplayMember = "Title";
+            ListBoxFeeds.DisplayMember = "Name";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,19 +46,24 @@ namespace Gruppprojekt
         {
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
-            String Category = cbCategory.SelectedItem.ToString() ;
+            string Category = cbCategory2.SelectedItem.ToString();
             int UpdateInterval = 1;
 
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
             ListBoxFeeds.Items.Clear();
             FormHandler.FillListBoxFeeds(ListBoxFeeds);
             FormHandler.HandleXMLSaving();
+
+            tbNamn.Clear();
+            tbURL.Clear();
+            MessageBox.Show("Success!");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             form_manage_categories manageCat = new form_manage_categories();
             manageCat.Show();
+            this.Hide();
 
         }
 
@@ -102,6 +94,7 @@ namespace Gruppprojekt
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ListBoxFeeds.Items.Clear();
             ListBoxPodcasts.Items.Clear();
             FormHandler.set_selected_category(cbCategory.SelectedItem.ToString());
             FormHandler.FillListBoxFeeds(ListBoxPodcasts);
