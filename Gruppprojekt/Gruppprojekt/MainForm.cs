@@ -20,11 +20,25 @@ namespace Gruppprojekt
         {
             InitializeComponent();
             AddDefaultCategories adc = new AddDefaultCategories();
+            clearAndSetSelectedIndexCategory();
+            ListBoxPodcasts.DisplayMember = "Title";
+        }
+        public void updateForm()
+        {
+            clearAndSetSelectedIndexCategory();
+        }
+
+        private void clearAndSetSelectedIndexCategory()
+        {
             FormHandler.fillCategoryComobox(cbCategory);
             FormHandler.fillCategoryComobox(cbCategory2);
-            cbCategory.SelectedIndex = 0;
-            cbCategory2.SelectedIndex = 0;
-            ListBoxPodcasts.DisplayMember = "Title";
+            FormHandler.setSelectedCategoryInCombobox(cbCategory, 0);
+            FormHandler.setSelectedCategoryInCombobox(cbCategory2, 0);
+        }
+
+        private void Form1_Activated(object sender, System.EventArgs e)
+        {
+            clearAndSetSelectedIndexCategory();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,7 +59,7 @@ namespace Gruppprojekt
         {
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
-            string Category = cbCategory.SelectedItem.ToString();
+            String Category = cbCategory.SelectedItem.ToString() ;
             int UpdateInterval = 1;
 
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
@@ -58,7 +72,6 @@ namespace Gruppprojekt
         {
             form_manage_categories manageCat = new form_manage_categories();
             manageCat.Show();
-            this.Hide();
 
         }
 
