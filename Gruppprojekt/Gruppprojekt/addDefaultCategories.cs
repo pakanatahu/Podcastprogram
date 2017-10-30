@@ -11,7 +11,7 @@ namespace Gruppprojekt
         Form_Handler formHandler = new Form_Handler();
 
 
-        public addDefaultCategories()
+        public AddDefaultCategories()
         {
             defaultCategories(formHandler.getCategoryList());
 
