@@ -15,11 +15,38 @@ namespace Gruppprojekt
         public void SerializeObject(List<Feed> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
 
-            var Serializer = new XmlSerializer(typeof(List<Feed>));
-            using (var Stream = File.OpenWrite(PodcastListToBeSerializedURL))
-            {
-                Serializer.Serialize(Stream, PodcastListToBeSerialized);
+            //TODO när man tar bort kategori ska ett default värde komma.
+            File.Delete(PodcastListToBeSerializedURL);
+
+            XmlTextWriter XMLWriter = new XmlTextWriter(PodcastListToBeSerializedURL, null);
+
+            foreach(Feed feed in PodcastListToBeSerialized) {
+
+                XMLWriter.Formatting = Formatting.Indented;
+
+                XMLWriter.WriteStartElement("feeds");
+
+                XMLWriter.WriteAttributeString("feedname", feed.Name);
+                XMLWriter.WriteAttributeString("category", feed.Category);
+                XMLWriter.WriteAttributeString("url", feed.URL);
+                XMLWriter.WriteAttributeString("updateinterval", feed.UpdateInterval.ToString());
+
+                foreach (Podcast podcast in feed.ReturnDataFromList()) {
+
+                    XMLWriter.WriteStartElement("podcast");
+                    XMLWriter.WriteElementString("title", podcast.Title);
+                    XMLWriter.WriteElementString("playurl", podcast.PlayURL);
+                    XMLWriter.WriteElementString("summary", podcast.Summary);
+                    XMLWriter.WriteElementString("publishingdate", podcast.PublishingDate);
+                    XMLWriter.WriteElementString("listencount", podcast.ListenCount.ToString());
+                    XMLWriter.WriteElementString("duration", podcast.Duration);
+                    XMLWriter.WriteWhitespace("\n");
+                    XMLWriter.WriteEndElement();
+                }    
             }
+
+            XMLWriter.WriteFullEndElement();
+            XMLWriter.Close();
         }
 
         public void Deserialize(List<Feed> PodcastListToBeDeserialized, string fileName)
