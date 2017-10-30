@@ -19,12 +19,12 @@ namespace Gruppprojekt
         public MainForm()
         {
             InitializeComponent();
-            addDefaultCategories adc = new addDefaultCategories();
+            AddDefaultCategories adc = new AddDefaultCategories();
             FormHandler.fillCategoryComobox(cbCategory);
             FormHandler.fillCategoryComobox(cbCategory2);
             cbCategory.SelectedIndex = 0;
             cbCategory2.SelectedIndex = 0;
-            listBox1.DisplayMember = "Title";
+            ListBoxPodcasts.DisplayMember = "Title";
         }
 
         private void button1_Click(object sender, EventArgs e)

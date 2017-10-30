@@ -17,7 +17,8 @@ namespace Gruppprojekt
 
         private CategoryHandler categoryHandler = new CategoryHandler();
         private Feed PodcastFeed = new Feed();
-        private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
+        private Feed_Controller FeedController = new Feed_Controller();
+        private Entities_Creator EntitiesCreator = new Entities_Creator();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
         private XML_Handler XMLHandler = new XML_Handler();
@@ -60,7 +61,7 @@ namespace Gruppprojekt
             }
         }
 
-        public void FillListBox(ListBox listbox)
+        public void FillListBoxFeeds(ListBox listbox)
         {
             //TODO Sortera på titelnummret, göra om filllist till en istället för två.
             List<Feed> FeedToFillBox = FeedController.ReturnDataFromList();
