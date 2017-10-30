@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class addDefaultCategories
+    class AddDefaultCategories
     {
         Form_Handler formHandler = new Form_Handler();
-        
+
 
         public addDefaultCategories()
         {
             defaultCategories(formHandler.getCategoryList());
-           
+
         }
 
 
         private void defaultCategories(List<Category> list)
         {
-            if(list.Count == 0)
+            if (list.Count == 0)
             {
                 list.Add(new Category("Thriller"));
                 list.Add(new Category("Sport"));
