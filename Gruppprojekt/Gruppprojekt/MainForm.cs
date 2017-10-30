@@ -43,9 +43,14 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+            string Name = tbNamn.Text;
+            string URL = tbURL.Text;
+            string Category = cbCategory.SelectedItem.ToString();
+            int UpdateInterval = 1;
 
-            FormHandler.SendInput(tbNamn.Text, tbURL.Text, cbCategory.SelectedItem.ToString(), 1);
-            FormHandler.FillListBox(listBox1);
+            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+            ListBoxFeeds.Items.Clear();
+            FormHandler.FillListBoxFeeds(ListBoxFeeds);
             FormHandler.HandleXMLSaving();
         }
 
@@ -59,7 +64,7 @@ namespace Gruppprojekt
 
         private async void button4_Click(object sender, EventArgs e)
         {
-            Podcast SelectedPodcast = listBox1.SelectedItem as Podcast;
+            Podcast SelectedPodcast = ListBoxPodcasts.SelectedItem as Podcast;
 
             Task<String> DownloadMP3Task = FormHandler.DownloadAudioHandler(SelectedPodcast);
             lbNowPlaying.Text = "Laddar ner...";
@@ -76,7 +81,7 @@ namespace Gruppprojekt
 
         private void button5_Click(object sender, EventArgs e)
         {
-            List<String> PodcastInfoTempList = FormHandler.GetPodcastInfo(listBox1.SelectedItem as Podcast);
+            List<String> PodcastInfoTempList = FormHandler.GetPodcastInfo(ListBoxPodcasts.SelectedItem as Podcast);
             ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
             PodcastInfoWindow.Show();
             
@@ -84,9 +89,9 @@ namespace Gruppprojekt
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            ListBoxPodcasts.Items.Clear();
             FormHandler.set_selected_category(cbCategory.SelectedItem.ToString());
-            FormHandler.FillListBox(listBox1);
+            FormHandler.FillListBoxFeeds(ListBoxPodcasts);
         }
 
         private void btPlayPause_Click(object sender, EventArgs e)
@@ -106,7 +111,14 @@ namespace Gruppprojekt
         private void button4_Click_1(object sender, EventArgs e)
         {
             FormHandler.LoadXMLSaving();
-            FormHandler.FillListBox(listBox1);
+            FormHandler.FillListBoxFeeds(ListBoxPodcasts);
+        }
+
+        private void ListBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBoxPodcasts.Items.Clear();
+            Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
+            FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

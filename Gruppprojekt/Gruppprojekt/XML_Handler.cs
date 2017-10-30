@@ -12,21 +12,22 @@ namespace Gruppprojekt
 {
     class XML_Handler
     {
-        public void SerializeObject(List<Podcast> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
+        public void SerializeObject(List<Feed> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
-            var Serializer = new XmlSerializer(typeof(List<Podcast>));
+
+            var Serializer = new XmlSerializer(typeof(List<Feed>));
             using (var Stream = File.OpenWrite(PodcastListToBeSerializedURL))
             {
                 Serializer.Serialize(Stream, PodcastListToBeSerialized);
             }
         }
 
-        public void Deserialize(List<Podcast> PodcastListToBeDeserialized, string fileName)
+        public void Deserialize(List<Feed> PodcastListToBeDeserialized, string fileName)
         {
-            var serializer = new XmlSerializer(typeof(List<Podcast>));
+            var serializer = new XmlSerializer(typeof(List<Feed>));
             using (var stream = File.OpenRead(fileName))
             {
-                var other = (List<Podcast>)(serializer.Deserialize(stream));
+                var other = (List<Feed>)(serializer.Deserialize(stream));
                 PodcastListToBeDeserialized.Clear();
                 PodcastListToBeDeserialized.AddRange(other);
             }

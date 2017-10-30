@@ -21,7 +21,7 @@ namespace Gruppprojekt
 
         private void LoadPodcastInfo(List<String> PodcastInfoList)
         {
-            List<String> BoxLabels = new List<String>(new String[] { "Namn - ", "Titel - ", "MP3-URL - ", "Uppspelningar - ", "Uppdateringsfrekvens - " });
+            List<String> BoxLabels = new List<String>(new String[] { "Titel - ", "Release datum - ", "Duration - ", "Sammanfattning - ", "Uppspelningar - " });
             for (int i = 0; i < BoxLabels.Count; i++)
             {
                 ShowMoreTextBox.Text += BoxLabels[i] + PodcastInfoList[i] + Environment.NewLine;

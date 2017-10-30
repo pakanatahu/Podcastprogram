@@ -10,12 +10,12 @@ namespace Gruppprojekt
     class MP3_Downloader
     {
 
-        public async Task<string> DownloadMP3FileAsync(String PodcastTitle, String PodcastURL)
+        public async Task<string> DownloadMP3FileAsync(string PodcastTitle, string PodcastURL)
         {
             using (WebClient client = new WebClient())
             {
                 var url = PodcastURL;
-                await client.DownloadFileTaskAsync(new Uri(url), Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\DownloadedPodcasts\\" + PodcastTitle + ".mp3");
+                await client.DownloadFileTaskAsync(new Uri(url), Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\PodcastProgram\\DownloadedPodcasts\\" + PodcastTitle + ".mp3");
                 return "Spelar upp...";
             }
         }

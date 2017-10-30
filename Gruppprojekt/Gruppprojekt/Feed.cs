@@ -3,30 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace Gruppprojekt
 {
-    class Feed
+    public class Feed : Data_Entities<Podcast>
     {
         //TODO - Skapa en listbox/cbbox som ska hålla alla podcasternas namn, för att sedan gå vidare till avsnitten.
 
         private List<Podcast> PodcastList = new List<Podcast>();
+
+        [XmlElement(ElementName = "Name")]
+        public String Name { get; set; }
+        [XmlElement(ElementName = "Category")]
         public String Category { get; set; }
+        [XmlElement(ElementName = "URL")]
         public String URL { get; set; }
+        [XmlElement(ElementName = "UpdateInterval")]
         public int UpdateInterval { get; set; }
+
         public Feed()
         {
+
             PodcastList = new List<Podcast>();
         }
 
-        public List<Podcast> GetPodcastList()
+        public override void AddDataToList(Podcast SelectedPodcast)
         {
-            return PodcastList;
+
+            PodcastList.Add(SelectedPodcast);
         }
 
-        public void AddPodcast(Podcast SelectedPodcast)
+        public override void RemoveDataFromList(Podcast SelectedPodcast)
         {
-            PodcastList.Add(SelectedPodcast);
+
+            PodcastList.Remove(SelectedPodcast);
+        }
+
+        public override List<Podcast> ReturnDataFromList()
+        {
+
+            return PodcastList;
         }
 
     }

@@ -10,6 +10,7 @@ namespace Gruppprojekt
     {
         public void CreateProgramRootDirectory()
         {
+
             System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\PodcastProgram");
         }
         public void CreateMP3DownloadDirectory()
@@ -32,12 +33,8 @@ namespace Gruppprojekt
 
         public String GetSavedXMLFile()
         {
+
             return Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\PodcastProgram\\SavedPodcasts\\";
-        }
-
-        public void SaveXMLFile()
-        {
-
         }
     }
 }
