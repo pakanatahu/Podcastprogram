@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Categories.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="CategoryHandler.cs" />
     <Compile Include="Data_Entities.cs" />
     <Compile Include="Directory_Handler.cs" />
     <Compile Include="Feed_Controller.cs" />

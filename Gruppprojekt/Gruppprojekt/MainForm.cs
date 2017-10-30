@@ -14,17 +14,17 @@ namespace Gruppprojekt
     public partial class MainForm : Form
     {
         Form_Handler FormHandler = new Form_Handler();
+        
 
         public MainForm()
         {
             InitializeComponent();
-            FormHandler = new Form_Handler();
-            Categories categ = new Categories();
-            List<String> categoryList = categ.getList();
-            categ.fillCategoryCB(categoryList, cbCategory);
-            categ.fillCategoryCB(categoryList, cbCategory2);
-            ListBoxFeeds.DisplayMember = "Name";
-            ListBoxPodcasts.DisplayMember = "Title";
+            addDefaultCategories adc = new addDefaultCategories();
+            FormHandler.fillCategoryComobox(cbCategory);
+            FormHandler.fillCategoryComobox(cbCategory2);
+            cbCategory.SelectedIndex = 0;
+            cbCategory2.SelectedIndex = 0;
+            listBox1.DisplayMember = "Title";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -58,6 +58,7 @@ namespace Gruppprojekt
         {
             form_manage_categories manageCat = new form_manage_categories();
             manageCat.Show();
+            this.Hide();
 
         }
 
@@ -118,6 +119,14 @@ namespace Gruppprojekt
             ListBoxPodcasts.Items.Clear();
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            cbCategory.Items.Clear();
+            cbCategory2.Items.Clear();
+            FormHandler.fillCategoryComobox(cbCategory);
+            FormHandler.fillCategoryComobox(cbCategory2);
         }
     }
 }

@@ -13,16 +13,15 @@ namespace Gruppprojekt
     public partial class form_manage_categories : Form
     {
         Validator validator = new Validator();
-        Categories categ = new Categories();
-        List<ComboBox> boxlist = new List<ComboBox>();
+        Form_Handler formHandler = new Form_Handler();
 
         public form_manage_categories()
         {
             InitializeComponent();
 
-            List<String> categoryList = categ.getList();
-            categ.fillCategoryCB(categ.getList(), cbCategory);
-            categ.fillCategoryCB(categ.getList(), cbCategory2);
+            formHandler.fillCategoryComobox(cbCategory);
+            formHandler.fillCategoryComobox(cbCategory2);
+            setSelectedIndexComboboxes(cbCategory, cbCategory2);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -35,10 +34,11 @@ namespace Gruppprojekt
             {
                 try
                 {
-                    validator.validateCategoryName(newName, categ.getList());
-                    changeName(newName, oldName);
+                    validator.validateCategoryName(newName, formHandler.getCategoryList());
+                    formHandler.changeCateogoryName(newName, oldName);
                     updateComboBoxes();
                     MessageBox.Show(oldName + " har döpts om till " + newName);
+                    setSelectedIndexComboboxes(cbCategory, cbCategory2);
                 }
                 catch(Exception ex)
                 {
@@ -58,43 +58,47 @@ namespace Gruppprojekt
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
-            Close();
+            MainForm mf = new MainForm();
+            mf.Show();
+            this.Close();
         }
 
-        private void changeName(String newName, String oldName)
-        {
 
-            categ.removeCategory(oldName);
-            categ.addNewCategory(newName);
-
-        }
 
         private void updateComboBoxes()
         {
 
             cbCategory.Items.Clear();
             cbCategory2.Items.Clear();
-            categ.fillCategoryCB(categ.getList(), cbCategory);
-            categ.fillCategoryCB(categ.getList(), cbCategory2);
+            formHandler.fillCategoryComobox(cbCategory);
+            formHandler.fillCategoryComobox(cbCategory2);
+            setSelectedIndexComboboxes(cbCategory, cbCategory2);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             var nyKategori = tbAddCategory.Text;
-            categ.addNewCategory(nyKategori);
+            formHandler.addCategoryName(nyKategori);
             updateComboBoxes();
             MessageBox.Show(nyKategori + " har lagts till som ny kategori");
             tbAddCategory.Clear();
+            setSelectedIndexComboboxes(cbCategory, cbCategory2);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             var valdKategori = cbCategory2.SelectedItem.ToString();
-            categ.removeCategory(valdKategori);
+            formHandler.removeCategory(valdKategori);
             MessageBox.Show(valdKategori + " har tagits bort som kategori");
-            updateComboBoxes();   
+            updateComboBoxes();
+            setSelectedIndexComboboxes(cbCategory, cbCategory2);
+        }
+
+        private void setSelectedIndexComboboxes(ComboBox cb1, ComboBox cb2)
+        {
+            formHandler.setSelectedCategoryInCombobox(cb1, 0);
+            formHandler.setSelectedCategoryInCombobox(cb2, 0);
         }
     }
 }

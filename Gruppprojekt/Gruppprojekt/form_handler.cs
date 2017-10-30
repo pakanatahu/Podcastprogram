@@ -15,8 +15,9 @@ namespace Gruppprojekt
 
         internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
 
-        private Feed_Controller FeedController = new Feed_Controller();
-        private Entities_Creator EntitiesCreator = new Entities_Creator();
+        private CategoryHandler categoryHandler = new CategoryHandler();
+        private Feed PodcastFeed = new Feed();
+        private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
         private XML_Handler XMLHandler = new XML_Handler();
@@ -30,7 +31,36 @@ namespace Gruppprojekt
             CreateDirectories();
 
         }
-        public void FillListBoxFeeds(ListBox listbox)
+
+        public List<Category> getCategoryList()
+        {
+            return categoryHandler.getList();
+        }
+
+        public void removeCategory(String categoryName)
+        {
+            categoryHandler.removeCategory(categoryName);
+        }
+
+        public void addCategoryName(String newName)
+        {
+            categoryHandler.addNewCategory(newName);
+        }
+
+        public void changeCateogoryName(String newCategoryName, String oldCategoryName)
+        {
+            categoryHandler.changeName(newCategoryName, oldCategoryName);
+        }
+
+        public void fillCategoryComobox(ComboBox cb)
+        {
+            foreach(Category category in categoryHandler.getList())
+            {
+                cb.Items.Add(category.Name);
+            }
+        }
+
+        public void FillListBox(ListBox listbox)
         {
             //TODO Sortera på titelnummret, göra om filllist till en istället för två.
             List<Feed> FeedToFillBox = FeedController.ReturnDataFromList();
@@ -55,6 +85,11 @@ namespace Gruppprojekt
                 listbox.Items.Add(podcast);
 
             }
+        }
+
+        public void setSelectedCategoryInCombobox(ComboBox cb, int index)
+        {
+            cb.SelectedIndex = index;
         }
 
         public void set_selected_category(string selected_categ)
