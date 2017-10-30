@@ -15,6 +15,7 @@ namespace Gruppprojekt
 
         internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
 
+        private CategoryHandler categoryHandler = new CategoryHandler();
         private Feed PodcastFeed = new Feed();
         private URL_Feed_Controller URLFeedController = new URL_Feed_Controller();
         private Directory_Handler DirectoryHandler = new Directory_Handler();
@@ -30,6 +31,35 @@ namespace Gruppprojekt
             CreateDirectories();
 
         }
+
+        public List<Category> getCategoryList()
+        {
+            return categoryHandler.getList();
+        }
+
+        public void removeCategory(String categoryName)
+        {
+            categoryHandler.removeCategory(categoryName);
+        }
+
+        public void addCategoryName(String newName)
+        {
+            categoryHandler.addNewCategory(newName);
+        }
+
+        public void changeCateogoryName(String newCategoryName, String oldCategoryName)
+        {
+            categoryHandler.changeName(newCategoryName, oldCategoryName);
+        }
+
+        public void fillCategoryComobox(ComboBox cb)
+        {
+            foreach(Category category in categoryHandler.getList())
+            {
+                cb.Items.Add(category.Name);
+            }
+        }
+
         public void FillListBox(ListBox listbox)
         {
 
@@ -43,6 +73,11 @@ namespace Gruppprojekt
                 }
 
             }
+        }
+
+        public void setSelectedCategoryInCombobox(ComboBox cb, int index)
+        {
+            cb.SelectedIndex = index;
         }
 
         public void set_selected_category(string selected_categ)

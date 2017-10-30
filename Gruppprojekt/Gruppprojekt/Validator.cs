@@ -47,11 +47,11 @@ namespace Gruppprojekt
             }
         }
 
-        public void validateCategoryName(String name, List<String> categoryList)
+        public void validateCategoryName(String name, List<Category> categoryList)
         {
             for (int i = 0; i < categoryList.Count; i++)
             {
-                 if (name == categoryList[i])
+                 if (name == categoryList[i].ToString())
                 {
                     throw new Exception(name + " already exists as a category");
                 }
