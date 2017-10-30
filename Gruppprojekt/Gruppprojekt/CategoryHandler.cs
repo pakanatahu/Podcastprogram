@@ -25,7 +25,7 @@ namespace Gruppprojekt
         {
             for (int i = 0; i < categoryList.Count; i++)
             {
-                if (categoryList[i].ToString() == name)
+                if (categoryList[i].Name == name)
                 {
                     categoryList.Remove(categoryList[i]);
                 }

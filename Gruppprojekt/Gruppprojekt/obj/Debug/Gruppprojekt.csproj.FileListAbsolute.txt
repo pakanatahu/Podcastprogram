@@ -36,3 +36,5 @@ C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Grupppro
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Properties.Resources.resources
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.ShowMorePodcastInfo.resources
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.GenerateResource.Cache
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.exe
+C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\bin\Debug\Gruppprojekt.pdb
