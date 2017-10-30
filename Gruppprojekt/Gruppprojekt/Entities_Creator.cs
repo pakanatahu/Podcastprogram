@@ -18,15 +18,13 @@ namespace Gruppprojekt
             Feed NewFeed = new Feed();
 
             var XMLDocument = new System.Xml.XmlDocument();
-
+            XNamespace NameSpace = "http://www.itunes.com/dtds/podcast-1.0.dtd";
             XMLDocument = RSSFeedDownloader(FeedURL);
 
             foreach (System.Xml.XmlNode Item in XMLDocument.DocumentElement.SelectNodes("channel/item"))
             {
-
                 if (!FeedCreated)
                 {
-
                     NewFeed = CreateFeed(FeedName, FeedCategory, FeedURL, FeedUpdateInterval);
                     FeedCreated = true;
 
@@ -39,7 +37,7 @@ namespace Gruppprojekt
                 string PublishingDate = Item.SelectSingleNode("pubDate").InnerText;
                 int ListenCount = 0;
 
-                NewFeed.AddDataToList(CreatePodcast(Title, PlayURL, Summary, Duration, PublishingDate, ListenCount));
+                NewFeed.AddDataToList(CreatePodcast(Title, PlayURL, "Summary", "Duration", PublishingDate, ListenCount));
 
             }
             return NewFeed;

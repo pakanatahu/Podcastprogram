@@ -66,7 +66,7 @@ namespace Gruppprojekt
         public void SendInput(String Name, String URL, String Category, int UpdateInterval)
         {
 
-            //TODO fixa uppdaterings frekvens. Ta bort den gamla list och ladda ner igen.
+            //TODO fixa uppdaterings frekvens.
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
 
             FeedController.AddDataToList(NewFeed);
@@ -109,10 +109,7 @@ namespace Gruppprojekt
         {
 
             List<Feed> PodcastsToBeSaved = FeedController.ReturnDataFromList();
-
-
             XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
-         
         }
 
         public void LoadXMLSaving()
