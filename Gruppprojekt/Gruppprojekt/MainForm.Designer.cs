@@ -183,7 +183,7 @@
             this.tbIntervall.Name = "tbIntervall";
             this.tbIntervall.Size = new System.Drawing.Size(142, 20);
             this.tbIntervall.TabIndex = 15;
-            this.tbIntervall.Text = "00.00";
+            this.tbIntervall.Text = "HH:MM";
             // 
             // label3
             // 
@@ -228,6 +228,7 @@
             this.tbURL.Name = "tbURL";
             this.tbURL.Size = new System.Drawing.Size(142, 20);
             this.tbURL.TabIndex = 10;
+            this.tbURL.TextChanged += new System.EventHandler(this.tbURL_TextChanged);
             // 
             // label6
             // 

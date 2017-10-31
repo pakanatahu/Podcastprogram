@@ -15,7 +15,6 @@ namespace Gruppprojekt
     {
         Form_Handler FormHandler = new Form_Handler();
         Validator validator = new Validator();
-        
 
         public MainForm()
         {
@@ -24,9 +23,6 @@ namespace Gruppprojekt
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
-            ComboBoxFeeds.DisplayMember = "Name";
-            FormHandler.LoadAllBackgroundWorkers();
-            FormHandler.FillFeedCombobox(ComboBoxFeeds);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -45,21 +41,30 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
-
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
             string UpdateInterval = tbIntervall.Text;
 
-            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
-            ListBoxFeeds.Items.Clear();
-            FormHandler.FillListBoxFeeds(ListBoxFeeds);
-            FormHandler.FillFeedCombobox(ComboBoxFeeds);
-            FormHandler.HandleXMLSaving();
+            try
+            {
+                validator.validateUrl(URL);
+                validator.validateName(Name);
+                FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+                ListBoxFeeds.Items.Clear();
+                FormHandler.FillListBoxFeeds(ListBoxFeeds);
+                FormHandler.HandleXMLSaving();
 
-            tbNamn.Clear();
-            tbURL.Clear();
-            MessageBox.Show("Success!");
+                tbNamn.Clear();
+                tbURL.Clear();
+                MessageBox.Show("Success!");
+
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private async void button4_Click(object sender, EventArgs e)
@@ -130,9 +135,13 @@ namespace Gruppprojekt
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+        }
+
         private void button7_Click(object sender, EventArgs e)
         {
-            var valdKategori = cbCategory2.SelectedItem.ToString();
+            var valdKategori = cbCategory3.SelectedItem.ToString();
             FormHandler.removeCategory(valdKategori);
             MessageBox.Show(valdKategori + " har tagits bort som kategori");
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
@@ -140,69 +149,43 @@ namespace Gruppprojekt
 
         private void btnChangeCategoryName_Click(object sender, EventArgs e)
         {
-
-
             var newName = tbNewName.Text;
             var oldName = cbCategory.SelectedItem.ToString();
 
-            if (!String.IsNullOrWhiteSpace(newName))
+            try 
             {
-                    FormHandler.changeCateogoryName(newName, oldName);
-                    FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
-                    MessageBox.Show(oldName + " har döpts om till " + newName);         }
-            else
+                validator.validateCategory(newName, FormHandler.getCategoryList());
+                FormHandler.changeCateogoryName(newName, oldName);
+                FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+                MessageBox.Show(oldName + " har döpts om till " + newName);
+            }
+            catch(ArgumentException ex)
             {
-                MessageBox.Show("Kategorin måste ha ett namn");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnCreateNewCategory_Click(object sender, EventArgs e)
         {
             var nyKategori = tbAddCategory.Text;
-            FormHandler.addCategoryName(nyKategori);
-            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
-            MessageBox.Show(nyKategori + " har lagts till som ny kategori");
-            tbAddCategory.Clear();
-        }
 
-        private void ButtonManageFeeds_Click(object sender, EventArgs e)
-        {
-            Feed FeedToChange = ComboBoxFeeds.SelectedItem as Feed;
-            bool hasValueName = validator.hasValue(TextBoxName.Text);
-            bool hasValueURL = validator.hasValue(TextBoxURL.Text);
-            bool hasValueInterval = validator.hasValue(TextBoxManageUpdateInterval.Text);
-
-            if (hasValueName)
+            try
             {
-                FeedToChange.Name = TextBoxName.Text;
+                validator.validateCategory(nyKategori, FormHandler.getCategoryList());
+                FormHandler.addCategoryName(nyKategori);
+                FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+                MessageBox.Show(nyKategori + " har lagts till som ny kategori");
+                tbAddCategory.Clear();
             }
-            if (hasValueURL)
+            catch (ArgumentException ex)
             {
-                FeedToChange.URL = TextBoxURL.Text;
+                MessageBox.Show(ex.Message);
             }
-            if (hasValueInterval)
-            {
-                Int32.TryParse(TextBoxManageUpdateInterval.Text, out int result);
-                FeedToChange.UpdateInterval = result;
-            }
-
+            
         }
 
-        private void ComboBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
+        private void tbURL_TextChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-            FormHandler.LoadAllBackgroundWorkers();
-
-        }
-
-        private void ButtonRemoveFeed_Click(object sender, EventArgs e)
-        {
-            Feed FeedToRemove = ComboBoxFeeds.SelectedItem as Feed;
-            FormHandler.RemoveFeed(FeedToRemove);
 
         }
     }
