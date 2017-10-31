@@ -8,53 +8,50 @@ namespace Gruppprojekt
 {
     class Validator
     {
-        public bool hasValue(String input)
-        {
-            if (String.IsNullOrWhiteSpace(input))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
 
         public void validateName(string input)
         {
             if (String.IsNullOrWhiteSpace(input))
-                throw new ArgumentException("Name must have a value");
+                throw new ArgumentException("Name cant be empty");
             if (input.Length > 30)
                 throw new ArgumentException("Name cannot be longer than 30 characters");
             if (input.Any(c => char.IsDigit(c)))
-            {
                 throw new ArgumentException("Name cannot contain numbers");
-            }
-
         }
 
-        public static void validateUrl(string url_input)
+        public void validateIntervall(String input)
         {
-            bool isUri = Uri.IsWellFormedUriString(url_input, UriKind.RelativeOrAbsolute);
+            if (String.IsNullOrWhiteSpace(input))
+                throw new ArgumentException("You must asign an intervall in format HH:MM");
+            int.TryParse(String input, out int result);
+        }
 
+        public void validateCategory(String input, List<Category> list)
+        {
+            validateName(input);
+            
+            for(int i = 0; i < list.Count; i++)
+            {
+                if (list[i].Name.Equals(input))
+                {
+                    throw new ArgumentException("A category with that name already exists");
+                }
+            }
+        }
+
+        public void validateUrl(string url_input)
+        {
+            if (String.IsNullOrWhiteSpace(url_input))
+                throw new ArgumentException("Url cant be empty");
+
+            bool isUri = Uri.IsWellFormedUriString(url_input, UriKind.RelativeOrAbsolute);
             if (!isUri)
             {
-                throw new Exception("URL not valid");
+                throw new ArgumentException("URL not valid");
             }
             if (!url_input.EndsWith("xml"))
             {
-                throw new Exception("The url does not contain an xml link");
-            }
-        }
-
-        public void validateCategoryName(String name, List<Category> categoryList)
-        {
-            for (int i = 0; i < categoryList.Count; i++)
-            {
-                 if (name == categoryList[i].ToString())
-                {
-                    throw new Exception(name + " already exists as a category");
-                }
+                throw new ArgumentException("The url does not contain an xml link");
             }
         }
     }

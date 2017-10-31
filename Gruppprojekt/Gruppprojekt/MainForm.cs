@@ -14,7 +14,7 @@ namespace Gruppprojekt
     public partial class MainForm : Form
     {
         Form_Handler FormHandler = new Form_Handler();
-        
+        Validator validator = new Validator();
 
         public MainForm()
         {
@@ -46,14 +46,25 @@ namespace Gruppprojekt
             string Category = cbCategory2.SelectedItem.ToString();
             string UpdateInterval = tbIntervall.Text;
 
-            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
-            ListBoxFeeds.Items.Clear();
-            FormHandler.FillListBoxFeeds(ListBoxFeeds);
-            FormHandler.HandleXMLSaving();
+            try
+            {
+                validator.validateUrl(URL);
+                validator.validateName(Name);
+                FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+                ListBoxFeeds.Items.Clear();
+                FormHandler.FillListBoxFeeds(ListBoxFeeds);
+                FormHandler.HandleXMLSaving();
 
-            tbNamn.Clear();
-            tbURL.Clear();
-            MessageBox.Show("Success!");
+                tbNamn.Clear();
+                tbURL.Clear();
+                MessageBox.Show("Success!");
+
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private async void button4_Click(object sender, EventArgs e)
@@ -130,7 +141,7 @@ namespace Gruppprojekt
 
         private void button7_Click(object sender, EventArgs e)
         {
-            var valdKategori = cbCategory2.SelectedItem.ToString();
+            var valdKategori = cbCategory3.SelectedItem.ToString();
             FormHandler.removeCategory(valdKategori);
             MessageBox.Show(valdKategori + " har tagits bort som kategori");
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
@@ -138,29 +149,44 @@ namespace Gruppprojekt
 
         private void btnChangeCategoryName_Click(object sender, EventArgs e)
         {
-
-
             var newName = tbNewName.Text;
             var oldName = cbCategory.SelectedItem.ToString();
 
-            if (!String.IsNullOrWhiteSpace(newName))
+            try 
             {
-                    FormHandler.changeCateogoryName(newName, oldName);
-                    FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
-                    MessageBox.Show(oldName + " har döpts om till " + newName);         }
-            else
+                validator.validateCategory(newName, FormHandler.getCategoryList());
+                FormHandler.changeCateogoryName(newName, oldName);
+                FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+                MessageBox.Show(oldName + " har döpts om till " + newName);
+            }
+            catch(ArgumentException ex)
             {
-                MessageBox.Show("Kategorin måste ha ett namn");
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnCreateNewCategory_Click(object sender, EventArgs e)
         {
             var nyKategori = tbAddCategory.Text;
-            FormHandler.addCategoryName(nyKategori);
-            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
-            MessageBox.Show(nyKategori + " har lagts till som ny kategori");
-            tbAddCategory.Clear();
+
+            try
+            {
+                validator.validateCategory(nyKategori, FormHandler.getCategoryList());
+                FormHandler.addCategoryName(nyKategori);
+                FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+                MessageBox.Show(nyKategori + " har lagts till som ny kategori");
+                tbAddCategory.Clear();
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+
+        private void tbURL_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
