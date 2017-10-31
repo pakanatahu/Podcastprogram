@@ -31,7 +31,7 @@ namespace Gruppprojekt
             return Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\PodcastProgram\\DownloadedPodcasts\\" + SelectedPodcast.Title + ".mp3";
         } 
 
-        public String GetSavedXMLFile()
+        public String GetSavedXMLFilesDirectory()
         {
 
             return Environment.GetFolderPath(Environment.SpecialFolder.Personal) + "\\PodcastProgram\\SavedPodcasts\\";

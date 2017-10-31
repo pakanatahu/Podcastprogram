@@ -98,22 +98,19 @@ namespace Gruppprojekt
             File.Delete(CategoriesURL);
 
             XmlTextWriter XMLWriter = new XmlTextWriter(CategoriesURL, null);
+            XMLWriter.Formatting = Formatting.Indented;
+            XMLWriter.WriteStartElement("categories");
 
             foreach (Category category in CategoriesToBeSaved)
             {
 
-                XMLWriter.Formatting = Formatting.Indented;
-
-                XMLWriter.WriteStartElement("categories");
-
                 XMLWriter.WriteStartElement("category");
                 XMLWriter.WriteElementString("name", category.Name);
-
                 XMLWriter.WriteWhitespace("\n");
 
-                XMLWriter.WriteEndElement();
             }
 
+            XMLWriter.WriteEndElement();
             XMLWriter.WriteFullEndElement();
 
             XMLWriter.Close();
@@ -124,12 +121,9 @@ namespace Gruppprojekt
 
             List<string> CategoriesList = new List<string>();
 
-
             XmlDocument XMLDocument = new XmlDocument();
-
             XMLDocument.Load(CategoriesURL);
-
-            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("feed");
+            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("category");
 
             for (int i = 0; i < FeedNodeList.Count; i++)
             {

@@ -158,14 +158,14 @@ namespace Gruppprojekt
 
             List<Feed> PodcastsToBeSaved = FeedController.ReturnDataFromList();
             List<Category> CategoriesToBeSaved = getCategoryList();
-            XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
-            XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFile() + "CategoriesSaveFile.xml");
+            XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
+            XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
         }
 
         public void LoadXMLSaving()
         {
 
-            List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXML(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+            List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
             //TODO trycatch om första programstarten.
             for (int i = 0; i < XMLFeedData[0].Count(); i++)
             {
@@ -175,11 +175,23 @@ namespace Gruppprojekt
                 string Name = XMLFeedData[i + 3][i];
                 int UpdateIntervalConverted = Int32.Parse(UpdateInterval);
 
-
                 Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateIntervalConverted);
 
                 FeedController.AddDataToList(NewFeed);
             }
+        }
+
+        public void LoadCategoriesSaving()
+        {
+            getCategoryList();
+            List<string> Categories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
+            
+            foreach(string categoryname in Categories)
+            {
+
+                categoryHandler.addNewCategory(categoryname);
+            }
+
         }
 
         public void StartPauseAudio()
