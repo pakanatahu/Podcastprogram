@@ -20,10 +20,7 @@ namespace Gruppprojekt
         {
             InitializeComponent();
             AddDefaultCategories adc = new AddDefaultCategories();
-            FormHandler.fillCategoryComobox(cbCategory);
-            FormHandler.fillCategoryComobox(cbCategory2);
-            cbCategory.SelectedIndex = 0;
-            cbCategory2.SelectedIndex = 0;
+            FormHandler.updateComboBoxes(cbCategory, cbCategory2);
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
         }
@@ -63,7 +60,6 @@ namespace Gruppprojekt
         {
             form_manage_categories manageCat = new form_manage_categories();
             manageCat.Show();
-            this.Hide();
 
         }
 
@@ -90,6 +86,11 @@ namespace Gruppprojekt
             ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
             PodcastInfoWindow.Show();
             
+        }
+
+        public void updateComboboxes()
+        {
+            FormHandler.updateComboBoxes(cbCategory, cbCategory);
         }
 
         private void cbCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -130,12 +131,5 @@ namespace Gruppprojekt
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            cbCategory.Items.Clear();
-            cbCategory2.Items.Clear();
-            FormHandler.fillCategoryComobox(cbCategory);
-            FormHandler.fillCategoryComobox(cbCategory2);
-        }
     }
 }

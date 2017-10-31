@@ -14,11 +14,12 @@ namespace Gruppprojekt
     {
         Validator validator = new Validator();
         Form_Handler formHandler = new Form_Handler();
+        MainForm mainForm = (MainForm)Application.OpenForms["Main"];
 
         public form_manage_categories()
         {
             InitializeComponent();
-
+            
             formHandler.fillCategoryComobox(cbCategory);
             formHandler.fillCategoryComobox(cbCategory2);
             setSelectedIndexComboboxes(cbCategory, cbCategory2);
@@ -36,7 +37,8 @@ namespace Gruppprojekt
                 {
                     validator.validateCategoryName(newName, formHandler.getCategoryList());
                     formHandler.changeCateogoryName(newName, oldName);
-                    updateComboBoxes();
+                    formHandler.updateComboBoxes(cbCategory, cbCategory2);
+                    mainForm.updateComboboxes();
                     MessageBox.Show(oldName + " har döpts om till " + newName);
                     setSelectedIndexComboboxes(cbCategory, cbCategory2);
                 }
@@ -79,6 +81,7 @@ namespace Gruppprojekt
             var nyKategori = tbAddCategory.Text;
             formHandler.addCategoryName(nyKategori);
             updateComboBoxes();
+            mainForm.updateComboboxes();
             MessageBox.Show(nyKategori + " har lagts till som ny kategori");
             tbAddCategory.Clear();
             setSelectedIndexComboboxes(cbCategory, cbCategory2);
@@ -90,6 +93,7 @@ namespace Gruppprojekt
             formHandler.removeCategory(valdKategori);
             MessageBox.Show(valdKategori + " har tagits bort som kategori");
             updateComboBoxes();
+            mainForm.updateComboboxes();
             setSelectedIndexComboboxes(cbCategory, cbCategory2);
         }
 

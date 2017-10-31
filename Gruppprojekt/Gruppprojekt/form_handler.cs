@@ -40,6 +40,7 @@ namespace Gruppprojekt
             {
                 cb.Items.Clear();
                 fillCategoryComobox(cb);
+                cb.SelectedIndex = 0;
             }
         }
 
