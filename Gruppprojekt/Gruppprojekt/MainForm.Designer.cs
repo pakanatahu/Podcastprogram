@@ -228,7 +228,6 @@
             this.tbURL.Name = "tbURL";
             this.tbURL.Size = new System.Drawing.Size(142, 20);
             this.tbURL.TabIndex = 10;
-            this.tbURL.TextChanged += new System.EventHandler(this.tbURL_TextChanged);
             // 
             // label6
             // 
@@ -340,7 +339,7 @@
             this.ComboBoxFeeds.Name = "ComboBoxFeeds";
             this.ComboBoxFeeds.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxFeeds.TabIndex = 33;
-            this.ComboBoxFeeds.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFeeds_SelectedIndexChanged);
+
             // 
             // TextBoxURL
             // 
@@ -514,7 +513,6 @@
             this.ButtonRemoveFeed.TabIndex = 54;
             this.ButtonRemoveFeed.Text = "Ta bort";
             this.ButtonRemoveFeed.UseVisualStyleBackColor = true;
-            this.ButtonRemoveFeed.Click += new System.EventHandler(this.ButtonRemoveFeed_Click);
             // 
             // MainForm
             // 

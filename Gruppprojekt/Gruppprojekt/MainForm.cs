@@ -45,16 +45,17 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+            try { 
 
-            string Name = tbNamn.Text;
-            string URL = tbURL.Text;
-            string Category = cbCategory2.SelectedItem.ToString();
-            string UpdateInterval = tbIntervall.Text;
+                string Name = tbNamn.Text;
+                string URL = tbURL.Text;
+                string Category = cbCategory2.SelectedItem.ToString();
+                string UpdateInterval = tbIntervall.Text;
             
-            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
-            ListBoxFeeds.Items.Clear();
-            FormHandler.FillListBoxFeeds(ListBoxFeeds);
-            FormHandler.HandleXMLSaving();
+                FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+                ListBoxFeeds.Items.Clear();
+                FormHandler.FillListBoxFeeds(ListBoxFeeds);
+                FormHandler.HandleXMLSaving();
 
                 tbNamn.Clear();
                 tbURL.Clear();
@@ -90,7 +91,6 @@ namespace Gruppprojekt
             List<String> PodcastInfoTempList = FormHandler.GetPodcastInfo(ListBoxPodcasts.SelectedItem as Podcast);
             ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
             PodcastInfoWindow.Show();
-            //yo
         }
 
         public void updateComboboxes()
@@ -112,6 +112,11 @@ namespace Gruppprojekt
             FormHandler.StartPauseAudio();
         }
 
+        private void ButtonManageFeeds_Click(object sender, EventArgs e)
+        {
+            FormHandler.StartPauseAudio();
+        }
+        
         private void btQuitMusicPlayback_Click(object sender, EventArgs e)
         {
             FormHandler.QuitMusicPlayer();
@@ -120,6 +125,12 @@ namespace Gruppprojekt
             btPlay.Visible = true;
             lbNowPlaying.Text = "";
         }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            FormHandler.StartPauseAudio();
+        }
+        
 
         private void button4_Click_1(object sender, EventArgs e)
         {
@@ -170,5 +181,6 @@ namespace Gruppprojekt
             MessageBox.Show(nyKategori + " har lagts till som ny kategori");
             tbAddCategory.Clear();
         }
+
     }
 }
