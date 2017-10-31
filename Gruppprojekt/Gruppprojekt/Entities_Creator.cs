@@ -10,7 +10,7 @@ namespace Gruppprojekt
     class Entities_Creator
     {
 
-        public Feed CreateEntities(String FeedName, String FeedURL, String FeedCategory, int FeedUpdateInterval)
+        public Feed CreateEntities(string FeedName, string FeedURL, string FeedCategory, int FeedUpdateInterval)
         {
 
             Boolean FeedCreated = false;
@@ -36,7 +36,7 @@ namespace Gruppprojekt
                 string PublishingDate = Item.SelectSingleNode("pubDate").InnerText;
                 int ListenCount = 0;
 
-                NewFeed.AddDataToList(CreatePodcast(Title, PlayURL, "Summary", "Duration", PublishingDate, ListenCount));
+                NewFeed.AddDataToList(CreatePodcast(Title, PlayURL, Summary, Duration, PublishingDate, ListenCount));
 
             }
             return NewFeed;

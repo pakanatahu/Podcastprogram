@@ -99,11 +99,13 @@ namespace Gruppprojekt
             selected_category = selected_categ;
         }
 
-        public void SendInput(String Name, String URL, String Category, int UpdateInterval)
+        public void SendInput(string Name, string URL, string Category, string UpdateInterval)
         {
 
             //TODO fixa uppdaterings frekvens.
-            Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
+            int IntUpdateInterval = 0;
+            int IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
+            Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, IntUpdateInterval);
 
             FeedController.AddDataToList(NewFeed);
 
@@ -150,8 +152,20 @@ namespace Gruppprojekt
 
         public void LoadXMLSaving()
         {
-            
-            //EntitiesCreator.CreateEntities(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+
+            List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXMLAsDictionary(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+
+            for (int i = 0; i < XMLFeedData.Count(); i++)
+            {
+                string Name = XMLFeedData[i][i];
+                string URL = XMLFeedData[i+1][i];
+                string Category = XMLFeedData[i+2][i];
+                string UpdateInterval = XMLFeedData[i + 3][i];
+
+                Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
+
+                FeedController.AddDataToList(NewFeed);
+            }
         }
 
         public void StartPauseAudio()
@@ -189,7 +203,21 @@ namespace Gruppprojekt
             Playing = !Playing;
         }
 
+        internal int ConvertStringToUpdateinterval(string StringNumber)
+        {
+            int ConvertedNumber = 0;
 
+            string[] SplittedString = StringNumber.Split(':');
+
+            int Hours = Int32.Parse(SplittedString[0]);
+            int Minutes = Int32.Parse(SplittedString[1]);
+
+            Hours = Hours * 60;
+
+            ConvertedNumber = Hours + Minutes;
+
+            return ConvertedNumber;
+        }
 
 
         //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.

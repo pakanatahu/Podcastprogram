@@ -55,8 +55,43 @@ namespace Gruppprojekt
             XMLWriter.Close();
         }
 
-        //public List<String> LoadFeedDataFromXML() { 
-        //}
+        public List<List<string>> LoadFeedDataFromXMLAsDictionary(string FeedURL) {
+
+            List<List<string>> FeedDataList = new List<List<string>>();
+
+            List<string> URLList = new List<string>();
+            List<string> UpdateIntervalList = new List<string>();
+            List<string> CategoryList = new List<string>();
+            List<string> NameList = new List<string>();
+
+            XmlDocument XMLDocument = new XmlDocument();
+
+            XMLDocument.Load(FeedURL);
+
+            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("feed");
+
+            for (int i = 0; i < FeedNodeList.Count; i++)
+            {
+
+                string URL = FeedNodeList[i].Attributes["url"].Value;
+                string UpdateInterval = FeedNodeList[i].Attributes["updateinterval"].Value;
+                string Category = FeedNodeList[i].Attributes["category"].Value;
+                string Name = FeedNodeList[i].Attributes["name"].Value;
+
+                URLList.Add(URL);
+                UpdateIntervalList.Add(UpdateInterval);
+                CategoryList.Add(Category);
+                NameList.Add(Name);
+
+                FeedDataList.Add(URLList);
+                FeedDataList.Add(UpdateIntervalList);
+                FeedDataList.Add(CategoryList);
+                FeedDataList.Add(NameList);
+
+            }
+
+            return FeedDataList;
+        }
 
         }
     

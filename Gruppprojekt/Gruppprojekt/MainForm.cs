@@ -47,7 +47,7 @@ namespace Gruppprojekt
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
-            int UpdateInterval = 1;
+            string UpdateInterval = "01:00";
 
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
             ListBoxFeeds.Items.Clear();
@@ -122,6 +122,8 @@ namespace Gruppprojekt
 
         private void ListBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            ListBoxFeeds.Items.Clear();
             ListBoxPodcasts.Items.Clear();
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
