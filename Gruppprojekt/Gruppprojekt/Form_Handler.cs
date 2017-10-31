@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -23,6 +24,7 @@ namespace Gruppprojekt
         private Directory_Handler DirectoryHandler = new Directory_Handler();
         private MP3_Downloader MP3Downloader = new MP3_Downloader();
         private XML_Handler XMLHandler = new XML_Handler();
+        private BackgroundWorker UpdateIntervalWorker = new BackgroundWorker();
 
         private Boolean Playing;
         public string selected_category = "";
@@ -44,6 +46,12 @@ namespace Gruppprojekt
             }
         }
 
+        public void RemoveFeed(Feed feed)
+        {
+            FeedController.RemoveDataFromList(feed);
+            //todo reload, refill.
+        }
+
         public List<Category> getCategoryList()
         {
             return categoryHandler.getList();
@@ -51,7 +59,17 @@ namespace Gruppprojekt
 
         public void removeCategory(String categoryName)
         {
+            List<Feed> ListOfFeeds = FeedController.ReturnDataFromList();
+            
             categoryHandler.removeCategory(categoryName);
+
+            foreach (Feed feed in ListOfFeeds)
+            {
+                if (feed.Category == categoryName)
+                {
+                    feed.Category = "Otilldelad";
+                }
+            }
         }
 
         public void addCategoryName(String newName)
@@ -113,13 +131,24 @@ namespace Gruppprojekt
         public void SendInput(string Name, string URL, string Category, string UpdateInterval)
         {
 
-            //TODO fixa uppdaterings frekvens.
             int IntUpdateInterval = 0;
             IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, IntUpdateInterval);
+            LoadSingleBackgroundWorker(NewFeed);
             FeedController.AddDataToList(NewFeed);
-            UpdateFrequencyStarter(NewFeed, FeedController);
 
+        }
+        public void SendInput(Feed FeedToBeUpdated)
+        {
+            string Name = FeedToBeUpdated.Name;
+            string URL = FeedToBeUpdated.URL;
+            string Category = FeedToBeUpdated.Category;
+            int UpdateInterval = FeedToBeUpdated.UpdateInterval;
+            string UpdateIntervalString = UpdateInterval.ToString();
+
+            Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
+            FeedController.AddDataToList(NewFeed);
+            System.Diagnostics.Debug.WriteLine("tjue");
         }
 
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
@@ -255,40 +284,62 @@ namespace Gruppprojekt
             return ConvertedNumberSeconds;
         }
 
-        private void UpdateFrequencyStarter(Feed FeedToUpdate, Feed_Controller FeedControllerToUpdate)
+        public void FillFeedCombobox(ComboBox comboBox)
+        {
+            List<Feed> FeedToFillComboBox = FeedController.ReturnDataFromList();
+            foreach (Feed feed in FeedToFillComboBox)
+            {
+                comboBox.Items.Add(feed);
+            }
+        }
+        
+        public void LoadAllBackgroundWorkers()
+        {
+            List<Feed> FeedsToBeUpdated = FeedController.ReturnDataFromList();
+            foreach (Feed feed in FeedsToBeUpdated)
+            {
+                CreateWorkers(feed);
+            }
+        }
+
+        public void LoadSingleBackgroundWorker(Feed FeedToBeUpdated)
+        {
+            CreateWorkers(FeedToBeUpdated);
+        }
+        public void CreateWorkers(Feed FeedToBeUpdated)
         {
 
-            string Name = FeedToUpdate.Name;
-            string URL = FeedToUpdate.URL;
-            string Category = FeedToUpdate.Category;
-            int UpdateInterval = FeedToUpdate.UpdateInterval;
-            string UpdateIntervalString = UpdateInterval.ToString();
-
-            int ConvertedUpdateInterval = 0;
-            ConvertedUpdateInterval = UpdateInterval * 1000;
-
-            new Thread(() =>
-            {
-                while (true)
-                {
-                    try
-                    {
-
-                        FeedControllerToUpdate.RemoveDataFromList(FeedToUpdate);
-
-                        SendInput(Name, URL, Category, UpdateIntervalString);
-                        Thread.CurrentThread.IsBackground = true;
-                        Thread.Sleep(ConvertedUpdateInterval);
-                    }
-                    catch
-                    {
-
-                    }
-                }
-
-
-            }).Start();
+            UpdateIntervalWorker = new BackgroundWorker();
+            UpdateIntervalWorker.DoWork += new DoWorkEventHandler(UpdateIntervalWorker_DoWork);
+            UpdateIntervalWorker.RunWorkerAsync(FeedToBeUpdated);
+            
         }
+
+        private void UpdateIntervalWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Feed FeedToBeUpdated = (Feed)e.Argument;
+            ThreadWaitingForUpdateInterval(sender as BackgroundWorker, FeedToBeUpdated);
+        }
+
+        public void ThreadWaitingForUpdateInterval(BackgroundWorker bw, Feed FeedToBeUpdated)
+        {
+            while (true)
+            {
+
+
+                //int ConvertedUpdateInterval = 0;
+                //ConvertedUpdateInterval = UpdateInterval * 1000;
+
+                System.Threading.Thread.Sleep(10000);
+                SendInput(FeedToBeUpdated);
+                FeedController.RemoveDataFromList(FeedToBeUpdated);
+                XMLHandler.SerializeObject(FeedController.ReturnDataFromList(), DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
+
+            }
+        }
+
+
+
 
         //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.
     }

@@ -14,6 +14,7 @@ namespace Gruppprojekt
     public partial class MainForm : Form
     {
         Form_Handler FormHandler = new Form_Handler();
+        Validator validator = new Validator();
         
 
         public MainForm()
@@ -23,6 +24,9 @@ namespace Gruppprojekt
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
+            ComboBoxFeeds.DisplayMember = "Name";
+            FormHandler.LoadAllBackgroundWorkers();
+            FormHandler.FillFeedCombobox(ComboBoxFeeds);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +45,7 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
@@ -49,6 +54,7 @@ namespace Gruppprojekt
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
             ListBoxFeeds.Items.Clear();
             FormHandler.FillListBoxFeeds(ListBoxFeeds);
+            FormHandler.FillFeedCombobox(ComboBoxFeeds);
             FormHandler.HandleXMLSaving();
 
             tbNamn.Clear();
@@ -124,10 +130,6 @@ namespace Gruppprojekt
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             var valdKategori = cbCategory2.SelectedItem.ToString();
@@ -161,6 +163,47 @@ namespace Gruppprojekt
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
             MessageBox.Show(nyKategori + " har lagts till som ny kategori");
             tbAddCategory.Clear();
+        }
+
+        private void ButtonManageFeeds_Click(object sender, EventArgs e)
+        {
+            Feed FeedToChange = ComboBoxFeeds.SelectedItem as Feed;
+            bool hasValueName = validator.hasValue(TextBoxName.Text);
+            bool hasValueURL = validator.hasValue(TextBoxURL.Text);
+            bool hasValueInterval = validator.hasValue(TextBoxManageUpdateInterval.Text);
+
+            if (hasValueName)
+            {
+                FeedToChange.Name = TextBoxName.Text;
+            }
+            if (hasValueURL)
+            {
+                FeedToChange.URL = TextBoxURL.Text;
+            }
+            if (hasValueInterval)
+            {
+                Int32.TryParse(TextBoxManageUpdateInterval.Text, out int result);
+                FeedToChange.UpdateInterval = result;
+            }
+
+        }
+
+        private void ComboBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            FormHandler.LoadAllBackgroundWorkers();
+
+        }
+
+        private void ButtonRemoveFeed_Click(object sender, EventArgs e)
+        {
+            Feed FeedToRemove = ComboBoxFeeds.SelectedItem as Feed;
+            FormHandler.RemoveFeed(FeedToRemove);
+
         }
     }
 }

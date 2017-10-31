@@ -28,7 +28,6 @@ namespace Gruppprojekt
             FeedList.Remove(SelectedFeed);
         }
 
-
         public override List<Feed> ReturnDataFromList()
         {
 

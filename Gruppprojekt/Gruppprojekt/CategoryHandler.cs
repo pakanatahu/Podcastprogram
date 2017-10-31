@@ -30,6 +30,7 @@ namespace Gruppprojekt
 
         public void removeCategory(String name)
         {
+
             for (int i = 0; i < categoryList.Count; i++)
             {
                 if (categoryList[i].Name == name)

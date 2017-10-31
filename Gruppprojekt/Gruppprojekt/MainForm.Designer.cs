@@ -75,6 +75,7 @@
             this.tbNewName = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.ButtonRemoveFeed = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -338,6 +339,7 @@
             this.ComboBoxFeeds.Name = "ComboBoxFeeds";
             this.ComboBoxFeeds.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxFeeds.TabIndex = 33;
+            this.ComboBoxFeeds.SelectedIndexChanged += new System.EventHandler(this.ComboBoxFeeds_SelectedIndexChanged);
             // 
             // TextBoxURL
             // 
@@ -411,6 +413,7 @@
             this.ButtonManageFeeds.TabIndex = 42;
             this.ButtonManageFeeds.Text = "OK";
             this.ButtonManageFeeds.UseVisualStyleBackColor = true;
+            this.ButtonManageFeeds.Click += new System.EventHandler(this.ButtonManageFeeds_Click);
             // 
             // label9
             // 
@@ -502,11 +505,22 @@
             this.label8.TabIndex = 53;
             this.label8.Text = "Hantera Kategorier";
             // 
+            // ButtonRemoveFeed
+            // 
+            this.ButtonRemoveFeed.Location = new System.Drawing.Point(690, 181);
+            this.ButtonRemoveFeed.Name = "ButtonRemoveFeed";
+            this.ButtonRemoveFeed.Size = new System.Drawing.Size(75, 23);
+            this.ButtonRemoveFeed.TabIndex = 54;
+            this.ButtonRemoveFeed.Text = "Ta bort";
+            this.ButtonRemoveFeed.UseVisualStyleBackColor = true;
+            this.ButtonRemoveFeed.Click += new System.EventHandler(this.ButtonRemoveFeed_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 424);
+            this.Controls.Add(this.ButtonRemoveFeed);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label10);
@@ -610,6 +624,7 @@
         private System.Windows.Forms.TextBox tbNewName;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button ButtonRemoveFeed;
     }
 }
 
