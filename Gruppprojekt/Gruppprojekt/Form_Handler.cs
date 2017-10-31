@@ -117,8 +117,8 @@ namespace Gruppprojekt
             int IntUpdateInterval = 0;
             IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, IntUpdateInterval);
-
             FeedController.AddDataToList(NewFeed);
+            UpdateFrequencyStarter(NewFeed, FeedController);
 
         }
 
@@ -237,18 +237,32 @@ namespace Gruppprojekt
 
             string[] SplittedString = StringNumber.Split(':');
 
-            int Hours = Int32.Parse(SplittedString[0]);
-            int Minutes = Int32.Parse(SplittedString[1]);
+            if (SplittedString[0] != "00")
+            {
+                int Hours = Int32.Parse(SplittedString[0]);
+                int Minutes = Int32.Parse(SplittedString[1]);
 
-            Hours = Hours * 60;
+                Hours = Hours * 60;
 
-            ConvertedNumberSeconds = (Hours + Minutes) * 60;
+                ConvertedNumberSeconds = (Hours + Minutes) * 60;
+            }
+            else
+            {
+                int Minutes = Int32.Parse(SplittedString[1]);
+                ConvertedNumberSeconds = Minutes * 60;
+            }
 
             return ConvertedNumberSeconds;
         }
 
-        public void UpdateFrequencyStarter(int UpdateInterval, Feed FeedToUpdate)
+        private void UpdateFrequencyStarter(Feed FeedToUpdate, Feed_Controller FeedControllerToUpdate)
         {
+
+            string Name = FeedToUpdate.Name;
+            string URL = FeedToUpdate.URL;
+            string Category = FeedToUpdate.Category;
+            int UpdateInterval = FeedToUpdate.UpdateInterval;
+            string UpdateIntervalString = UpdateInterval.ToString();
 
             int ConvertedUpdateInterval = 0;
             ConvertedUpdateInterval = UpdateInterval * 1000;
@@ -260,6 +274,9 @@ namespace Gruppprojekt
                     try
                     {
 
+                        FeedControllerToUpdate.RemoveDataFromList(FeedToUpdate);
+
+                        SendInput(Name, URL, Category, UpdateIntervalString);
                         Thread.CurrentThread.IsBackground = true;
                         Thread.Sleep(ConvertedUpdateInterval);
                     }
@@ -272,7 +289,6 @@ namespace Gruppprojekt
 
             }).Start();
         }
-
 
         //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.
     }

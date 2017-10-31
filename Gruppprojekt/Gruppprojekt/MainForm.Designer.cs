@@ -54,6 +54,18 @@
             this.button4 = new System.Windows.Forms.Button();
             this.LabelFeeds = new System.Windows.Forms.Label();
             this.ListBoxFeeds = new System.Windows.Forms.ListBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.LabelManageFeed = new System.Windows.Forms.Label();
+            this.ComboBoxFeeds = new System.Windows.Forms.ComboBox();
+            this.TextBoxURL = new System.Windows.Forms.TextBox();
+            this.TextBoxName = new System.Windows.Forms.TextBox();
+            this.LabelManageURL = new System.Windows.Forms.Label();
+            this.LabelManageName = new System.Windows.Forms.Label();
+            this.TextBoxManageCategory = new System.Windows.Forms.TextBox();
+            this.LabelManageCategory = new System.Windows.Forms.Label();
+            this.TextBoxManageUpdateInterval = new System.Windows.Forms.TextBox();
+            this.LabelManageUpdateInterval = new System.Windows.Forms.Label();
+            this.ButtonManageFeeds = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -221,9 +233,9 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(479, 19);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(98, 13);
+            this.label6.Size = new System.Drawing.Size(81, 13);
             this.label6.TabIndex = 20;
-            this.label6.Text = "Lägg till ny podcast";
+            this.label6.Text = "Lägg till ny feed";
             // 
             // label7
             // 
@@ -300,11 +312,123 @@
             this.ListBoxFeeds.TabIndex = 30;
             this.ListBoxFeeds.SelectedIndexChanged += new System.EventHandler(this.ListBoxFeeds_SelectedIndexChanged);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(371, 280);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 31;
+            this.button6.Text = "button6";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click_1);
+            // 
+            // LabelManageFeed
+            // 
+            this.LabelManageFeed.AutoSize = true;
+            this.LabelManageFeed.Location = new System.Drawing.Point(706, 19);
+            this.LabelManageFeed.Name = "LabelManageFeed";
+            this.LabelManageFeed.Size = new System.Drawing.Size(59, 13);
+            this.LabelManageFeed.TabIndex = 32;
+            this.LabelManageFeed.Text = "Ändra feed";
+            // 
+            // ComboBoxFeeds
+            // 
+            this.ComboBoxFeeds.FormattingEnabled = true;
+            this.ComboBoxFeeds.Location = new System.Drawing.Point(698, 40);
+            this.ComboBoxFeeds.Name = "ComboBoxFeeds";
+            this.ComboBoxFeeds.Size = new System.Drawing.Size(121, 21);
+            this.ComboBoxFeeds.TabIndex = 33;
+            // 
+            // TextBoxURL
+            // 
+            this.TextBoxURL.Location = new System.Drawing.Point(747, 76);
+            this.TextBoxURL.Name = "TextBoxURL";
+            this.TextBoxURL.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxURL.TabIndex = 34;
+            // 
+            // TextBoxName
+            // 
+            this.TextBoxName.Location = new System.Drawing.Point(747, 102);
+            this.TextBoxName.Name = "TextBoxName";
+            this.TextBoxName.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxName.TabIndex = 35;
+            // 
+            // LabelManageURL
+            // 
+            this.LabelManageURL.AutoSize = true;
+            this.LabelManageURL.Location = new System.Drawing.Point(695, 79);
+            this.LabelManageURL.Name = "LabelManageURL";
+            this.LabelManageURL.Size = new System.Drawing.Size(29, 13);
+            this.LabelManageURL.TabIndex = 36;
+            this.LabelManageURL.Text = "URL";
+            // 
+            // LabelManageName
+            // 
+            this.LabelManageName.AutoSize = true;
+            this.LabelManageName.Location = new System.Drawing.Point(695, 109);
+            this.LabelManageName.Name = "LabelManageName";
+            this.LabelManageName.Size = new System.Drawing.Size(35, 13);
+            this.LabelManageName.TabIndex = 37;
+            this.LabelManageName.Text = "Name";
+            // 
+            // TextBoxManageCategory
+            // 
+            this.TextBoxManageCategory.Location = new System.Drawing.Point(747, 129);
+            this.TextBoxManageCategory.Name = "TextBoxManageCategory";
+            this.TextBoxManageCategory.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxManageCategory.TabIndex = 38;
+            // 
+            // LabelManageCategory
+            // 
+            this.LabelManageCategory.AutoSize = true;
+            this.LabelManageCategory.Location = new System.Drawing.Point(695, 132);
+            this.LabelManageCategory.Name = "LabelManageCategory";
+            this.LabelManageCategory.Size = new System.Drawing.Size(46, 13);
+            this.LabelManageCategory.TabIndex = 39;
+            this.LabelManageCategory.Text = "Kategori";
+            // 
+            // TextBoxManageUpdateInterval
+            // 
+            this.TextBoxManageUpdateInterval.Location = new System.Drawing.Point(747, 155);
+            this.TextBoxManageUpdateInterval.Name = "TextBoxManageUpdateInterval";
+            this.TextBoxManageUpdateInterval.Size = new System.Drawing.Size(100, 20);
+            this.TextBoxManageUpdateInterval.TabIndex = 40;
+            // 
+            // LabelManageUpdateInterval
+            // 
+            this.LabelManageUpdateInterval.AutoSize = true;
+            this.LabelManageUpdateInterval.Location = new System.Drawing.Point(695, 158);
+            this.LabelManageUpdateInterval.Name = "LabelManageUpdateInterval";
+            this.LabelManageUpdateInterval.Size = new System.Drawing.Size(42, 13);
+            this.LabelManageUpdateInterval.TabIndex = 41;
+            this.LabelManageUpdateInterval.Text = "Interval";
+            // 
+            // ButtonManageFeeds
+            // 
+            this.ButtonManageFeeds.Location = new System.Drawing.Point(772, 181);
+            this.ButtonManageFeeds.Name = "ButtonManageFeeds";
+            this.ButtonManageFeeds.Size = new System.Drawing.Size(75, 23);
+            this.ButtonManageFeeds.TabIndex = 42;
+            this.ButtonManageFeeds.Text = "OK";
+            this.ButtonManageFeeds.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(682, 390);
+            this.ClientSize = new System.Drawing.Size(1084, 586);
+            this.Controls.Add(this.ButtonManageFeeds);
+            this.Controls.Add(this.LabelManageUpdateInterval);
+            this.Controls.Add(this.TextBoxManageUpdateInterval);
+            this.Controls.Add(this.LabelManageCategory);
+            this.Controls.Add(this.TextBoxManageCategory);
+            this.Controls.Add(this.LabelManageName);
+            this.Controls.Add(this.LabelManageURL);
+            this.Controls.Add(this.TextBoxName);
+            this.Controls.Add(this.TextBoxURL);
+            this.Controls.Add(this.ComboBoxFeeds);
+            this.Controls.Add(this.LabelManageFeed);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.ListBoxFeeds);
             this.Controls.Add(this.LabelFeeds);
             this.Controls.Add(this.button4);
@@ -366,6 +490,18 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label LabelFeeds;
         private System.Windows.Forms.ListBox ListBoxFeeds;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label LabelManageFeed;
+        private System.Windows.Forms.ComboBox ComboBoxFeeds;
+        private System.Windows.Forms.TextBox TextBoxURL;
+        private System.Windows.Forms.TextBox TextBoxName;
+        private System.Windows.Forms.Label LabelManageURL;
+        private System.Windows.Forms.Label LabelManageName;
+        private System.Windows.Forms.TextBox TextBoxManageCategory;
+        private System.Windows.Forms.Label LabelManageCategory;
+        private System.Windows.Forms.TextBox TextBoxManageUpdateInterval;
+        private System.Windows.Forms.Label LabelManageUpdateInterval;
+        private System.Windows.Forms.Button ButtonManageFeeds;
     }
 }
 

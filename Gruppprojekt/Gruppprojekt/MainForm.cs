@@ -44,7 +44,7 @@ namespace Gruppprojekt
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
-            string UpdateInterval = "01:10";
+            string UpdateInterval = tbIntervall.Text;
 
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
             ListBoxFeeds.Items.Clear();
@@ -85,7 +85,7 @@ namespace Gruppprojekt
             List<String> PodcastInfoTempList = FormHandler.GetPodcastInfo(ListBoxPodcasts.SelectedItem as Podcast);
             ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
             PodcastInfoWindow.Show();
-            
+            //yo
         }
 
         public void updateComboboxes()
@@ -131,5 +131,8 @@ namespace Gruppprojekt
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+        }
     }
 }

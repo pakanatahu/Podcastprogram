@@ -47,10 +47,8 @@ namespace Gruppprojekt
                     XMLWriter.WriteEndElement();
                 }
 
-
+                XMLWriter.WriteFullEndElement();
             }
-
-            XMLWriter.WriteFullEndElement();
 
             XMLWriter.Close();
         }
