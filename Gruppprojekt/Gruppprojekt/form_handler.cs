@@ -33,6 +33,15 @@ namespace Gruppprojekt
 
         }
 
+        public void updateComboBoxes(params ComboBox[] comboboxes )
+        {
+            foreach (ComboBox cb in comboboxes)
+            {
+                cb.Items.Clear();
+                fillCategoryComobox(cb);
+            }
+        }
+
         public List<Category> getCategoryList()
         {
             return categoryHandler.getList();
