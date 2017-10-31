@@ -18,7 +18,14 @@ namespace Gruppprojekt
 
         public List<Category> getList()
         {
+            categoryList = sortTheList(categoryList);
             return categoryList;
+        }
+
+        private List<Category> sortTheList(List<Category> li)
+        {
+            li = li.OrderBy(x => x.Name).ToList();
+            return li;
         }
 
         public void removeCategory(String name)
