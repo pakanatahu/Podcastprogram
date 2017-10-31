@@ -18,7 +18,6 @@ C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Grupppro
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.pdb
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csprojResolveAssemblyReference.cache
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.MainForm.resources
-C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.form_manage_categories.resources
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.Properties.Resources.resources
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.ShowMorePodcastInfo.resources
 C:\Users\David\Source\Repos\NewRepo\Gruppprojekt\Gruppprojekt\obj\Debug\Gruppprojekt.csproj.GenerateResource.Cache

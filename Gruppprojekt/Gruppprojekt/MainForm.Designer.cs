@@ -33,7 +33,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ListBoxPodcasts = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.btPlay = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -66,6 +65,16 @@
             this.TextBoxManageUpdateInterval = new System.Windows.Forms.TextBox();
             this.LabelManageUpdateInterval = new System.Windows.Forms.Label();
             this.ButtonManageFeeds = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnRemoveCategory = new System.Windows.Forms.Button();
+            this.tbAddCategory = new System.Windows.Forms.TextBox();
+            this.btnCreateNewCategory = new System.Windows.Forms.Button();
+            this.cbCategory3 = new System.Windows.Forms.ComboBox();
+            this.btnChangeCategoryName = new System.Windows.Forms.Button();
+            this.tbNewName = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -81,6 +90,7 @@
             // 
             // cbCategory
             // 
+            this.cbCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory.FormattingEnabled = true;
             this.cbCategory.Location = new System.Drawing.Point(84, 16);
             this.cbCategory.Name = "cbCategory";
@@ -116,17 +126,6 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "Inställningar";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.AccessibleName = "bt_manage_categories";
-            this.button3.Location = new System.Drawing.Point(211, 16);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(110, 23);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Hantera kategorier";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // btPlay
             // 
@@ -205,6 +204,7 @@
             // 
             // cbCategory2
             // 
+            this.cbCategory2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCategory2.FormattingEnabled = true;
             this.cbCategory2.Location = new System.Drawing.Point(482, 95);
             this.cbCategory2.Name = "cbCategory2";
@@ -286,7 +286,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(462, 297);
+            this.button4.Location = new System.Drawing.Point(431, 172);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 28;
@@ -314,7 +314,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(371, 280);
+            this.button6.Location = new System.Drawing.Point(340, 155);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 31;
@@ -334,7 +334,7 @@
             // ComboBoxFeeds
             // 
             this.ComboBoxFeeds.FormattingEnabled = true;
-            this.ComboBoxFeeds.Location = new System.Drawing.Point(698, 40);
+            this.ComboBoxFeeds.Location = new System.Drawing.Point(726, 41);
             this.ComboBoxFeeds.Name = "ComboBoxFeeds";
             this.ComboBoxFeeds.Size = new System.Drawing.Size(121, 21);
             this.ComboBoxFeeds.TabIndex = 33;
@@ -412,11 +412,111 @@
             this.ButtonManageFeeds.Text = "OK";
             this.ButtonManageFeeds.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(393, 343);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 13);
+            this.label9.TabIndex = 52;
+            this.label9.Text = "Lägg till kategori";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(412, 256);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 51;
+            this.label10.Text = "Välj kategori";
+            // 
+            // btnRemoveCategory
+            // 
+            this.btnRemoveCategory.Location = new System.Drawing.Point(627, 253);
+            this.btnRemoveCategory.Name = "btnRemoveCategory";
+            this.btnRemoveCategory.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveCategory.TabIndex = 49;
+            this.btnRemoveCategory.Text = "Ta bort";
+            this.btnRemoveCategory.UseVisualStyleBackColor = true;
+            this.btnRemoveCategory.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // tbAddCategory
+            // 
+            this.tbAddCategory.Location = new System.Drawing.Point(483, 340);
+            this.tbAddCategory.Name = "tbAddCategory";
+            this.tbAddCategory.Size = new System.Drawing.Size(121, 20);
+            this.tbAddCategory.TabIndex = 48;
+            // 
+            // btnCreateNewCategory
+            // 
+            this.btnCreateNewCategory.Location = new System.Drawing.Point(627, 340);
+            this.btnCreateNewCategory.Name = "btnCreateNewCategory";
+            this.btnCreateNewCategory.Size = new System.Drawing.Size(75, 23);
+            this.btnCreateNewCategory.TabIndex = 47;
+            this.btnCreateNewCategory.Text = "Skapa";
+            this.btnCreateNewCategory.UseVisualStyleBackColor = true;
+            this.btnCreateNewCategory.Click += new System.EventHandler(this.btnCreateNewCategory_Click);
+            // 
+            // cbCategory3
+            // 
+            this.cbCategory3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCategory3.FormattingEnabled = true;
+            this.cbCategory3.Location = new System.Drawing.Point(483, 253);
+            this.cbCategory3.Name = "cbCategory3";
+            this.cbCategory3.Size = new System.Drawing.Size(121, 21);
+            this.cbCategory3.TabIndex = 46;
+            // 
+            // btnChangeCategoryName
+            // 
+            this.btnChangeCategoryName.Location = new System.Drawing.Point(627, 291);
+            this.btnChangeCategoryName.Name = "btnChangeCategoryName";
+            this.btnChangeCategoryName.Size = new System.Drawing.Size(75, 23);
+            this.btnChangeCategoryName.TabIndex = 45;
+            this.btnChangeCategoryName.Text = "Spara";
+            this.btnChangeCategoryName.UseVisualStyleBackColor = true;
+            this.btnChangeCategoryName.Click += new System.EventHandler(this.btnChangeCategoryName_Click);
+            // 
+            // tbNewName
+            // 
+            this.tbNewName.AccessibleName = "tb_manage_name";
+            this.tbNewName.Location = new System.Drawing.Point(483, 291);
+            this.tbNewName.Name = "tbNewName";
+            this.tbNewName.Size = new System.Drawing.Size(121, 20);
+            this.tbNewName.TabIndex = 44;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(422, 296);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(55, 13);
+            this.label11.TabIndex = 43;
+            this.label11.Text = "Nytt namn";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(480, 213);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.TabIndex = 53;
+            this.label8.Text = "Hantera Kategorier";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 586);
+            this.ClientSize = new System.Drawing.Size(922, 424);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.btnRemoveCategory);
+            this.Controls.Add(this.tbAddCategory);
+            this.Controls.Add(this.btnCreateNewCategory);
+            this.Controls.Add(this.cbCategory3);
+            this.Controls.Add(this.btnChangeCategoryName);
+            this.Controls.Add(this.tbNewName);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.ButtonManageFeeds);
             this.Controls.Add(this.LabelManageUpdateInterval);
             this.Controls.Add(this.TextBoxManageUpdateInterval);
@@ -449,7 +549,6 @@
             this.Controls.Add(this.tbURL);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btPlay);
-            this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.ListBoxPodcasts);
             this.Controls.Add(this.label1);
@@ -469,7 +568,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox ListBoxPodcasts;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button btPlay;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label4;
@@ -502,6 +600,16 @@
         private System.Windows.Forms.TextBox TextBoxManageUpdateInterval;
         private System.Windows.Forms.Label LabelManageUpdateInterval;
         private System.Windows.Forms.Button ButtonManageFeeds;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnRemoveCategory;
+        private System.Windows.Forms.TextBox tbAddCategory;
+        private System.Windows.Forms.Button btnCreateNewCategory;
+        private System.Windows.Forms.ComboBox cbCategory3;
+        private System.Windows.Forms.Button btnChangeCategoryName;
+        private System.Windows.Forms.TextBox tbNewName;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label8;
     }
 }
 

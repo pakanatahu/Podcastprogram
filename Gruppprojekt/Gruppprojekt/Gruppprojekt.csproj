@@ -58,12 +58,6 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form_manage_categories.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form_manage_categories.Designer.cs">
-      <DependentUpon>form_manage_categories.cs</DependentUpon>
-    </Compile>
     <Compile Include="MP3_Downloader.cs" />
     <Compile Include="Podcast.cs" />
     <Compile Include="Feed.cs" />
@@ -79,9 +73,6 @@
     <Compile Include="XML_Handler.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form_manage_categories.resx">
-      <DependentUpon>form_manage_categories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

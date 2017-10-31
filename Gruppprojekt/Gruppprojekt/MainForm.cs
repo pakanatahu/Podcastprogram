@@ -20,7 +20,7 @@ namespace Gruppprojekt
         {
             InitializeComponent();
             AddDefaultCategories adc = new AddDefaultCategories();
-            FormHandler.updateComboBoxes(cbCategory, cbCategory2);
+            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
         }
@@ -54,13 +54,6 @@ namespace Gruppprojekt
             tbNamn.Clear();
             tbURL.Clear();
             MessageBox.Show("Success!");
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            form_manage_categories manageCat = new form_manage_categories();
-            manageCat.Show();
-
         }
 
         private async void button4_Click(object sender, EventArgs e)
@@ -133,6 +126,41 @@ namespace Gruppprojekt
 
         private void button6_Click_1(object sender, EventArgs e)
         {
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            var valdKategori = cbCategory2.SelectedItem.ToString();
+            FormHandler.removeCategory(valdKategori);
+            MessageBox.Show(valdKategori + " har tagits bort som kategori");
+            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+        }
+
+        private void btnChangeCategoryName_Click(object sender, EventArgs e)
+        {
+
+
+            var newName = tbNewName.Text;
+            var oldName = cbCategory.SelectedItem.ToString();
+
+            if (!String.IsNullOrWhiteSpace(newName))
+            {
+                    FormHandler.changeCateogoryName(newName, oldName);
+                    FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+                    MessageBox.Show(oldName + " har döpts om till " + newName);         }
+            else
+            {
+                MessageBox.Show("Kategorin måste ha ett namn");
+            }
+        }
+
+        private void btnCreateNewCategory_Click(object sender, EventArgs e)
+        {
+            var nyKategori = tbAddCategory.Text;
+            FormHandler.addCategoryName(nyKategori);
+            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+            MessageBox.Show(nyKategori + " har lagts till som ny kategori");
+            tbAddCategory.Clear();
         }
     }
 }
