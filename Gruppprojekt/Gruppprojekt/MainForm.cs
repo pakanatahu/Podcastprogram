@@ -15,6 +15,7 @@ namespace Gruppprojekt
     {
         Form_Handler FormHandler = new Form_Handler();
         Validator validator = new Validator();
+        
 
         public MainForm()
         {
@@ -23,6 +24,9 @@ namespace Gruppprojekt
             FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
+            ComboBoxFeeds.DisplayMember = "Name";
+            FormHandler.LoadAllBackgroundWorkers();
+            FormHandler.FillFeedCombobox(ComboBoxFeeds);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,19 +45,16 @@ namespace Gruppprojekt
 
         private void button8_Click(object sender, EventArgs e)
         {
+
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
             string UpdateInterval = tbIntervall.Text;
-
-            try
-            {
-                validator.validateUrl(URL);
-                validator.validateName(Name);
-                FormHandler.SendInput(Name, URL, Category, UpdateInterval);
-                ListBoxFeeds.Items.Clear();
-                FormHandler.FillListBoxFeeds(ListBoxFeeds);
-                FormHandler.HandleXMLSaving();
+            
+            FormHandler.SendInput(Name, URL, Category, UpdateInterval);
+            ListBoxFeeds.Items.Clear();
+            FormHandler.FillListBoxFeeds(ListBoxFeeds);
+            FormHandler.HandleXMLSaving();
 
                 tbNamn.Clear();
                 tbURL.Clear();
@@ -135,10 +136,6 @@ namespace Gruppprojekt
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-        }
-
         private void button7_Click(object sender, EventArgs e)
         {
             var valdKategori = cbCategory3.SelectedItem.ToString();
@@ -168,25 +165,10 @@ namespace Gruppprojekt
         private void btnCreateNewCategory_Click(object sender, EventArgs e)
         {
             var nyKategori = tbAddCategory.Text;
-
-            try
-            {
-                validator.validateCategory(nyKategori, FormHandler.getCategoryList());
-                FormHandler.addCategoryName(nyKategori);
-                FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
-                MessageBox.Show(nyKategori + " har lagts till som ny kategori");
-                tbAddCategory.Clear();
-            }
-            catch (ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            
-        }
-
-        private void tbURL_TextChanged(object sender, EventArgs e)
-        {
-
+            FormHandler.addCategoryName(nyKategori);
+            FormHandler.updateComboBoxes(cbCategory, cbCategory2, cbCategory3);
+            MessageBox.Show(nyKategori + " har lagts till som ny kategori");
+            tbAddCategory.Clear();
         }
     }
 }
