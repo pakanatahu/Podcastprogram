@@ -55,7 +55,7 @@ namespace Gruppprojekt
             XMLWriter.Close();
         }
 
-        public List<List<string>> LoadFeedDataFromXMLAsDictionary(string FeedURL) {
+        public List<List<string>> LoadFeedDataFromXML(string FeedURL) {
 
             List<List<string>> FeedDataList = new List<List<string>>();
 
@@ -93,6 +93,55 @@ namespace Gruppprojekt
             return FeedDataList;
         }
 
+        public void SerializeCategories(List<Category> CategoriesToBeSaved, string CategoriesURL)
+        {
+            File.Delete(CategoriesURL);
+
+            XmlTextWriter XMLWriter = new XmlTextWriter(CategoriesURL, null);
+
+            foreach (Category category in CategoriesToBeSaved)
+            {
+
+                XMLWriter.Formatting = Formatting.Indented;
+
+                XMLWriter.WriteStartElement("categories");
+
+                XMLWriter.WriteStartElement("category");
+                XMLWriter.WriteElementString("name", category.Name);
+
+                XMLWriter.WriteWhitespace("\n");
+
+                XMLWriter.WriteEndElement();
+            }
+
+            XMLWriter.WriteFullEndElement();
+
+            XMLWriter.Close();
         }
+
+        public List<string> LoadCategoriesFromXML(string CategoriesURL)
+        {
+
+            List<string> CategoriesList = new List<string>();
+
+
+            XmlDocument XMLDocument = new XmlDocument();
+
+            XMLDocument.Load(CategoriesURL);
+
+            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("feed");
+
+            for (int i = 0; i < FeedNodeList.Count; i++)
+            {
+
+                string Name = FeedNodeList[i].Attributes["name"].Value;
+
+                CategoriesList.Add(Name);
+
+            }
+
+            return CategoriesList;
+        }
+    }
     
 }

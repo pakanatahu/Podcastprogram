@@ -47,7 +47,7 @@ namespace Gruppprojekt
             string Name = tbNamn.Text;
             string URL = tbURL.Text;
             string Category = cbCategory2.SelectedItem.ToString();
-            string UpdateInterval = "01:00";
+            string UpdateInterval = "01:10";
 
             FormHandler.SendInput(Name, URL, Category, UpdateInterval);
             ListBoxFeeds.Items.Clear();
@@ -96,8 +96,9 @@ namespace Gruppprojekt
         {
             ListBoxFeeds.Items.Clear();
             ListBoxPodcasts.Items.Clear();
+
             FormHandler.set_selected_category(cbCategory.SelectedItem.ToString());
-            FormHandler.FillListBoxFeeds(ListBoxPodcasts);
+            FormHandler.FillListBoxFeeds(ListBoxFeeds);
         }
 
         private void btPlayPause_Click(object sender, EventArgs e)
@@ -117,15 +118,15 @@ namespace Gruppprojekt
         private void button4_Click_1(object sender, EventArgs e)
         {
             FormHandler.LoadXMLSaving();
-            FormHandler.FillListBoxFeeds(ListBoxPodcasts);
+            FormHandler.FillListBoxFeeds(ListBoxFeeds);
         }
 
         private void ListBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-            ListBoxFeeds.Items.Clear();
-            ListBoxPodcasts.Items.Clear();
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
+
+            ListBoxPodcasts.Items.Clear();
             FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
         }
 

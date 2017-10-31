@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
@@ -113,7 +114,7 @@ namespace Gruppprojekt
 
             //TODO fixa uppdaterings frekvens.
             int IntUpdateInterval = 0;
-            int IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
+            IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, IntUpdateInterval);
 
             FeedController.AddDataToList(NewFeed);
@@ -156,22 +157,26 @@ namespace Gruppprojekt
         {
 
             List<Feed> PodcastsToBeSaved = FeedController.ReturnDataFromList();
+            List<Category> CategoriesToBeSaved = getCategoryList();
             XMLHandler.SerializeObject(PodcastsToBeSaved, DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+            XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFile() + "CategoriesSaveFile.xml");
         }
 
         public void LoadXMLSaving()
         {
 
-            List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXMLAsDictionary(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
-
-            for (int i = 0; i < XMLFeedData.Count(); i++)
+            List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXML(DirectoryHandler.GetSavedXMLFile() + "PodcastSaveFile.xml");
+            //TODO trycatch om första programstarten.
+            for (int i = 0; i < XMLFeedData[0].Count(); i++)
             {
-                string Name = XMLFeedData[i][i];
-                string URL = XMLFeedData[i+1][i];
+                string URL = XMLFeedData[i][i];
+                string UpdateInterval = XMLFeedData[i+1][i];
                 string Category = XMLFeedData[i+2][i];
-                string UpdateInterval = XMLFeedData[i + 3][i];
+                string Name = XMLFeedData[i + 3][i];
+                int UpdateIntervalConverted = Int32.Parse(UpdateInterval);
 
-                Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
+
+                Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateIntervalConverted);
 
                 FeedController.AddDataToList(NewFeed);
             }
@@ -214,7 +219,8 @@ namespace Gruppprojekt
 
         internal int ConvertStringToUpdateinterval(string StringNumber)
         {
-            int ConvertedNumber = 0;
+
+            int ConvertedNumberSeconds = 0;
 
             string[] SplittedString = StringNumber.Split(':');
 
@@ -223,9 +229,35 @@ namespace Gruppprojekt
 
             Hours = Hours * 60;
 
-            ConvertedNumber = Hours + Minutes;
+            ConvertedNumberSeconds = (Hours + Minutes) * 60;
 
-            return ConvertedNumber;
+            return ConvertedNumberSeconds;
+        }
+
+        public void UpdateFrequencyStarter(int UpdateInterval, Feed FeedToUpdate)
+        {
+
+            int ConvertedUpdateInterval = 0;
+            ConvertedUpdateInterval = UpdateInterval * 1000;
+
+            new Thread(() =>
+            {
+                while (true)
+                {
+                    try
+                    {
+
+                        Thread.CurrentThread.IsBackground = true;
+                        Thread.Sleep(ConvertedUpdateInterval);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+
+
+            }).Start();
         }
 
 
