@@ -36,7 +36,7 @@ namespace Gruppprojekt
 
         }
 
-        public void updateComboBoxes(params ComboBox[] comboboxes )
+        public void UpdateComboBoxes(params ComboBox[] comboboxes )
         {
             foreach (ComboBox cb in comboboxes)
             {
@@ -46,6 +46,17 @@ namespace Gruppprojekt
             }
         }
 
+        public Boolean SavedPodcastListExists()
+        {
+            if(File.Exists(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void RemoveFeed(Feed feed)
         {
             FeedController.RemoveDataFromList(feed);
@@ -72,12 +83,12 @@ namespace Gruppprojekt
             }
         }
 
-        public void addCategoryName(String newName)
+        public void AddCategoryName(String newName)
         {
             categoryHandler.addNewCategory(newName);
         }
 
-        public void changeCateogoryName(String newCategoryName, String oldCategoryName)
+        public void ChangeCategoryName(String newCategoryName, String oldCategoryName)
         {
             categoryHandler.changeName(newCategoryName, oldCategoryName);
         }
@@ -128,7 +139,7 @@ namespace Gruppprojekt
             selected_category = selected_categ;
         }
 
-        public void SendInput(string Name, string URL, string Category, string UpdateInterval)
+        public void CreateNewFeed(string Name, string URL, string Category, string UpdateInterval)
         {
 
             int IntUpdateInterval = 0;
@@ -138,7 +149,7 @@ namespace Gruppprojekt
             FeedController.AddDataToList(NewFeed);
 
         }
-        public void SendInput(Feed FeedToBeUpdated)
+        public void CreateNewFeed(Feed FeedToBeUpdated)
         {
             string Name = FeedToBeUpdated.Name;
             string URL = FeedToBeUpdated.URL;
@@ -148,7 +159,6 @@ namespace Gruppprojekt
 
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateInterval);
             FeedController.AddDataToList(NewFeed);
-            System.Diagnostics.Debug.WriteLine("tjue");
         }
 
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
@@ -199,10 +209,10 @@ namespace Gruppprojekt
             //TODO trycatch om första programstarten.
             for (int i = 0; i < XMLFeedData[0].Count(); i++)
             {
-                string URL = XMLFeedData[i][i];
-                string UpdateInterval = XMLFeedData[i+1][i];
-                string Category = XMLFeedData[i+2][i];
-                string Name = XMLFeedData[i + 3][i];
+                string URL = XMLFeedData[0][i];
+                string UpdateInterval = XMLFeedData[1][i];
+                string Category = XMLFeedData[2][i];
+                string Name = XMLFeedData[3][i];
                 int UpdateIntervalConverted = Int32.Parse(UpdateInterval);
 
                 Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateIntervalConverted);
@@ -321,17 +331,42 @@ namespace Gruppprojekt
             ThreadWaitingForUpdateInterval(sender as BackgroundWorker, FeedToBeUpdated);
         }
 
+        public void SaveCategories()
+        {
+            List<Category> CategoriesToBeSaved = categoryHandler.getList();
+            XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
+            ReloadCategories();
+        }
+
+        private void ReloadCategories()
+        {
+            List<string> LoadedCategories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
+            foreach(string category in LoadedCategories)
+            {
+                categoryHandler.addNewCategory(category);
+            }
+        }
+
+        public void CreateStandardCategoryXMLFile()
+        {
+            List<string> StandardCategories = new List<string>(new string[] { "Thriller", "Sport", "Komedi", "Vetenskap", "Nyheter", "Politik", "Musik"});
+            foreach (string category in StandardCategories)
+            {
+                categoryHandler.addNewCategory(category);
+            }
+            List<Category> CategoriesToBeSaved = categoryHandler.getList();
+            XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
+        }
+
         public void ThreadWaitingForUpdateInterval(BackgroundWorker bw, Feed FeedToBeUpdated)
         {
             while (true)
             {
-
-
-                //int ConvertedUpdateInterval = 0;
-                //ConvertedUpdateInterval = UpdateInterval * 1000;
-
-                System.Threading.Thread.Sleep(10000);
-                SendInput(FeedToBeUpdated);
+                int UpdateInterval = FeedToBeUpdated.UpdateInterval;
+                int ConvertedUpdateInterval = 0;
+                ConvertedUpdateInterval = UpdateInterval * 1000;
+                System.Threading.Thread.Sleep(ConvertedUpdateInterval);
+                CreateNewFeed(FeedToBeUpdated);
                 FeedController.RemoveDataFromList(FeedToBeUpdated);
                 XMLHandler.SerializeObject(FeedController.ReturnDataFromList(), DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
 

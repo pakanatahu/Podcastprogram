@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddDefaultCategories.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="CategoryHandler.cs" />
     <Compile Include="Data_Entities.cs" />

@@ -24,7 +24,7 @@ namespace Gruppprojekt
             List<String> BoxLabels = new List<String>(new String[] { "Titel - ", "Release datum - ", "Duration - ", "Sammanfattning - ", "Uppspelningar - " });
             for (int i = 0; i < BoxLabels.Count; i++)
             {
-                ShowMoreTextBox.Text += BoxLabels[i] + PodcastInfoList[i] + Environment.NewLine;
+                TextBoxShowMore.Text += BoxLabels[i] + PodcastInfoList[i] + Environment.NewLine;
             }
 
         }

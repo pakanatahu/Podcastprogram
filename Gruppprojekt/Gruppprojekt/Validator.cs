@@ -23,7 +23,7 @@ namespace Gruppprojekt
         {
             if (String.IsNullOrWhiteSpace(input))
                 throw new ArgumentException("You must asign an intervall in format HH:MM");
-            int.TryParse(String input, out int result);
+            //int.TryParse(String input, out int result);
         }
 
         public void validateCategory(String input, List<Category> list)

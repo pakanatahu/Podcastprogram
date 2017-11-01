@@ -20,17 +20,19 @@ namespace Gruppprojekt
 
             XmlTextWriter XMLWriter = new XmlTextWriter(PodcastListToBeSerializedURL, null);
 
+            XMLWriter.WriteStartElement("feeds");
+
             foreach (Feed feed in PodcastListToBeSerialized)
             {
 
                 XMLWriter.Formatting = Formatting.Indented;
 
-                XMLWriter.WriteStartElement("feed");
 
-                XMLWriter.WriteAttributeString("name", feed.Name);
-                XMLWriter.WriteAttributeString("category", feed.Category);
-                XMLWriter.WriteAttributeString("updateinterval", feed.UpdateInterval.ToString());
-                XMLWriter.WriteAttributeString("url", feed.URL);
+                XMLWriter.WriteStartElement("feed");
+                XMLWriter.WriteElementString("name", feed.Name);
+                XMLWriter.WriteElementString("category", feed.Category);
+                XMLWriter.WriteElementString("updateinterval", feed.UpdateInterval.ToString());
+                XMLWriter.WriteElementString("url", feed.URL);
 
                 foreach (Podcast podcast in feed.ReturnDataFromList())
                 {
@@ -47,9 +49,10 @@ namespace Gruppprojekt
                     XMLWriter.WriteEndElement();
                 }
 
-                XMLWriter.WriteFullEndElement();
+                XMLWriter.WriteEndElement();
             }
 
+            XMLWriter.WriteFullEndElement();
             XMLWriter.Close();
         }
 
@@ -66,27 +69,26 @@ namespace Gruppprojekt
 
             XMLDocument.Load(FeedURL);
 
-            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("feed");
+            XmlNodeList FeedDataNodeList = XMLDocument.SelectNodes("/feeds/feed");
 
-            for (int i = 0; i < FeedNodeList.Count; i++)
+            foreach (XmlNode xmlnode in FeedDataNodeList)
             {
 
-                string URL = FeedNodeList[i].Attributes["url"].Value;
-                string UpdateInterval = FeedNodeList[i].Attributes["updateinterval"].Value;
-                string Category = FeedNodeList[i].Attributes["category"].Value;
-                string Name = FeedNodeList[i].Attributes["name"].Value;
+                string URL = xmlnode.SelectSingleNode("url").InnerText;
+                string UpdateInterval = xmlnode.SelectSingleNode("updateinterval").InnerText;
+                string Category = xmlnode.SelectSingleNode("category").InnerText;
+                string Name = xmlnode.SelectSingleNode("name").InnerText;
 
                 URLList.Add(URL);
                 UpdateIntervalList.Add(UpdateInterval);
                 CategoryList.Add(Category);
                 NameList.Add(Name);
-
-                FeedDataList.Add(URLList);
-                FeedDataList.Add(UpdateIntervalList);
-                FeedDataList.Add(CategoryList);
-                FeedDataList.Add(NameList);
-
             }
+
+            FeedDataList.Add(URLList);
+            FeedDataList.Add(UpdateIntervalList);
+            FeedDataList.Add(CategoryList);
+            FeedDataList.Add(NameList);
 
             return FeedDataList;
         }
@@ -121,12 +123,12 @@ namespace Gruppprojekt
 
             XmlDocument XMLDocument = new XmlDocument();
             XMLDocument.Load(CategoriesURL);
-            XmlNodeList FeedNodeList = XMLDocument.GetElementsByTagName("category");
+            XmlNodeList FeedNodeList = XMLDocument.SelectNodes("/categories/category");
 
-            for (int i = 0; i < FeedNodeList.Count; i++)
+            foreach(XmlNode xmlnode in FeedNodeList)
             {
 
-                string Name = FeedNodeList[i].Attributes["name"].Value;
+                string Name = xmlnode.SelectSingleNode("name").InnerText;
 
                 CategoriesList.Add(Name);
 
@@ -134,6 +136,7 @@ namespace Gruppprojekt
 
             return CategoriesList;
         }
+
     }
     
 }

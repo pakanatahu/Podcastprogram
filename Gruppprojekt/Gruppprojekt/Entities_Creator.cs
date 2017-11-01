@@ -36,7 +36,8 @@ namespace Gruppprojekt
                 string PublishingDate = Item.SelectSingleNode("pubDate").InnerText;
                 int ListenCount = 0;
 
-                NewFeed.AddDataToList(CreatePodcast(Title, PlayURL, Summary, Duration, PublishingDate, ListenCount));
+                Podcast NewPodcast = CreatePodcast(Title, PlayURL, Summary, Duration, PublishingDate, ListenCount);
+                NewFeed.AddDataToList(NewPodcast);
 
             }
             return NewFeed;
@@ -67,7 +68,13 @@ namespace Gruppprojekt
 
             return NewPodcast;
         }
+        public Category CreateCategory(string Name)
+        {
 
+            Category NewCategory = new Category(Name);
+
+            return NewCategory;
+        }
         internal System.Xml.XmlDocument RSSFeedDownloader(string FeedURL)
         {
 

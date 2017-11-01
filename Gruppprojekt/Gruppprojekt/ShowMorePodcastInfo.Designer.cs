@@ -28,24 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ShowMoreTextBox = new System.Windows.Forms.TextBox();
+            this.TextBoxShowMore = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // ShowMoreTextBox
+            // TextBoxShowMore
             // 
-            this.ShowMoreTextBox.Location = new System.Drawing.Point(26, 28);
-            this.ShowMoreTextBox.Multiline = true;
-            this.ShowMoreTextBox.Name = "ShowMoreTextBox";
-            this.ShowMoreTextBox.ReadOnly = true;
-            this.ShowMoreTextBox.Size = new System.Drawing.Size(380, 277);
-            this.ShowMoreTextBox.TabIndex = 0;
+            this.TextBoxShowMore.Location = new System.Drawing.Point(17, 18);
+            this.TextBoxShowMore.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TextBoxShowMore.Multiline = true;
+            this.TextBoxShowMore.Name = "TextBoxShowMore";
+            this.TextBoxShowMore.ReadOnly = true;
+            this.TextBoxShowMore.Size = new System.Drawing.Size(255, 181);
+            this.TextBoxShowMore.TabIndex = 0;
+            this.TextBoxShowMore.TabStop = false;
             // 
             // ShowMorePodcastInfo
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(446, 340);
-            this.Controls.Add(this.ShowMoreTextBox);
+            this.ClientSize = new System.Drawing.Size(297, 221);
+            this.Controls.Add(this.TextBoxShowMore);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ShowMorePodcastInfo";
             this.Text = "ShowMorePodcastInfo";
             this.ResumeLayout(false);
@@ -55,6 +58,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox ShowMoreTextBox;
+        private System.Windows.Forms.TextBox TextBoxShowMore;
     }
 }
