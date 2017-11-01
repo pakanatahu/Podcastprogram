@@ -44,6 +44,10 @@ namespace Gruppprojekt
         {
             categoryList.Add(new Category(name));
         }
+        public void ClearList()
+        {
+            categoryList.Clear();
+        }
 
         public void changeName(String newName, String oldName)
         {

@@ -183,6 +183,7 @@ namespace Gruppprojekt
             {
                 validator.validateCategory(NewName, FormHandler.getCategoryList());
                 FormHandler.ChangeCategoryName(NewName, OldName);
+                FormHandler.SaveCategories();
                 FormHandler.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
                 MessageBox.Show(OldName + " har döpts om till " + NewName);
             }

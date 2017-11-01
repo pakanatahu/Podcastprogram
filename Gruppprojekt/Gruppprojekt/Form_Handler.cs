@@ -85,7 +85,8 @@ namespace Gruppprojekt
             List<Feed> ListOfFeeds = FeedController.ReturnDataFromList();
             
             categoryHandler.removeCategory(categoryName);
-
+            SaveCategories();
+            ReloadCategories();
             foreach (Feed feed in ListOfFeeds)
             {
                 if (feed.Category == categoryName)
@@ -351,6 +352,7 @@ namespace Gruppprojekt
         private void ReloadCategories()
         {
             List<string> LoadedCategories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
+            categoryHandler.ClearList();
             foreach(string category in LoadedCategories)
             {
                 categoryHandler.addNewCategory(category);
