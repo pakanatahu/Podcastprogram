@@ -39,7 +39,6 @@ namespace Gruppprojekt
             else
             {
                 FormHandler.CreateStandardCategoryXMLFile();
-                FormHandler.LoadCategoriesSaving();
             }
 
             if (FormHandler.SavedPodcastListExists())
