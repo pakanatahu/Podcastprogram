@@ -60,7 +60,6 @@
             this.TextBoxManageFeedName = new System.Windows.Forms.TextBox();
             this.LabelManageURL = new System.Windows.Forms.Label();
             this.LabelManageName = new System.Windows.Forms.Label();
-            this.TextBoxManageFeedCategory = new System.Windows.Forms.TextBox();
             this.LabelManageCategory = new System.Windows.Forms.Label();
             this.TextBoxManageFeedUpdateInterval = new System.Windows.Forms.TextBox();
             this.LabelManageUpdateInterval = new System.Windows.Forms.Label();
@@ -76,6 +75,7 @@
             this.LabelManageCategoriesNewName = new System.Windows.Forms.Label();
             this.LabelManageCategories = new System.Windows.Forms.Label();
             this.ButtonManageFeedRemove = new System.Windows.Forms.Button();
+            this.cbChangeFeedCategory = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -336,6 +336,7 @@
             // 
             // ComboBoxManageFeed
             // 
+            this.ComboBoxManageFeed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBoxManageFeed.FormattingEnabled = true;
             this.ComboBoxManageFeed.Location = new System.Drawing.Point(726, 41);
             this.ComboBoxManageFeed.Name = "ComboBoxManageFeed";
@@ -373,13 +374,6 @@
             this.LabelManageName.Size = new System.Drawing.Size(35, 13);
             this.LabelManageName.TabIndex = 37;
             this.LabelManageName.Text = "Name";
-            // 
-            // TextBoxManageFeedCategory
-            // 
-            this.TextBoxManageFeedCategory.Location = new System.Drawing.Point(747, 129);
-            this.TextBoxManageFeedCategory.Name = "TextBoxManageFeedCategory";
-            this.TextBoxManageFeedCategory.Size = new System.Drawing.Size(100, 20);
-            this.TextBoxManageFeedCategory.TabIndex = 38;
             // 
             // LabelManageCategory
             // 
@@ -516,11 +510,21 @@
             this.ButtonManageFeedRemove.UseVisualStyleBackColor = true;
             this.ButtonManageFeedRemove.Click += new System.EventHandler(this.ButtonManageFeedRemove_Click);
             // 
+            // cbChangeFeedCategory
+            // 
+            this.cbChangeFeedCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbChangeFeedCategory.FormattingEnabled = true;
+            this.cbChangeFeedCategory.Location = new System.Drawing.Point(747, 132);
+            this.cbChangeFeedCategory.Name = "cbChangeFeedCategory";
+            this.cbChangeFeedCategory.Size = new System.Drawing.Size(100, 21);
+            this.cbChangeFeedCategory.TabIndex = 55;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 424);
+            this.Controls.Add(this.cbChangeFeedCategory);
             this.Controls.Add(this.ButtonManageFeedRemove);
             this.Controls.Add(this.LabelManageCategories);
             this.Controls.Add(this.LabelManageCategoriesAdd);
@@ -536,7 +540,6 @@
             this.Controls.Add(this.LabelManageUpdateInterval);
             this.Controls.Add(this.TextBoxManageFeedUpdateInterval);
             this.Controls.Add(this.LabelManageCategory);
-            this.Controls.Add(this.TextBoxManageFeedCategory);
             this.Controls.Add(this.LabelManageName);
             this.Controls.Add(this.LabelManageURL);
             this.Controls.Add(this.TextBoxManageFeedName);
@@ -610,7 +613,6 @@
         private System.Windows.Forms.TextBox TextBoxManageFeedName;
         private System.Windows.Forms.Label LabelManageURL;
         private System.Windows.Forms.Label LabelManageName;
-        private System.Windows.Forms.TextBox TextBoxManageFeedCategory;
         private System.Windows.Forms.Label LabelManageCategory;
         private System.Windows.Forms.TextBox TextBoxManageFeedUpdateInterval;
         private System.Windows.Forms.Label LabelManageUpdateInterval;
@@ -626,6 +628,7 @@
         private System.Windows.Forms.Label LabelManageCategoriesNewName;
         private System.Windows.Forms.Label LabelManageCategories;
         private System.Windows.Forms.Button ButtonManageFeedRemove;
+        private System.Windows.Forms.ComboBox cbChangeFeedCategory;
     }
 }
 
