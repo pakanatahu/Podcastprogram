@@ -69,7 +69,10 @@ namespace Gruppprojekt
                 string URL = TextBoxAddRSSURL.Text;
                 string Category = ComboBoxAddRSS.SelectedItem.ToString();
                 string UpdateInterval = TextBoxAddRSSIntervall.Text;
-            
+
+                validator.validateName(Name);
+                validator.validateUrl(URL);
+                validator.validateIntervall(UpdateInterval);
                 FormHandler.CreateNewFeed(Name, URL, Category, UpdateInterval);
                 ListBoxFeeds.Items.Clear();
                 FormHandler.HandleXMLSaving();
