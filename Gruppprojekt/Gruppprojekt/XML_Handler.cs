@@ -107,10 +107,9 @@ namespace Gruppprojekt
                 XMLWriter.WriteStartElement("category");
                 XMLWriter.WriteElementString("name", category.Name);
                 XMLWriter.WriteWhitespace("\n");
-
+                XMLWriter.WriteEndElement();
             }
 
-            XMLWriter.WriteEndElement();
             XMLWriter.WriteFullEndElement();
 
             XMLWriter.Close();

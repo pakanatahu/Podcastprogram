@@ -57,6 +57,18 @@ namespace Gruppprojekt
                 return false;
             }
         }
+        public Boolean SavedCategoryListExists()
+        {
+            if (File.Exists(DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void RemoveFeed(Feed feed)
         {
             FeedController.RemoveDataFromList(feed);
@@ -202,9 +214,8 @@ namespace Gruppprojekt
             XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
         }
 
-        public void LoadXMLSaving()
+        public void LoadFeedsSaving()
         {
-
             List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
             //TODO trycatch om första programstarten.
             for (int i = 0; i < XMLFeedData[0].Count(); i++)
@@ -220,11 +231,10 @@ namespace Gruppprojekt
                 FeedController.AddDataToList(NewFeed);
             }
         }
-
         public void LoadCategoriesSaving()
         {
-            getCategoryList();
-            List<string> Categories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
+
+            List<string> Categories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
             
             foreach(string categoryname in Categories)
             {

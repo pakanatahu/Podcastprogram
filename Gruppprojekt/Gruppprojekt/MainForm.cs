@@ -24,17 +24,28 @@ namespace Gruppprojekt
             ListBoxFeeds.DisplayMember = "Name";
             ComboBoxManageFeed.DisplayMember = "Name";
             CheckForXMLLoadFile();
-            FormHandler.CreateStandardCategoryXMLFile();
-            FormHandler.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
             FormHandler.FillListBoxFeeds(ListBoxFeeds);
             FormHandler.FillFeedCombobox(ComboBoxManageFeed);
+            FormHandler.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
             FormHandler.LoadAllBackgroundWorkers();
         }
         private void CheckForXMLLoadFile()
         {
-            if(FormHandler.SavedPodcastListExists())
+
+            if (FormHandler.SavedCategoryListExists())
             {
-                FormHandler.LoadXMLSaving();
+                FormHandler.LoadCategoriesSaving();
+            }
+            else
+            {
+                FormHandler.CreateStandardCategoryXMLFile();
+                FormHandler.LoadCategoriesSaving();
+            }
+
+            if (FormHandler.SavedPodcastListExists())
+            {
+                FormHandler.LoadFeedsSaving();
+
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -144,7 +155,6 @@ namespace Gruppprojekt
 
         private void button4_Click_1(object sender, EventArgs e)
         {
-            FormHandler.LoadXMLSaving();
             
         }
 
