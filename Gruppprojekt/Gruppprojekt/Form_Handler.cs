@@ -141,11 +141,6 @@ namespace Gruppprojekt
             }
         }
 
-        public void setSelectedCategoryInCombobox(ComboBox cb, int index)
-        {
-            cb.SelectedIndex = index;
-        }
-
         public void set_selected_category(string selected_categ)
         {
 
