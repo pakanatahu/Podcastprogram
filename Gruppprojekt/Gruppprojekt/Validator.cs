@@ -50,6 +50,14 @@ namespace Gruppprojekt
 
         }
 
+        public Boolean hasValue(string input)
+        {
+            if (String.IsNullOrWhiteSpace(input))
+                return false;
+            else
+                return true;
+        }
+
         public void validateUrl(string url_input)
         {
             if (String.IsNullOrWhiteSpace(url_input))

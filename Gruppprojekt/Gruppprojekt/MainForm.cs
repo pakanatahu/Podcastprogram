@@ -24,9 +24,8 @@ namespace Gruppprojekt
             ListBoxFeeds.DisplayMember = "Name";
             ComboBoxManageFeed.DisplayMember = "Name";
             CheckForXMLLoadFile();
-            FormHandler.FillListBoxFeeds(ListBoxFeeds);
-            FormHandler.FillFeedCombobox(ComboBoxManageFeed);
-            FormHandler.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
+            ReloadListBoxes();
+            FormHandler.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories, ComboBoxManageFeedChange);
             FormHandler.LoadAllBackgroundWorkers();
         }
         private void CheckForXMLLoadFile()
@@ -47,6 +46,15 @@ namespace Gruppprojekt
 
             }
         }
+        private void ReloadListBoxes()
+        {
+            ListBoxFeeds.Items.Clear();
+            ListBoxPodcasts.Items.Clear();
+            ComboBoxManageFeed.Items.Clear();
+            FormHandler.FillListBoxFeeds(ListBoxFeeds);
+            FormHandler.FillFeedCombobox(ComboBoxManageFeed);
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
         }
@@ -64,6 +72,7 @@ namespace Gruppprojekt
         private void ButtonAddRSS_Click(object sender, EventArgs e)
         {
             string UpdateInterval = TextBoxAddRSSIntervall.Text;
+
             try
             {
                 validator.validateInterval(UpdateInterval);
@@ -82,6 +91,7 @@ namespace Gruppprojekt
                 TextBoxAddRSSIntervall.Text = "HH";
 
                 MessageBox.Show("Podcastfeed added!");
+                ReloadListBoxes();
             }
             catch (ArgumentException ex)
             {
@@ -135,7 +145,43 @@ namespace Gruppprojekt
 
         private void ButtonManageFeeds_Click(object sender, EventArgs e)
         {
-            FormHandler.StartPauseAudio();
+            try
+            {
+
+                Feed FeedToChange = ComboBoxManageFeed.SelectedItem as Feed;
+                Category CategoryForFeed = ComboBoxManageFeedChange.SelectedItem as Category;
+
+                string NewCategory = CategoryForFeed.Name;
+
+                bool hasValueName = validator.hasValue(TextBoxManageFeedName.Text);
+                bool hasValueURL = validator.hasValue(TextBoxManageFeedURL.Text);
+                bool hasValueInterval = validator.hasValue(TextBoxManageFeedUpdateInterval.Text);
+
+                if (hasValueName)
+                {
+                    validator.validateName(TextBoxManageFeedName.Text);
+                    FormHandler.ManageFeed(FeedToChange, "Name", TextBoxManageFeedName.Text);
+                }
+                if (hasValueURL)
+                {
+                    validator.validateUrl(TextBoxManageFeedURL.Text);
+                    FormHandler.ManageFeed(FeedToChange, "URL", TextBoxManageFeedURL.Text);
+                }
+                if (hasValueInterval)
+                {
+                    validator.validateInterval(TextBoxManageFeedUpdateInterval.Text);
+                    FormHandler.ManageFeed(FeedToChange, "UpdateInterval", TextBoxManageFeedUpdateInterval.Text);
+                }
+                FormHandler.ManageFeed(FeedToChange, "Category", NewCategory);
+                ReloadListBoxes();
+
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
         
         private void ButtonQuitMusicPlayback_Click(object sender, EventArgs e)
@@ -147,24 +193,14 @@ namespace Gruppprojekt
             lbNowPlaying.Text = "";
         }
 
-        private void button6_Click_1(object sender, EventArgs e)
-        {
-            FormHandler.StartPauseAudio();
-        }
-        
-
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-            
-        }
-
         private void ListBoxFeeds_SelectedIndexChanged(object sender, EventArgs e)
         {
 
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
-
-            ListBoxPodcasts.Items.Clear();
-            FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
+            if(SelectedFeed != null) {
+                ListBoxPodcasts.Items.Clear();
+                FormHandler.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
+            }
         }
 
         private void ButtonManageCategoriesRemove_Click(object sender, EventArgs e)
@@ -204,24 +240,5 @@ namespace Gruppprojekt
             TextBoxAddCategory.Clear();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ButtonManageFeedRemove_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBoxAddRSS_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TextBoxAddRSSIntervall_TextChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

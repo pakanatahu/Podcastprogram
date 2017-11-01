@@ -28,11 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
             this.ComboBoxCategory = new System.Windows.Forms.ComboBox();
             this.LabelCategory = new System.Windows.Forms.Label();
             this.ListBoxPodcasts = new System.Windows.Forms.ListBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.ButtonPlay = new System.Windows.Forms.Button();
             this.ButtonShowMore = new System.Windows.Forms.Button();
             this.LabelAddRSSName = new System.Windows.Forms.Label();
@@ -50,10 +48,8 @@
             this.ButtonPlayPause = new System.Windows.Forms.Button();
             this.ButtonQuitMusicPlayback = new System.Windows.Forms.Button();
             this.lbNowPlaying = new System.Windows.Forms.Label();
-            this.button4 = new System.Windows.Forms.Button();
             this.LabelListBoxFeeds = new System.Windows.Forms.Label();
             this.ListBoxFeeds = new System.Windows.Forms.ListBox();
-            this.button6 = new System.Windows.Forms.Button();
             this.LabelManageFeed = new System.Windows.Forms.Label();
             this.ComboBoxManageFeed = new System.Windows.Forms.ComboBox();
             this.TextBoxManageFeedURL = new System.Windows.Forms.TextBox();
@@ -75,19 +71,8 @@
             this.LabelManageCategoriesNewName = new System.Windows.Forms.Label();
             this.LabelManageCategories = new System.Windows.Forms.Label();
             this.ButtonManageFeedRemove = new System.Windows.Forms.Button();
-            this.cbChangeFeedCategory = new System.Windows.Forms.ComboBox();
+            this.ComboBoxManageFeedChange = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.AccessibleName = "bt_add";
-            this.button1.Location = new System.Drawing.Point(255, 314);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Lägg till";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ComboBoxCategory
             // 
@@ -118,16 +103,6 @@
             this.ListBoxPodcasts.Size = new System.Drawing.Size(298, 82);
             this.ListBoxPodcasts.TabIndex = 3;
             this.ListBoxPodcasts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(174, 314);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Inställningar";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // ButtonPlay
             // 
@@ -184,7 +159,6 @@
             this.TextBoxAddRSSIntervall.Size = new System.Drawing.Size(142, 20);
             this.TextBoxAddRSSIntervall.TabIndex = 15;
             this.TextBoxAddRSSIntervall.Text = "HH";
-            this.TextBoxAddRSSIntervall.TextChanged += new System.EventHandler(this.TextBoxAddRSSIntervall_TextChanged);
             // 
             // LabelAddRSSUpdateInterval
             // 
@@ -212,7 +186,6 @@
             this.ComboBoxAddRSS.Name = "ComboBoxAddRSS";
             this.ComboBoxAddRSS.Size = new System.Drawing.Size(142, 21);
             this.ComboBoxAddRSS.TabIndex = 12;
-            this.ComboBoxAddRSS.SelectedIndexChanged += new System.EventHandler(this.ComboBoxAddRSS_SelectedIndexChanged);
             // 
             // LabelAddRSSURL
             // 
@@ -287,16 +260,6 @@
             this.lbNowPlaying.Size = new System.Drawing.Size(0, 13);
             this.lbNowPlaying.TabIndex = 27;
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(340, 184);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click_1);
-            // 
             // LabelListBoxFeeds
             // 
             this.LabelListBoxFeeds.AutoSize = true;
@@ -314,16 +277,6 @@
             this.ListBoxFeeds.Size = new System.Drawing.Size(295, 95);
             this.ListBoxFeeds.TabIndex = 30;
             this.ListBoxFeeds.SelectedIndexChanged += new System.EventHandler(this.ListBoxFeeds_SelectedIndexChanged);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(340, 155);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 31;
-            this.button6.Text = "button6";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click_1);
             // 
             // LabelManageFeed
             // 
@@ -508,23 +461,22 @@
             this.ButtonManageFeedRemove.TabIndex = 54;
             this.ButtonManageFeedRemove.Text = "Ta bort";
             this.ButtonManageFeedRemove.UseVisualStyleBackColor = true;
-            this.ButtonManageFeedRemove.Click += new System.EventHandler(this.ButtonManageFeedRemove_Click);
             // 
-            // cbChangeFeedCategory
+            // ComboBoxManageFeedChange
             // 
-            this.cbChangeFeedCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbChangeFeedCategory.FormattingEnabled = true;
-            this.cbChangeFeedCategory.Location = new System.Drawing.Point(747, 132);
-            this.cbChangeFeedCategory.Name = "cbChangeFeedCategory";
-            this.cbChangeFeedCategory.Size = new System.Drawing.Size(100, 21);
-            this.cbChangeFeedCategory.TabIndex = 55;
+            this.ComboBoxManageFeedChange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxManageFeedChange.FormattingEnabled = true;
+            this.ComboBoxManageFeedChange.Location = new System.Drawing.Point(747, 132);
+            this.ComboBoxManageFeedChange.Name = "ComboBoxManageFeedChange";
+            this.ComboBoxManageFeedChange.Size = new System.Drawing.Size(100, 21);
+            this.ComboBoxManageFeedChange.TabIndex = 55;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(922, 424);
-            this.Controls.Add(this.cbChangeFeedCategory);
+            this.Controls.Add(this.ComboBoxManageFeedChange);
             this.Controls.Add(this.ButtonManageFeedRemove);
             this.Controls.Add(this.LabelManageCategories);
             this.Controls.Add(this.LabelManageCategoriesAdd);
@@ -546,10 +498,8 @@
             this.Controls.Add(this.TextBoxManageFeedURL);
             this.Controls.Add(this.ComboBoxManageFeed);
             this.Controls.Add(this.LabelManageFeed);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.ListBoxFeeds);
             this.Controls.Add(this.LabelListBoxFeeds);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.lbNowPlaying);
             this.Controls.Add(this.ButtonQuitMusicPlayback);
             this.Controls.Add(this.ButtonPlayPause);
@@ -567,11 +517,9 @@
             this.Controls.Add(this.TextBoxAddRSSURL);
             this.Controls.Add(this.ButtonShowMore);
             this.Controls.Add(this.ButtonPlay);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.ListBoxPodcasts);
             this.Controls.Add(this.LabelCategory);
             this.Controls.Add(this.ComboBoxCategory);
-            this.Controls.Add(this.button1);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -580,12 +528,9 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox ComboBoxCategory;
         private System.Windows.Forms.Label LabelCategory;
         private System.Windows.Forms.ListBox ListBoxPodcasts;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button ButtonPlay;
         private System.Windows.Forms.Button ButtonShowMore;
         private System.Windows.Forms.Label LabelAddRSSName;
@@ -603,10 +548,8 @@
         private System.Windows.Forms.Button ButtonPlayPause;
         private System.Windows.Forms.Button ButtonQuitMusicPlayback;
         private System.Windows.Forms.Label lbNowPlaying;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label LabelListBoxFeeds;
         private System.Windows.Forms.ListBox ListBoxFeeds;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label LabelManageFeed;
         private System.Windows.Forms.ComboBox ComboBoxManageFeed;
         private System.Windows.Forms.TextBox TextBoxManageFeedURL;
@@ -628,7 +571,7 @@
         private System.Windows.Forms.Label LabelManageCategoriesNewName;
         private System.Windows.Forms.Label LabelManageCategories;
         private System.Windows.Forms.Button ButtonManageFeedRemove;
-        private System.Windows.Forms.ComboBox cbChangeFeedCategory;
+        private System.Windows.Forms.ComboBox ComboBoxManageFeedChange;
     }
 }
 

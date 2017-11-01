@@ -33,6 +33,10 @@ namespace Gruppprojekt
         {
 
             CreateDirectories();
+        }
+
+        public void ManageFeed(string Name)
+        {
 
         }
 
@@ -74,6 +78,36 @@ namespace Gruppprojekt
             FeedController.RemoveDataFromList(feed);
             //todo reload, refill.
         }
+
+        public void ManageFeed(Feed FeedToBeChanged, string FeedChoice, string FeedChange)
+        {
+            Feed FeedToBeChangedTemporary = FeedToBeChanged;
+            FeedController.RemoveDataFromList(FeedToBeChanged);
+            switch(FeedChoice)
+            {
+                case "Name":
+                    FeedToBeChangedTemporary.Name = FeedChange;
+                    break;
+
+                case "URL":
+                    FeedToBeChangedTemporary.URL = FeedChange;
+                    break;
+
+                case "UpdateInterval":
+                    FeedToBeChangedTemporary.UpdateInterval = Int32.Parse(FeedChange);
+                    break;
+
+                case "Category":
+                    FeedToBeChangedTemporary.Category = FeedChange;
+                    break;
+
+                default:
+                    break;
+            }
+            FeedController.AddDataToList(FeedToBeChangedTemporary);
+            HandleXMLSaving();
+        }
+
 
         public List<Category> getCategoryList()
         {
@@ -213,7 +247,6 @@ namespace Gruppprojekt
         public void LoadFeedsSaving()
         {
             List<List<string>> XMLFeedData = XMLHandler.LoadFeedDataFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml");
-            //TODO trycatch om första programstarten.
             for (int i = 0; i < XMLFeedData[0].Count(); i++)
             {
                 string URL = XMLFeedData[0][i];
@@ -287,6 +320,7 @@ namespace Gruppprojekt
         
         public void LoadAllBackgroundWorkers()
         {
+
             List<Feed> FeedsToBeUpdated = FeedController.ReturnDataFromList();
             foreach (Feed feed in FeedsToBeUpdated)
             {
@@ -296,6 +330,7 @@ namespace Gruppprojekt
 
         public void LoadSingleBackgroundWorker(Feed FeedToBeUpdated)
         {
+
             CreateWorkers(FeedToBeUpdated);
         }
         public void CreateWorkers(Feed FeedToBeUpdated)
