@@ -12,12 +12,12 @@ using WMPLib;
 
 namespace Gruppprojekt
 {
-    class Form_Handler
+    class Main_Logic
     {
 
         internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
 
-        private CategoryHandler categoryHandler = new CategoryHandler();
+        private Category_Handler CategoryHandler = new Category_Handler();
         private Feed PodcastFeed = new Feed();
         private Feed_Controller FeedController = new Feed_Controller();
         private Entities_Creator EntitiesCreator = new Entities_Creator();
@@ -29,7 +29,7 @@ namespace Gruppprojekt
         private Boolean Playing;
         public string selected_category = "";
 
-        public Form_Handler()
+        public Main_Logic()
         {
 
             CreateDirectories();
@@ -111,14 +111,14 @@ namespace Gruppprojekt
 
         public List<Category> getCategoryList()
         {
-            return categoryHandler.getList();
+            return CategoryHandler.getList();
         }
 
         public void removeCategory(String categoryName)
         {
             List<Feed> ListOfFeeds = FeedController.ReturnDataFromList();
             
-            categoryHandler.removeCategory(categoryName);
+            CategoryHandler.removeCategory(categoryName);
             SaveCategories();
             ReloadCategories();
             foreach (Feed feed in ListOfFeeds)
@@ -132,17 +132,17 @@ namespace Gruppprojekt
 
         public void AddCategoryName(String newName)
         {
-            categoryHandler.addNewCategory(newName);
+            CategoryHandler.addNewCategory(newName);
         }
 
         public void ChangeCategoryName(String newCategoryName, String oldCategoryName)
         {
-            categoryHandler.changeName(newCategoryName, oldCategoryName);
+            CategoryHandler.changeName(newCategoryName, oldCategoryName);
         }
 
         public void fillCategoryComobox(ComboBox cb)
         {
-            foreach(Category category in categoryHandler.getList())
+            foreach(Category category in CategoryHandler.getList())
             {
                 cb.Items.Add(category.Name);
             }
@@ -268,7 +268,7 @@ namespace Gruppprojekt
             foreach(string categoryname in Categories)
             {
 
-                categoryHandler.addNewCategory(categoryname);
+                CategoryHandler.addNewCategory(categoryname);
             }
 
         }
@@ -350,7 +350,7 @@ namespace Gruppprojekt
 
         public void SaveCategories()
         {
-            List<Category> CategoriesToBeSaved = categoryHandler.getList();
+            List<Category> CategoriesToBeSaved = CategoryHandler.getList();
             XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
             ReloadCategories();
         }
@@ -358,10 +358,10 @@ namespace Gruppprojekt
         private void ReloadCategories()
         {
             List<string> LoadedCategories = XMLHandler.LoadCategoriesFromXML(DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
-            categoryHandler.ClearList();
+            CategoryHandler.ClearList();
             foreach(string category in LoadedCategories)
             {
-                categoryHandler.addNewCategory(category);
+                CategoryHandler.addNewCategory(category);
             }
         }
 
@@ -370,9 +370,9 @@ namespace Gruppprojekt
             List<string> StandardCategories = new List<string>(new string[] { "Thriller", "Sport", "Komedi", "Vetenskap", "Nyheter", "Politik", "Musik"});
             foreach (string category in StandardCategories)
             {
-                categoryHandler.addNewCategory(category);
+                CategoryHandler.addNewCategory(category);
             }
-            List<Category> CategoriesToBeSaved = categoryHandler.getList();
+            List<Category> CategoriesToBeSaved = CategoryHandler.getList();
             XMLHandler.SerializeCategories(CategoriesToBeSaved, DirectoryHandler.GetSavedXMLFilesDirectory() + "CategoriesSaveFile.xml");
         }
 

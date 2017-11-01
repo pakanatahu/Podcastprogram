@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Gruppprojekt
 {
-    class CategoryHandler
+    class Category_Handler
     {
         private static List<Category> categoryList = new List<Category>();
 
 
-        public CategoryHandler()
+        public Category_Handler()
         {
 
         }
