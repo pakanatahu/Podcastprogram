@@ -19,12 +19,7 @@ namespace Gruppprojekt
                 throw new ArgumentException("Name cannot contain numbers");
         }
 
-        public void validateIntervall(String input)
-        {
-            if (String.IsNullOrWhiteSpace(input))
-                throw new ArgumentException("You must asign an intervall in format HH:MM");
-        }
-
+  
         public void validateCategory(String input, List<Category> list)
         {
             validateName(input);
@@ -36,6 +31,23 @@ namespace Gruppprojekt
                     throw new ArgumentException("A category with that name already exists");
                 }
             }
+        }
+
+        public void validateInterval(String input)
+        {
+            if (String.IsNullOrWhiteSpace(input))
+                throw new ArgumentException("You must asign an intervall in format HH:MM");
+
+            bool isInt = Int32.TryParse(input, out var output);
+            if (!isInt)
+            {
+                throw new ArgumentException("Interval is not a number");
+            }
+            else if (output > 99)
+            {
+                throw new ArgumentException("Max interval is 99");
+            }
+
         }
 
         public void validateUrl(string url_input)

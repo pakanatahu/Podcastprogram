@@ -63,13 +63,15 @@ namespace Gruppprojekt
 
         private void ButtonAddRSS_Click(object sender, EventArgs e)
         {
-            try { 
+            string UpdateInterval = TextBoxAddRSSIntervall.Text;
+            try
+            {
+                validator.validateInterval(UpdateInterval);
 
                 string Name = TextBoxAddRSSName.Text;
                 string URL = TextBoxAddRSSURL.Text;
                 string Category = ComboBoxAddRSS.SelectedItem.ToString();
-                string UpdateInterval = TextBoxAddRSSIntervall.Text;
-            
+
                 FormHandler.CreateNewFeed(Name, URL, Category, UpdateInterval);
                 ListBoxFeeds.Items.Clear();
                 FormHandler.HandleXMLSaving();
@@ -77,12 +79,11 @@ namespace Gruppprojekt
 
                 TextBoxAddRSSName.Clear();
                 TextBoxAddRSSURL.Clear();
-                TextBoxAddRSSIntervall.Text = "HH:MM";
+                TextBoxAddRSSIntervall.Text = "HH";
 
-                MessageBox.Show("Podcastfeed tillagd!");
-
+                MessageBox.Show("Podcastfeed added!");
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -214,6 +215,11 @@ namespace Gruppprojekt
         }
 
         private void ComboBoxAddRSS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TextBoxAddRSSIntervall_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -151,7 +151,7 @@ namespace Gruppprojekt
         {
 
             int IntUpdateInterval = 0;
-            IntUpdateInterval = ConvertStringToUpdateinterval(UpdateInterval);
+            IntUpdateInterval = Int32.Parse(UpdateInterval);
             Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, IntUpdateInterval);
             LoadSingleBackgroundWorker(NewFeed);
             FeedController.AddDataToList(NewFeed);
@@ -275,30 +275,6 @@ namespace Gruppprojekt
             Playing = !Playing;
         }
 
-        internal int ConvertStringToUpdateinterval(string StringNumber)
-        {
-
-            int ConvertedNumberSeconds = 0;
-
-            string[] SplittedString = StringNumber.Split(':');
-
-            if (SplittedString[0] != "00")
-            {
-                int Hours = Int32.Parse(SplittedString[0]);
-                int Minutes = Int32.Parse(SplittedString[1]);
-
-                Hours = Hours * 60;
-
-                ConvertedNumberSeconds = (Hours + Minutes) * 60;
-            }
-            else
-            {
-                int Minutes = Int32.Parse(SplittedString[1]);
-                ConvertedNumberSeconds = Minutes * 60;
-            }
-
-            return ConvertedNumberSeconds;
-        }
 
         public void FillFeedCombobox(ComboBox comboBox)
         {
@@ -371,7 +347,7 @@ namespace Gruppprojekt
             {
                 int UpdateInterval = FeedToBeUpdated.UpdateInterval;
                 int ConvertedUpdateInterval = 0;
-                ConvertedUpdateInterval = UpdateInterval * 1000;
+                ConvertedUpdateInterval = UpdateInterval * 600000;
                 System.Threading.Thread.Sleep(ConvertedUpdateInterval);
                 CreateNewFeed(FeedToBeUpdated);
                 FeedController.RemoveDataFromList(FeedToBeUpdated);

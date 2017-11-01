@@ -183,7 +183,8 @@
             this.TextBoxAddRSSIntervall.Name = "TextBoxAddRSSIntervall";
             this.TextBoxAddRSSIntervall.Size = new System.Drawing.Size(142, 20);
             this.TextBoxAddRSSIntervall.TabIndex = 15;
-            this.TextBoxAddRSSIntervall.Text = "HH:MM";
+            this.TextBoxAddRSSIntervall.Text = "HH";
+            this.TextBoxAddRSSIntervall.TextChanged += new System.EventHandler(this.TextBoxAddRSSIntervall_TextChanged);
             // 
             // LabelAddRSSUpdateInterval
             // 
