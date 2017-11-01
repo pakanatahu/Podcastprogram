@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using System.Xml.Serialization;
 
 namespace Gruppprojekt
 {
@@ -15,7 +10,6 @@ namespace Gruppprojekt
         public void SerializeObject(List<Feed> PodcastListToBeSerialized, String PodcastListToBeSerializedURL)
         {
 
-            //TODO när man tar bort kategori ska ett default värde komma.
             File.Delete(PodcastListToBeSerializedURL);
 
             XmlTextWriter XMLWriter = new XmlTextWriter(PodcastListToBeSerializedURL, null);
@@ -40,10 +34,8 @@ namespace Gruppprojekt
                     XMLWriter.WriteStartElement("podcast");
                     XMLWriter.WriteElementString("title", podcast.Title);
                     XMLWriter.WriteElementString("playurl", podcast.PlayURL);
-                    XMLWriter.WriteElementString("summary", podcast.Summary);
                     XMLWriter.WriteElementString("publishingdate", podcast.PublishingDate);
                     XMLWriter.WriteElementString("listencount", podcast.ListenCount.ToString());
-                    XMLWriter.WriteElementString("duration", podcast.Duration);
                     XMLWriter.WriteWhitespace("\n");
 
                     XMLWriter.WriteEndElement();
@@ -56,6 +48,42 @@ namespace Gruppprojekt
             XMLWriter.Close();
         }
 
+        public List<List<string>> LoadPodcastDataFromXML(string FeedURL)
+        {
+            List<List<string>> PodcastDataList = new List<List<string>>();
+
+            List<string> TitleList = new List<string>();
+            List<string> PlayURLList = new List<string>();
+            List<string> PublishingDateList = new List<string>();
+            List<string> ListenCountList = new List<string>();
+
+            XmlDocument XMLDocument = new XmlDocument();
+
+            XMLDocument.Load(FeedURL);
+
+            XmlNodeList FeedDataNodeList = XMLDocument.SelectNodes("/feeds/feed/podcast");
+
+            foreach (XmlNode xmlnode in FeedDataNodeList)
+            {
+
+                string Title = xmlnode.SelectSingleNode("title").InnerText;
+                string PlayURL = xmlnode.SelectSingleNode("playurl").InnerText;
+                string PublishingDate = xmlnode.SelectSingleNode("publishingdate").InnerText;
+                string ListenCount = xmlnode.SelectSingleNode("listencount").InnerText;
+
+                TitleList.Add(Title);
+                PlayURLList.Add(PlayURL);
+                PublishingDateList.Add(PublishingDate);
+                ListenCountList.Add(ListenCount);
+            }
+
+            PodcastDataList.Add(TitleList);
+            PodcastDataList.Add(PlayURLList);
+            PodcastDataList.Add(PublishingDateList);
+            PodcastDataList.Add(ListenCountList);
+
+            return PodcastDataList;
+        }
         public List<List<string>> LoadFeedDataFromXML(string FeedURL) {
 
             List<List<string>> FeedDataList = new List<List<string>>();

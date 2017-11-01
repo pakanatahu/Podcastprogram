@@ -1,15 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using System.Xml;
 
 namespace Gruppprojekt
 {
     class Entities_Creator
     {
+        public Feed CreateEntitiesFromSaveFile(string URL, string FeedName, string FeedURL, string FeedCategory, int FeedUpdateInterval)
+        {
+            Boolean FeedCreated = false;
 
+            Feed NewFeed = new Feed();
+
+            var XMLDocument = new System.Xml.XmlDocument();
+            XMLDocument.Load(URL);
+
+            XmlNodeList FeedDataNodeList = XMLDocument.SelectNodes("/feeds/feed/podcast");
+
+            foreach (XmlNode Item in FeedDataNodeList)
+            {
+                if (!FeedCreated)
+                {
+                    NewFeed = CreateFeed(FeedName, FeedCategory, FeedURL, FeedUpdateInterval);
+                    FeedCreated = true;
+
+                }
+
+                string Title = Item.SelectSingleNode("title").InnerText;
+                string PlayURL = Item.SelectSingleNode("playurl").InnerText;
+                string PublishingDate = Item.SelectSingleNode("publishingdate").InnerText;
+                string StringListenCount = Item.SelectSingleNode("listencount").InnerText;
+
+                int ListenCount = Int32.Parse(StringListenCount);
+
+                Podcast NewPodcast = CreatePodcast(Title, PlayURL, PublishingDate, ListenCount);
+                NewFeed.AddDataToList(NewPodcast);
+
+            }
+            return NewFeed;
+        }
         public Feed CreateEntities(string FeedName, string FeedURL, string FeedCategory, int FeedUpdateInterval)
         {
 
@@ -31,12 +60,10 @@ namespace Gruppprojekt
 
                 string Title = Item.SelectSingleNode("title").InnerText;
                 string PlayURL = Item.SelectSingleNode("link").InnerText;
-                string Summary = Item.SelectSingleNode("//*[local-name() = 'summary']").InnerText;
-                string Duration = Item.SelectSingleNode("//*[local-name() = 'duration']").InnerText;
                 string PublishingDate = Item.SelectSingleNode("pubDate").InnerText;
                 int ListenCount = 0;
 
-                Podcast NewPodcast = CreatePodcast(Title, PlayURL, Summary, Duration, PublishingDate, ListenCount);
+                Podcast NewPodcast = CreatePodcast(Title, PlayURL, PublishingDate, ListenCount);
                 NewFeed.AddDataToList(NewPodcast);
 
             }
@@ -54,15 +81,13 @@ namespace Gruppprojekt
 
             return NewFeed;
         }
-        private Podcast CreatePodcast(string Title, string PlayURL, string Summary, string Duration, string PublishingDate, int ListenCount)
+        private Podcast CreatePodcast(string Title, string PlayURL, string PublishingDate, int ListenCount)
         {
 
             Podcast NewPodcast = new Podcast();
 
             NewPodcast.Title = Title;
             NewPodcast.PlayURL = PlayURL;
-            NewPodcast.Summary = Summary;
-            NewPodcast.Duration = Duration;
             NewPodcast.PublishingDate = PublishingDate;
             NewPodcast.ListenCount = ListenCount;
 

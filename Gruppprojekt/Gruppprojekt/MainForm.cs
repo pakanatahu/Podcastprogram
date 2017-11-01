@@ -13,37 +13,39 @@ namespace Gruppprojekt
 {
     public partial class MainForm : Form
     {
-        Main_Logic MainLogic = new Main_Logic();
-        Validator validator = new Validator();
+        private Main_Logic_Delegater MainLogicDelegater;
+        private Validator validator;
         
         public MainForm()
         {
             InitializeComponent();
-
+            MainLogicDelegater = new Main_Logic_Delegater();
+            validator = new Validator();
             ListBoxPodcasts.DisplayMember = "Title";
             ListBoxFeeds.DisplayMember = "Name";
             ComboBoxManageFeed.DisplayMember = "Name";
             CheckForXMLLoadFile();
             ReloadListBoxes();
-            MainLogic.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories, ComboBoxManageFeedChange);
-            MainLogic.LoadAllBackgroundWorkers();
+            MainLogicDelegater.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories, ComboBoxManageFeedChange);
+            MainLogicDelegater.LoadAllBackgroundWorkers();
         }
         private void CheckForXMLLoadFile()
         {
 
-            if (MainLogic.SavedCategoryListExists())
+            if (MainLogicDelegater.SavedCategoryListExists())
             {
-                MainLogic.LoadCategoriesSaving();
+
+                MainLogicDelegater.LoadCategoriesSaving();
             }
             else
             {
-                MainLogic.CreateStandardCategoryXMLFile();
+
+                MainLogicDelegater.CreateStandardCategoryXMLFile();
             }
-
-            if (MainLogic.SavedPodcastListExists())
+            if (MainLogicDelegater.SavedPodcastListExists())
             {
-                MainLogic.LoadFeedsSaving();
 
+                MainLogicDelegater.LoadFeedsSaving();
             }
         }
         private void ReloadListBoxes()
@@ -51,22 +53,9 @@ namespace Gruppprojekt
             ListBoxFeeds.Items.Clear();
             ListBoxPodcasts.Items.Clear();
             ComboBoxManageFeed.Items.Clear();
-            MainLogic.FillListBoxFeeds(ListBoxFeeds);
-            MainLogic.FillFeedCombobox(ComboBoxManageFeed);
+            MainLogicDelegater.FillListBoxFeeds(ListBoxFeeds);
+            MainLogicDelegater.FillFeedCombobox(ComboBoxManageFeed);
 
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void ButtonAddRSS_Click(object sender, EventArgs e)
@@ -81,10 +70,10 @@ namespace Gruppprojekt
                 string URL = TextBoxAddRSSURL.Text;
                 string Category = ComboBoxAddRSS.SelectedItem.ToString();
 
-                MainLogic.CreateNewFeed(Name, URL, Category, UpdateInterval);
+                MainLogicDelegater.CreateNewFeed(Name, URL, Category, UpdateInterval);
                 ListBoxFeeds.Items.Clear();
-                MainLogic.HandleXMLSaving();
-                MainLogic.FillListBoxFeeds(ListBoxFeeds);
+                MainLogicDelegater.HandleXMLSaving();
+                MainLogicDelegater.FillListBoxFeeds(ListBoxFeeds);
 
                 TextBoxAddRSSName.Clear();
                 TextBoxAddRSSURL.Clear();
@@ -103,30 +92,52 @@ namespace Gruppprojekt
         private async void ButtonPlay_Click(object sender, EventArgs e)
         {
             Podcast SelectedPodcast = ListBoxPodcasts.SelectedItem as Podcast;
+            Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
+            try
+            {
+                if(MainLogicDelegater.SavedPodcastExists(SelectedPodcast)) {
+                    MainLogicDelegater.StartAlreadyDownloadedMP3(SelectedPodcast, SelectedFeed);
+                    ButtonQuitMusicPlayback.Visible = true;
+                    ButtonPlayPause.Visible = true;
+                    ButtonPlay.Visible = false;
+                    lbNowPlaying.Text = "Spelar upp...";
 
-            Task<String> DownloadMP3Task = MainLogic.DownloadAudioHandler(SelectedPodcast);
-            lbNowPlaying.Text = "Laddar ner...";
+                }
+                else {
 
-            await DownloadMP3Task;
+                    Task<String> DownloadMP3Task = MainLogicDelegater.DownloadAudioHandler(SelectedPodcast);
+                    lbNowPlaying.Text = "Laddar ner...";
 
-            lbNowPlaying.Text = DownloadMP3Task.Result;
+                    await DownloadMP3Task;
 
-            ButtonQuitMusicPlayback.Visible = true;
-            ButtonPlayPause.Visible = true;
-            ButtonPlay.Visible = false;
-            lbNowPlaying.Text = "Spelar upp...";
+                    lbNowPlaying.Text = DownloadMP3Task.Result;
+
+                    ButtonQuitMusicPlayback.Visible = true;
+                    ButtonPlayPause.Visible = true;
+                    ButtonPlay.Visible = false;
+                    lbNowPlaying.Text = "Spelar upp...";
+                }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message + " Task did not load.");
+            }
         }
 
-        private void ButtonShowMore_Click(object sender, EventArgs e)
+            private void ButtonShowMore_Click(object sender, EventArgs e)
         {
-            List<String> PodcastInfoTempList = MainLogic.GetPodcastInfo(ListBoxPodcasts.SelectedItem as Podcast);
-            ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
-            PodcastInfoWindow.Show();
+            Podcast SelectedPodcast = ListBoxPodcasts.SelectedItem as Podcast;
+            if (SelectedPodcast != null)
+            {
+                List<String> PodcastInfoTempList = MainLogicDelegater.GetPodcastInfo(ListBoxPodcasts.SelectedItem as Podcast);
+                ShowMorePodcastInfo PodcastInfoWindow = new ShowMorePodcastInfo(PodcastInfoTempList);
+                PodcastInfoWindow.Show();
+            }
         }
 
-        public void updateComboboxes()
+        public void UpdateComboboxes()
         {
-            MainLogic.UpdateComboBoxes(ComboBoxCategory, ComboBoxCategory);
+            MainLogicDelegater.UpdateComboBoxes(ComboBoxCategory, ComboBoxCategory);
         }
 
         private void ComboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,13 +145,13 @@ namespace Gruppprojekt
             ListBoxFeeds.Items.Clear();
             ListBoxPodcasts.Items.Clear();
 
-            MainLogic.set_selected_category(ComboBoxCategory.SelectedItem.ToString());
-            MainLogic.FillListBoxFeeds(ListBoxFeeds);
+            MainLogicDelegater.SetSelectedCategory(ComboBoxCategory.SelectedItem.ToString());
+            MainLogicDelegater.FillListBoxFeeds(ListBoxFeeds);
         }
 
         private void ButtonPlayPause_Click(object sender, EventArgs e)
         {
-            MainLogic.StartPauseAudio();
+            MainLogicDelegater.StartPauseAudio();
         }
 
         private void ButtonManageFeeds_Click(object sender, EventArgs e)
@@ -160,19 +171,19 @@ namespace Gruppprojekt
                 if (hasValueName)
                 {
                     validator.validateName(TextBoxManageFeedName.Text);
-                    MainLogic.ManageFeed(FeedToChange, "Name", TextBoxManageFeedName.Text);
+                    MainLogicDelegater.ManageFeed(FeedToChange, "Name", TextBoxManageFeedName.Text);
                 }
                 if (hasValueURL)
                 {
                     validator.validateUrl(TextBoxManageFeedURL.Text);
-                    MainLogic.ManageFeed(FeedToChange, "URL", TextBoxManageFeedURL.Text);
+                    MainLogicDelegater.ManageFeed(FeedToChange, "URL", TextBoxManageFeedURL.Text);
                 }
                 if (hasValueInterval)
                 {
                     validator.validateInterval(TextBoxManageFeedUpdateInterval.Text);
-                    MainLogic.ManageFeed(FeedToChange, "UpdateInterval", TextBoxManageFeedUpdateInterval.Text);
+                    MainLogicDelegater.ManageFeed(FeedToChange, "UpdateInterval", TextBoxManageFeedUpdateInterval.Text);
                 }
-                MainLogic.ManageFeed(FeedToChange, "Category", NewCategory);
+                MainLogicDelegater.ManageFeed(FeedToChange, "Category", NewCategory);
                 ReloadListBoxes();
 
             }
@@ -186,7 +197,7 @@ namespace Gruppprojekt
         
         private void ButtonQuitMusicPlayback_Click(object sender, EventArgs e)
         {
-            MainLogic.QuitMusicPlayer();
+            MainLogicDelegater.QuitMusicPlayer();
             ButtonQuitMusicPlayback.Visible = false;
             ButtonPlayPause.Visible = false;
             ButtonPlay.Visible = true;
@@ -199,16 +210,16 @@ namespace Gruppprojekt
             Feed SelectedFeed = ListBoxFeeds.SelectedItem as Feed;
             if(SelectedFeed != null) {
                 ListBoxPodcasts.Items.Clear();
-                MainLogic.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
+                MainLogicDelegater.FillListBoxPodcasts(ListBoxPodcasts, SelectedFeed);
             }
         }
 
         private void ButtonManageCategoriesRemove_Click(object sender, EventArgs e)
         {
             var ChoosenCategory = ComboBoxManageCategories.SelectedItem.ToString();
-            MainLogic.removeCategory(ChoosenCategory);
+            MainLogicDelegater.removeCategory(ChoosenCategory);
             MessageBox.Show(ChoosenCategory + " har tagits bort som kategori");
-            MainLogic.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
+            MainLogicDelegater.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
         }
 
         private void ButtonManageCategoriesSave_Click(object sender, EventArgs e)
@@ -218,11 +229,12 @@ namespace Gruppprojekt
 
             try 
             {
-                validator.validateCategory(NewName, MainLogic.getCategoryList());
-                MainLogic.ChangeCategoryName(NewName, OldName);
-                MainLogic.SaveCategories();
-                MainLogic.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
+                validator.validateCategory(NewName, MainLogicDelegater.getCategoryList());
+                MainLogicDelegater.ChangeCategoryName(NewName, OldName);
+                MainLogicDelegater.SaveCategories();
+                MainLogicDelegater.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
                 MessageBox.Show(OldName + " har döpts om till " + NewName);
+                ReloadListBoxes();
             }
             catch(ArgumentException ex)
             {
@@ -233,11 +245,12 @@ namespace Gruppprojekt
         private void ButtonManageCategoriesCreate_Click(object sender, EventArgs e)
         {
             var NewCategory = TextBoxAddCategory.Text;
-            MainLogic.AddCategoryName(NewCategory);
-            MainLogic.SaveCategories();
-            MainLogic.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
+            MainLogicDelegater.AddCategoryName(NewCategory);
+            MainLogicDelegater.SaveCategories();
+            MainLogicDelegater.UpdateComboBoxes(ComboBoxCategory, ComboBoxAddRSS, ComboBoxManageCategories);
             MessageBox.Show(NewCategory + " har lagts till som ny kategori");
             TextBoxAddCategory.Clear();
+            ReloadListBoxes();
         }
 
     }

@@ -3,41 +3,41 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WMPLib;
 
 namespace Gruppprojekt
 {
-    class Main_Logic
+    class Main_Logic_Delegater
     {
 
-        internal WMPLib.WindowsMediaPlayer WindowsPlayer = new WindowsMediaPlayer();
+        internal WMPLib.WindowsMediaPlayer WindowsPlayer;
 
-        private Category_Handler CategoryHandler = new Category_Handler();
-        private Feed PodcastFeed = new Feed();
-        private Feed_Controller FeedController = new Feed_Controller();
-        private Entities_Creator EntitiesCreator = new Entities_Creator();
-        private Directory_Handler DirectoryHandler = new Directory_Handler();
-        private MP3_Downloader MP3Downloader = new MP3_Downloader();
-        private XML_Handler XMLHandler = new XML_Handler();
-        private BackgroundWorker UpdateIntervalWorker = new BackgroundWorker();
+        private Category_Handler CategoryHandler;
+        private Feed PodcastFeed;
+        private Feed_Controller FeedController;
+        private Entities_Creator EntitiesCreator;
+        private Directory_Handler DirectoryHandler;
+        private MP3_Downloader MP3Downloader;
+        private XML_Handler XMLHandler;
+        private BackgroundWorker UpdateIntervalWorker;
 
         private Boolean Playing;
         public string selected_category = "";
 
-        public Main_Logic()
+        public Main_Logic_Delegater()
         {
-
+            CategoryHandler = new Category_Handler();
+            PodcastFeed = new Feed();
+            FeedController = new Feed_Controller();
+            EntitiesCreator = new Entities_Creator();
+            DirectoryHandler = new Directory_Handler();
+            MP3Downloader = new MP3_Downloader();
+            XMLHandler = new XML_Handler();
+            UpdateIntervalWorker = new BackgroundWorker();
+            WindowsPlayer = new WindowsMediaPlayer();
             CreateDirectories();
-        }
-
-        public void ManageFeed(string Name)
-        {
-
         }
 
         public void UpdateComboBoxes(params ComboBox[] comboboxes )
@@ -73,10 +73,22 @@ namespace Gruppprojekt
             }
         }
 
+        public Boolean SavedPodcastExists(Podcast SelectedPodcast)
+        {
+            if (File.Exists(DirectoryHandler.GetPlayableMP3File(SelectedPodcast)))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void RemoveFeed(Feed feed)
         {
             FeedController.RemoveDataFromList(feed);
-            //todo reload, refill.
+            HandleXMLSaving();
         }
 
         public void ManageFeed(Feed FeedToBeChanged, string FeedChoice, string FeedChange)
@@ -175,7 +187,7 @@ namespace Gruppprojekt
             }
         }
 
-        public void set_selected_category(string selected_categ)
+        public void SetSelectedCategory(string selected_categ)
         {
 
             selected_category = selected_categ;
@@ -206,8 +218,7 @@ namespace Gruppprojekt
         public List<String> GetPodcastInfo(Podcast SelectedPodcast)
         {
 
-            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Title,
-                SelectedPodcast.PublishingDate, SelectedPodcast.Duration, SelectedPodcast.Summary, SelectedPodcast.ListenCount.ToString() });
+            List<String> PodcastInfoList = new List<String>(new String[] { SelectedPodcast.Title, SelectedPodcast.PublishingDate, SelectedPodcast.ListenCount.ToString() });
 
             return PodcastInfoList;
         }
@@ -228,6 +239,26 @@ namespace Gruppprojekt
             return DownloadMP3Task.Result;
         }
 
+        public void StartAlreadyDownloadedMP3(Podcast SelectedPodcast, Feed SelectedFeed)
+        {
+
+            Podcast SelectedPodcastTemporary = SelectedPodcast;
+            Feed SelectedFeedTemporary = SelectedFeed;
+
+            SelectedFeedTemporary.RemoveDataFromList(SelectedPodcast);
+
+            FeedController.RemoveDataFromList(SelectedFeedTemporary);
+
+            SelectedPodcastTemporary.ListenCount++;
+
+            SelectedFeedTemporary.AddDataToList(SelectedPodcastTemporary);
+
+            FeedController.AddDataToList(SelectedFeedTemporary);
+
+            HandleXMLSaving();
+            StartAudio(DirectoryHandler.GetPlayableMP3File(SelectedPodcast));
+        }
+ 
         public void CreateDirectories()
         {
             DirectoryHandler.CreateProgramRootDirectory();
@@ -255,7 +286,7 @@ namespace Gruppprojekt
                 string Name = XMLFeedData[3][i];
                 int UpdateIntervalConverted = Int32.Parse(UpdateInterval);
 
-                Feed NewFeed = EntitiesCreator.CreateEntities(Name, URL, Category, UpdateIntervalConverted);
+                Feed NewFeed = EntitiesCreator.CreateEntitiesFromSaveFile(DirectoryHandler.GetSavedXMLFilesDirectory() + "PodcastSaveFile.xml", Name, URL, Category, UpdateIntervalConverted);
 
                 FeedController.AddDataToList(NewFeed);
             }
@@ -272,42 +303,6 @@ namespace Gruppprojekt
             }
 
         }
-
-        public void StartPauseAudio()
-        {
-
-            CheckIfPlayingOrPaused();
-        }
-
-        public void QuitMusicPlayer()
-        {
-
-            WindowsPlayer.controls.stop();
-        }
-
-        private void StartAudio(String MP3URL)
-        {
-
-            WindowsPlayer.URL = MP3URL;
-            WindowsPlayer.controls.play();
-            Playing = true;
-        }
-
-        private void CheckIfPlayingOrPaused()
-        {
-
-            if (Playing)
-            {
-                WindowsPlayer.controls.pause();
-            }
-            else
-            {
-                WindowsPlayer.controls.play();
-            }
-
-            Playing = !Playing;
-        }
-
 
         public void FillFeedCombobox(ComboBox comboBox)
         {
@@ -390,11 +385,41 @@ namespace Gruppprojekt
 
             }
         }
+        public void StartPauseAudio()
+        {
 
+            CheckIfPlayingOrPaused();
+        }
 
+        public void QuitMusicPlayer()
+        {
 
+            WindowsPlayer.controls.stop();
+        }
 
-        //TODO - gör om audiplayer till internal, eftersom den bara ska användas av formhandler.
+        private void StartAudio(String MP3URL)
+        {
+
+            WindowsPlayer.URL = MP3URL;
+            WindowsPlayer.controls.play();
+            Playing = true;
+        }
+
+        private void CheckIfPlayingOrPaused()
+        {
+
+            if (Playing)
+            {
+                WindowsPlayer.controls.pause();
+            }
+            else
+            {
+                WindowsPlayer.controls.play();
+            }
+
+            Playing = !Playing;
+        }
+
     }
 
 }

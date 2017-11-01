@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Gruppprojekt
 {
     public class Feed : Data_Entities<Podcast>
     {
-        //TODO - Skapa en listbox/cbbox som ska hålla alla podcasternas namn, för att sedan gå vidare till avsnitten.
 
         private List<Podcast> PodcastList = new List<Podcast>();
 
@@ -44,6 +40,12 @@ namespace Gruppprojekt
         {
 
             return PodcastList;
+        }
+
+        public void IncrementListenCount(string PodcastTitle)
+        {
+            Podcast SelectedPodcast = PodcastList.Find(item => item.Title == PodcastTitle);
+            SelectedPodcast.ListenCount++;
         }
 
     }

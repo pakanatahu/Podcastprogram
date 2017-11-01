@@ -8,12 +8,24 @@ namespace Gruppprojekt
 {
     public abstract class Data_Entities<T>
     {
+        public virtual List<T> List { get; set; }
+        public virtual void AddDataToList(T type)
+        {
 
-        public abstract void AddDataToList(T type);
+            List.Add(type);
+        }
 
-        public abstract void RemoveDataFromList(T Type);
+        public virtual void RemoveDataFromList(T type)
+        {
 
-        public abstract List<T> ReturnDataFromList();
+            List.Remove(type);
+        }
+
+        public virtual List<T> ReturnDataFromList()
+        {
+
+            return List;
+        }
 
     }
 }

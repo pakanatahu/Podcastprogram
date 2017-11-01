@@ -50,7 +50,7 @@
     <Compile Include="Data_Entities.cs" />
     <Compile Include="Directory_Handler.cs" />
     <Compile Include="Feed_Controller.cs" />
-    <Compile Include="Main_Logic.cs" />
+    <Compile Include="Main_Logic_Delegater.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

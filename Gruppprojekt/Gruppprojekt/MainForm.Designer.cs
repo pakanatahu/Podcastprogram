@@ -102,7 +102,6 @@
             this.ListBoxPodcasts.Name = "ListBoxPodcasts";
             this.ListBoxPodcasts.Size = new System.Drawing.Size(298, 82);
             this.ListBoxPodcasts.TabIndex = 3;
-            this.ListBoxPodcasts.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // ButtonPlay
             // 
